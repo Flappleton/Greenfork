@@ -1,0 +1,13 @@
+.hero {
+    background: linear-gradient(to right, #28a745, #218838);
+}
+
+.features h3 {
+    color: #28a745;
+}
+
+footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
