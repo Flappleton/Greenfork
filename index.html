@@ -8,21 +8,34 @@
     <link rel="stylesheet" href="css/style.css">
     <style>
         :root {
-            --primary-green: #2ecc71;
-            --secondary-green: #27ae60;
-            --light-green: #e8f5e9;
-            --dark-green: #1a3c34;
+            --forest-green: #2a9d8f;    /* Primary green shade */
+            --lime-green: #8ab17d;      /* Softer green for accents */
+            --pale-green: #f4f7f3;      /* Light background green */
+            --deep-green: #264653;      /* Darker green for footer */
         }
 
         body {
             font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, var(--light-green), #ffffff);
-            min-height: 100vh;
+            background: var(--pale-green);
+            color: #333;
+            line-height: 1.6;
         }
 
+        /* Navbar */
         .navbar {
-            background: linear-gradient(to right, var(--primary-green), var(--secondary-green));
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
+        }
+
+        .nav-link {
+            color: var(--forest-green) !important;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--lime-green) !important;
         }
 
         .navbar-brand img {
@@ -30,113 +43,130 @@
         }
 
         .navbar-brand img:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
         }
 
-        .nav-link {
-            color: white !important;
-            transition: color 0.3s;
-        }
-
-        .nav-link:hover {
-            color: var(--light-green) !important;
-        }
-
+        /* Hero Section */
         .hero {
-            background: linear-gradient(45deg, var(--secondary-green), var(--primary-green));
-            padding: 6rem 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 50vh;
+            background: linear-gradient(135deg, var(--forest-green), var(--lime-green));
+            color: white;
+            padding: 5rem 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
-            font-weight: bold;
-            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+            font-size: 3rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
         }
 
         .hero .btn {
             background: white;
-            color: var(--secondary-green);
-            border: none;
-            padding: 0.75rem 2rem;
+            color: var(--forest-green);
+            padding: 0.8rem 2rem;
+            border-radius: 25px;
+            font-weight: 500;
             transition: all 0.3s;
         }
 
         .hero .btn:hover {
-            background: var(--light-green);
-            transform: translateY(-2px);
+            background: var(--lime-green);
+            color: white;
         }
 
+        /* About Section */
         .about-website {
-            background: var(--light-green);
             padding: 4rem 0;
+            background: white;
         }
 
+        .about-website h2 {
+            color: var(--forest-green);
+            margin-bottom: 2rem;
+        }
+
+        .about-website .btn-success {
+            background: var(--forest-green);
+            border: none;
+            border-radius: 20px;
+            padding: 0.7rem 1.5rem;
+        }
+
+        .about-website .btn-success:hover {
+            background: var(--lime-green);
+        }
+
+        .about-website .btn-outline-success {
+            border-color: var(--forest-green);
+            color: var(--forest-green);
+            border-radius: 20px;
+            padding: 0.7rem 1.5rem;
+        }
+
+        .about-website .btn-outline-success:hover {
+            background: var(--forest-green);
+            color: white;
+        }
+
+        /* Features Section */
         .features {
             padding: 4rem 0;
             display: flex;
             flex-wrap: wrap;
-            justify-content: center;
             gap: 2rem;
+            justify-content: center;
         }
 
-        .features .col-md-4 {
+        .features .feature-card {
             background: white;
             padding: 2rem;
-            border-radius: 15px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s;
             flex: 1;
             min-width: 250px;
-            max-width: 350px;
+            max-width: 300px;
+            text-align: center;
         }
 
-        .features .col-md-4:hover {
-            transform: translateY(-10px);
+        .features .feature-card:hover {
+            transform: translateY(-5px);
         }
 
         .features h3 {
-            color: var(--secondary-green);
+            color: var(--forest-green);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
         }
 
+        /* Footer */
         footer {
-            background: var(--dark-green);
+            background: var(--deep-green);
+            color: white;
             padding: 2rem 0;
         }
 
-        .modal-content {
-            border: none;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
-        }
-
+        /* Modal */
         .modal-header {
-            background: var(--primary-green);
+            background: var(--forest-green);
             color: white;
-            border-radius: 15px 15px 0 0;
+            border-radius: 10px 10px 0 0;
         }
 
-        .btn-success {
-            background: var(--primary-green);
+        .modal-content {
+            border-radius: 10px;
             border: none;
-            transition: background 0.3s;
         }
 
-        .btn-success:hover {
-            background: var(--secondary-green);
+        .modal .btn-success {
+            background: var(--forest-green);
+            border: none;
         }
 
-        .btn-outline-success {
-            border-color: var(--primary-green);
-            color: var(--primary-green);
-        }
-
-        .btn-outline-success:hover {
-            background: var(--primary-green);
-            color: white;
+        .modal .btn-success:hover {
+            background: var(--lime-green);
         }
     </style>
 </head>
@@ -166,19 +196,19 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero text-white text-center">
+    <section class="hero">
         <div class="container">
             <h1>GreenFork</h1>
             <p class="lead">A Food Waste Management Initiative</p>
             <p>Connecting surplus food with those in need and composting the rest for a sustainable future.</p>
-            <a href="#" class="btn btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#signInModal">Get Started</a>
+            <a href="#" class="btn mt-3" data-bs-toggle="modal" data-bs-target="#signInModal">Get Started</a>
         </div>
     </section>
 
     <!-- About the Website Section -->
     <section class="about-website">
         <div class="container">
-            <h2 class="text-center mb-4">About GreenFork</h2>
+            <h2 class="text-center">About GreenFork</h2>
             <p class="text-center">GreenFork is dedicated to reducing food waste by connecting surplus food from merchants to seekers in need. Whether you're a business with excess inventory or an individual looking for affordable meals, we’ve got you covered. Our smart composting system ensures that unsalvageable food is turned into valuable resources, promoting sustainability.</p>
             <div class="text-center mt-4">
                 <a href="merchant.html" class="btn btn-success me-2">Join as a Merchant</a>
@@ -190,16 +220,16 @@
     <!-- Features Section -->
     <section class="features">
         <div class="container">
-            <div class="row text-center">
-                <div class="col-md-4">
+            <div class="row">
+                <div class="feature-card">
                     <h3>Surprise Bags</h3>
                     <p>Buy unsold food from local businesses at discounted prices.</p>
                 </div>
-                <div class="col-md-4">
+                <div class="feature-card">
                     <h3>Real-Time Donations</h3>
                     <p>Donate excess food instantly to nearby recipients.</p>
                 </div>
-                <div class="col-md-4">
+                <div class="feature-card">
                     <h3>Smart Composting</h3>
                     <p>Turn unsalvageable food into organic fertilizer with IoT monitoring.</p>
                 </div>
@@ -233,7 +263,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="text-white">
+    <footer>
         <div class="container">
             <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
         </div>
