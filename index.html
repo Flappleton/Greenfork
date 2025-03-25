@@ -12,7 +12,7 @@
     <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="images/logo.png" alt="GreenFork Logo" style="height: 40px;">
+                <img src="logo.png" alt="GreenFork Logo" style="height: 40px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -23,8 +23,10 @@
                     <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link" href="seeker.html">Seekers</a></li>
-                    <li class="nav-item"><a class="nav-link" href="donate.html">Donate</a></li>
                     <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -36,7 +38,7 @@
             <h1>GreenFork</h1>
             <p class="lead">A Food Waste Management Initiative</p>
             <p>Connecting surplus food with those in need and composting the rest for a sustainable future.</p>
-            <a href="donate.html" class="btn btn-light btn-lg mt-3">Get Started</a>
+            <a href="#" class="btn btn-light btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#signInModal">Get Started</a>
         </div>
     </section>
 
@@ -72,12 +74,15 @@
         </div>
     </section>
 
-    <!-- Footer with Sign-In Form -->
-    <footer class="bg-dark text-white py-4">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-6 mx-auto">
-                    <h5 class="text-center mb-3">Sign In</h5>
+    <!-- Sign In Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
                     <form>
                         <div class="mb-3">
                             <input type="email" class="form-control" placeholder="Email" required>
@@ -91,6 +96,12 @@
                     </form>
                 </div>
             </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-dark text-white py-4">
+        <div class="container">
             <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
         </div>
     </footer>
