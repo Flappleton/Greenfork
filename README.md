@@ -12,7 +12,6 @@ GreenFork is a web-based platform designed to tackle the food waste crisis by co
   - Atharva Lotankar (47)
   - Om Manglani (51)
 - **Mentor**: Mrs. Charusheela Nehete
-- **Institution**: Autonomous Institute of Technology, affiliated with the University of Mumbai
 
 ## ✨ Features
 
