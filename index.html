@@ -6,10 +6,143 @@
     <title>GreenFork - Home</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --primary-green: #2ecc71;
+            --secondary-green: #27ae60;
+            --light-green: #e8f5e9;
+            --dark-green: #1a3c34;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--light-green), #ffffff);
+            min-height: 100vh;
+        }
+
+        .navbar {
+            background: linear-gradient(to right, var(--primary-green), var(--secondary-green));
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar-brand img {
+            transition: transform 0.3s;
+        }
+
+        .navbar-brand img:hover {
+            transform: scale(1.1);
+        }
+
+        .nav-link {
+            color: white !important;
+            transition: color 0.3s;
+        }
+
+        .nav-link:hover {
+            color: var(--light-green) !important;
+        }
+
+        .hero {
+            background: linear-gradient(45deg, var(--secondary-green), var(--primary-green));
+            padding: 6rem 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 50vh;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2);
+        }
+
+        .hero .btn {
+            background: white;
+            color: var(--secondary-green);
+            border: none;
+            padding: 0.75rem 2rem;
+            transition: all 0.3s;
+        }
+
+        .hero .btn:hover {
+            background: var(--light-green);
+            transform: translateY(-2px);
+        }
+
+        .about-website {
+            background: var(--light-green);
+            padding: 4rem 0;
+        }
+
+        .features {
+            padding: 4rem 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 2rem;
+        }
+
+        .features .col-md-4 {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s;
+            flex: 1;
+            min-width: 250px;
+            max-width: 350px;
+        }
+
+        .features .col-md-4:hover {
+            transform: translateY(-10px);
+        }
+
+        .features h3 {
+            color: var(--secondary-green);
+        }
+
+        footer {
+            background: var(--dark-green);
+            padding: 2rem 0;
+        }
+
+        .modal-content {
+            border: none;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            background: var(--primary-green);
+            color: white;
+            border-radius: 15px 15px 0 0;
+        }
+
+        .btn-success {
+            background: var(--primary-green);
+            border: none;
+            transition: background 0.3s;
+        }
+
+        .btn-success:hover {
+            background: var(--secondary-green);
+        }
+
+        .btn-outline-success {
+            border-color: var(--primary-green);
+            color: var(--primary-green);
+        }
+
+        .btn-outline-success:hover {
+            background: var(--primary-green);
+            color: white;
+        }
+    </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">
                 <img src="logo.png" alt="GreenFork Logo" style="height: 40px;">
@@ -33,17 +166,17 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero bg-success text-white text-center py-5">
+    <section class="hero text-white text-center">
         <div class="container">
             <h1>GreenFork</h1>
             <p class="lead">A Food Waste Management Initiative</p>
             <p>Connecting surplus food with those in need and composting the rest for a sustainable future.</p>
-            <a href="#" class="btn btn-light btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#signInModal">Get Started</a>
+            <a href="#" class="btn btn-lg mt-3" data-bs-toggle="modal" data-bs-target="#signInModal">Get Started</a>
         </div>
     </section>
 
     <!-- About the Website Section -->
-    <section class="about-website py-5 bg-light">
+    <section class="about-website">
         <div class="container">
             <h2 class="text-center mb-4">About GreenFork</h2>
             <p class="text-center">GreenFork is dedicated to reducing food waste by connecting surplus food from merchants to seekers in need. Whether you're a business with excess inventory or an individual looking for affordable meals, we’ve got you covered. Our smart composting system ensures that unsalvageable food is turned into valuable resources, promoting sustainability.</p>
@@ -55,7 +188,7 @@
     </section>
 
     <!-- Features Section -->
-    <section class="features py-5">
+    <section class="features">
         <div class="container">
             <div class="row text-center">
                 <div class="col-md-4">
@@ -100,7 +233,7 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white py-4">
+    <footer class="text-white">
         <div class="container">
             <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
         </div>
