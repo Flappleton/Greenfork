@@ -87,15 +87,16 @@
             margin-bottom: 2rem;
         }
 
-        .about-website .btn-success {
-            background: var(--forest-green);
+        .merchant-btn {
+            background: #e76f51; /* Vibrant orange for Join as a Merchant */
             border: none;
             border-radius: 20px;
             padding: 0.7rem 1.5rem;
         }
 
-        .about-website .btn-success:hover {
-            background: var(--lime-green);
+        .merchant-btn:hover {
+            background: #f4a261; /* Lighter orange for hover */
+            color: white;
         }
 
         .about-website .btn-outline-success {
@@ -113,10 +114,16 @@
         /* Features Section */
         .features {
             padding: 4rem 0;
+            background: var(--pale-green);
+        }
+
+        .feature-cards {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
+            justify-content: center; /* Centers cards horizontally */
+            gap: 2rem; /* Consistent spacing between cards */
+            max-width: 1200px; /* Limits width for larger screens */
+            margin: 0 auto; /* Centers the flex container within the section */
         }
 
         .features .feature-card {
@@ -125,9 +132,8 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             transition: transform 0.3s;
-            flex: 1;
-            min-width: 250px;
-            max-width: 300px;
+            flex: 1 1 250px; /* Flex-grow, flex-shrink, and basis for responsiveness */
+            max-width: 300px; /* Maximum width for each card */
             text-align: center;
         }
 
@@ -175,7 +181,7 @@
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
             <a class="navbar-brand" href="index.html">
-                <img src="logo.png" alt="GreenFork Logo" style="height: 40px;">
+                <img src="logo.png" alt="GreenFork Logo" style="height: 55px;">
             </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
                 <span class="navbar-toggler-icon"></span>
@@ -183,7 +189,7 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#about-us">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
@@ -206,12 +212,15 @@
     </section>
 
     <!-- About the Website Section -->
-    <section class="about-website">
+    <section class="about-website"  id="about-us">
         <div class="container">
             <h2 class="text-center">About GreenFork</h2>
             <p class="text-center">GreenFork is dedicated to reducing food waste by connecting surplus food from merchants to seekers in need. Whether you're a business with excess inventory or an individual looking for affordable meals, we’ve got you covered. Our smart composting system ensures that unsalvageable food is turned into valuable resources, promoting sustainability.</p>
+            <p align="center">
+                <img src="home-image.jpg" width="900px" height="500px" alt="eco-friendly.jpg">
+            </p>
             <div class="text-center mt-4">
-                <a href="merchant.html" class="btn btn-success me-2">Join as a Merchant</a>
+                <a href="merchant.html" class="btn merchant-btn me-2">Join as a Merchant</a>
                 <a href="seeker.html" class="btn btn-outline-success">Join as a Seeker</a>
             </div>
         </div>
@@ -219,8 +228,8 @@
 
     <!-- Features Section -->
     <section class="features">
-        <div class="container">
-            <div class="row">
+        <div class="container text-center">
+            <div class="feature-cards">
                 <div class="feature-card">
                     <h3>Surprise Bags</h3>
                     <p>Buy unsold food from local businesses at discounted prices.</p>

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenFork - Compost</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --forest-green: #2a9d8f;    /* Primary green shade */
+            --lime-green: #8ab17d;      /* Softer green for accents */
+            --pale-green: #f4f7f3;      /* Light background green */
+            --deep-green: #264653;      /* Darker green for footer */
+        }
+        body { font-family: 'Arial', sans-serif; background: var(--pale-green); color: #333; line-height: 1.6; }
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); padding: 1rem 0; }
+        .nav-link { color: var(--forest-green) !important; font-weight: 500; transition: color 0.3s; }
+        .nav-link:hover { color: var(--lime-green) !important; }
+        .navbar-brand img { transition: transform 0.3s; }
+        .navbar-brand img:hover { transform: scale(1.05); }
+        .compost-section { padding: 4rem 0; background: white; }
+        .compost-section h2 { color: var(--forest-green); margin-bottom: 2rem; }
+        footer { background: var(--deep-green); color: white; padding: 2rem 0; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="GreenFork Logo" style="height: 55px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
+                    <li class="nav-item"><a class="nav-link" href="seeker.html">Seekers</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="compost.html">Compost</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Compost Section -->
+    <section class="compost-section">
+        <div class="container">
+            <h2 class="text-center">Smart Composting</h2>
+            <p class="text-center">When food can’t be donated or sold, GreenFork ensures it doesn’t go to waste. Our smart composting system turns unsalvageable food into organic fertilizer, reducing landfill waste and methane emissions.</p>
+            <ul class="text-center list-unstyled">
+                <li>IoT-enabled monitoring of temperature, humidity, and oxygen levels.</li>
+                <li>Efficient processing with data-driven insights.</li>
+                <li>Supports a circular economy by repurposing waste for agriculture.</li>
+                <li>Contributes to a sustainable future with every compost batch.</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
