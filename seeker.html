@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GreenFork - Seekers</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        :root {
+            --forest-green: #2a9d8f;    /* Primary green shade */
+            --lime-green: #8ab17d;      /* Softer green for accents */
+            --pale-green: #f4f7f3;      /* Light background green */
+            --deep-green: #264653;      /* Darker green for footer */
+        }
+        body { font-family: 'Arial', sans-serif; background: var(--pale-green); color: #333; line-height: 1.6; }
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); padding: 1rem 0; }
+        .nav-link { color: var(--forest-green) !important; font-weight: 500; transition: color 0.3s; }
+        .nav-link:hover { color: var(--lime-green) !important; }
+        .navbar-brand img { transition: transform 0.3s; }
+        .navbar-brand img:hover { transform: scale(1.05); }
+        .seeker-section { padding: 4rem 0; background: white; }
+        .seeker-section h2 { color: var(--forest-green); margin-bottom: 2rem; }
+        .btn-join { border-color: var(--forest-green); color: var(--forest-green); border-radius: 20px; padding: 0.7rem 1.5rem; }
+        .btn-join:hover { background: var(--forest-green); color: white; }
+        footer { background: var(--deep-green); color: white; padding: 2rem 0; }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-light">
+        <div class="container">
+            <a class="navbar-brand" href="index.html">
+                <img src="logo.png" alt="GreenFork Logo" style="height: 55px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="seeker.html">Seekers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Seeker Section -->
+    <section class="seeker-section">
+        <div class="container">
+            <h2 class="text-center">Join as a Seeker</h2>
+            <p class="text-center">Looking for affordable meals? GreenFork connects you with local businesses offering "Surprise Bags" of unsold food at discounted prices.</p>
+            <ul class="text-center list-unstyled">
+                <li>Search nearby surprise bags by location, price, or category.</li>
+                <li>Enjoy seamless one-click purchases with secure payments.</li>
+                <li>Get real-time notifications for new bag availability.</li>
+                <li>Pick up your order with a confirmation code.</li>
+            </ul>
+            <div class="text-center mt-4">
+                <a href="#" class="btn btn-join" data-bs-toggle="modal" data-bs-target="#signInModal">Start Exploring Now</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/script.js"></script>
+</body>
+</html>
