@@ -7,134 +7,181 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         :root {
-            --forest-green: #2a9d8f;    /* Primary green shade */
-            --lime-green: #8ab17d;      /* Softer green for accents */
-            --pale-green: #f4f7f3;      /* Light background green */
-            --deep-green: #264653;      /* Darker green for footer */
+            --forest-green: #2a9d8f;
+            --lime-green: #8ab17d;
+            --pale-green: #f4f7f3;
+            --deep-green: #264653;
+            --turquoise-blue: #64d5ca;
         }
-        body { 
-            font-family: 'Arial', sans-serif; 
-            background: var(--pale-green); 
-            color: #333; 
-            line-height: 1.6; 
-            margin: 0; 
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(135deg, var(--pale-green), var(--turquoise-blue));
+            color: #333;
+            line-height: 1.6;
+            background-attachment: fixed;
         }
-        .navbar { 
-            background: white; 
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05); 
-            padding: 1rem 0; 
+        .navbar {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            padding: 1rem 0;
         }
-        .nav-link { 
-            color: var(--forest-green) !important; 
-            font-weight: 500; 
-            transition: color 0.3s; 
+        .nav-link {
+            color: var(--forest-green) !important;
+            font-weight: 500;
+            transition: color 0.3s;
         }
-        .nav-link:hover { 
-            color: var(--lime-green) !important; 
+        .nav-link:hover {
+            color: var(--lime-green) !important;
         }
-        .navbar-brand img { 
-            transition: transform 0.3s; 
-            height: 55px; 
+        .navbar-brand img {
+            transition: transform 0.3s;
+            height: 55px;
         }
-        .navbar-brand img:hover { 
-            transform: scale(1.05); 
+        .navbar-brand img:hover {
+            transform: scale(1.05);
         }
-        .merchant-section, #stores, #listings { 
-            padding: 4rem 0; 
-            background: white; 
+        .merchant-section, #stores, #listings {
+            padding: 4rem 0;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 95%;
         }
-        h2 { 
-            color: var(--forest-green); 
-            margin-bottom: 2rem; 
-            text-align: center; 
+        h2 {
+            color: var(--forest-green);
+            margin-bottom: 2rem;
+            text-align: center;
         }
-        .btn-join { 
-            background: #e76f51; 
-            border: none; 
-            border-radius: 20px; 
-            padding: 0.7rem 1.5rem; 
-            color: white; 
+        /* Updated Button Styles */
+        .btn-join {
+            background: white;
+            color: var(--forest-green);
+            border: 2px solid var(--forest-green);
+            border-radius: 25px;
+            padding: 0.8rem 2rem;
+            font-weight: 500;
+            transition: all 0.3s;
         }
-        .btn-join:hover { 
-            background: #f4a261; 
-            color: white; 
+        .btn-join:hover {
+            background: var(--forest-green);
+            color: white;
+            transform: translateY(-2px);
         }
-        .store-container, .listing-container { 
-            display: flex; 
-            flex-wrap: wrap; 
-            gap: 2rem; 
-            justify-content: center; 
+        .btn-orange {
+            background: white;
+            color: #e76f51;
+            border: 2px solid #e76f51;
+            border-radius: 25px;
+            padding: 0.8rem 2rem;
+            font-weight: 500;
+            transition: all 0.3s;
         }
-        .store-card, .listing-card { 
-            background: var(--pale-green); 
-            padding: 1.5rem; 
-            border-radius: 10px; 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
-            text-align: center; 
-            flex: 1 1 250px; 
-            max-width: 300px; 
+        .btn-orange:hover {
+            background: #f4a261;
+            color: white;
+            border-color: #f4a261;
+            transform: translateY(-2px);
         }
-        .add-store, #addListingBtn { 
-            background: var(--lime-green); 
-            color: white; 
-            cursor: pointer; 
-            transition: background 0.3s; 
-            border: none; 
-            padding: 1.5rem; 
+        .store-container, .listing-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 2rem;
+            justify-content: center;
         }
-        .add-store:hover, #addListingBtn:hover { 
-            background: var(--forest-green); 
+        .store-card, .listing-card {
+            background: var(--pale-green);
+            padding: 1.5rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+            text-align: center;
+            flex: 1 1 250px;
+            max-width: 300px;
+            transition: all 0.3s;
         }
-        .modal { 
-            display: none; 
-            position: fixed; 
-            top: 0; 
-            left: 0; 
-            width: 100%; 
-            height: 100%; 
-            background: rgba(0, 0, 0, 0.5); 
-            z-index: 1000; 
+        .store-card:hover, .listing-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
         }
-        .modal-content { 
-            background: white; 
-            margin: 15% auto; 
-            padding: 2rem; 
-            width: 90%; 
-            max-width: 500px; 
-            border-radius: 10px; 
+        .add-store, #addListingBtn {
+            background: var(--lime-green);
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            border: none;
+            padding: 1.5rem;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 500;
         }
-        .close { 
-            float: right; 
-            font-size: 1.5rem; 
-            cursor: pointer; 
+        .add-store:hover, #addListingBtn:hover {
+            background: var(--forest-green);
+            transform: translateY(-5px);
         }
-        form label { 
-            display: block; 
-            margin: 0.5rem 0; 
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
         }
-        form input { 
-            width: 100%; 
-            padding: 0.5rem; 
-            margin-bottom: 1rem; 
-            border: 1px solid var(--forest-green); 
-            border-radius: 5px; 
+        .modal-content {
+            background: white;
+            margin: 15% auto;
+            padding: 2rem;
+            width: 90%;
+            max-width: 500px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        form button { 
-            background: var(--forest-green); 
-            color: white; 
-            padding: 0.7rem 1.5rem; 
-            border: none; 
-            border-radius: 20px; 
-            cursor: pointer; 
+        .close {
+            float: right;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--forest-green);
         }
-        form button:hover { 
-            background: var(--lime-green); 
+        form label {
+            display: block;
+            margin: 0.5rem 0;
+            color: var(--forest-green);
         }
-        footer { 
-            background: var(--deep-green); 
-            color: white; 
-            padding: 2rem 0; 
-            text-align: center; 
+        form input {
+            width: 100%;
+            padding: 0.5rem;
+            margin-bottom: 1rem;
+            border: 1px solid var(--forest-green);
+            border-radius: 5px;
+        }
+        form button {
+            background: var(--forest-green);
+            color: white;
+            padding: 0.7rem 1.5rem;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        form button:hover {
+            background: var(--lime-green);
+            transform: translateY(-2px);
+        }
+        footer {
+            background: var(--deep-green);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
+        }
+        @media (max-width: 768px) {
+            .merchant-section, #stores, #listings {
+                padding: 3rem 1rem;
+                margin: 1rem auto;
+            }
         }
     </style>
 </head>
@@ -151,11 +198,11 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
-                    <li class="nav-item"><a class="nav-link" href="about.html">About</a></li>
+                    <li class="nav-item"><a class="nav-link" href="index.html#about-us">About</a></li>
                     <li class="nav-item"><a class="nav-link active" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#">Sign In</a></li>
+                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a></li>
                 </ul>
             </div>
         </div>
@@ -173,7 +220,7 @@
                 <li>Get real-time notifications for orders and pickups.</li>
             </ul>
             <div class="text-center mt-4">
-                <a href="#" class="btn btn-join">Start Selling Now</a>
+                <a href="#" class="btn btn-orange">Start Selling Now</a>
             </div>
         </div>
     </section>
@@ -228,10 +275,38 @@
         </div>
     </div>
 
+    <!-- Sign In Modal -->
+    <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header" style="background: var(--forest-green); color: white;">
+                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                            <input type="email" class="form-control" placeholder="Email" required>
+                        </div>
+                        <div class="mb-3">
+                            <input type="password" class="form-control" placeholder="Password" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn" style="background: var(--forest-green); color: white;">Sign In</button>
+                        </div>
+                        <div class="text-center mt-3">
+                            <p>New to GreenFork? <a href="#" style="color: var(--forest-green);">Create an account</a></p>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer>
         <div class="container">
-            <p class="mt-3">© 2025 GreenFork. All rights reserved.</p>
+            <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
         </div>
     </footer>
 
