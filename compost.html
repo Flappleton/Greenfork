@@ -12,6 +12,7 @@
             --pale-green: #f4f7f3;
             --deep-green: #264653;
             --turquoise-blue: #64d5ca;
+            --orange-accent: #e76f51;
         }
         body {
             font-family: 'Arial', sans-serif;
@@ -29,8 +30,9 @@
             color: var(--forest-green) !important;
             font-weight: 500;
             transition: color 0.3s;
+            margin: 0 0.5rem;
         }
-        .nav-link:hover {
+        .nav-link:hover, .nav-link.active {
             color: var(--lime-green) !important;
         }
         .navbar-brand img {
@@ -41,7 +43,7 @@
             transform: scale(1.05);
         }
         .compost-section, .pooling-section {
-            padding: 5rem 0;
+            padding: 4rem 1rem;
             background: white;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -50,12 +52,12 @@
         }
         h2 {
             color: var(--forest-green);
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
             text-align: center;
+            font-weight: 600;
         }
         p, li {
-            font-size: 1.1rem;
+            font-size: 1rem;
             margin-bottom: 1rem;
         }
         .btn-learn, .btn-pool {
@@ -83,61 +85,103 @@
             font-weight: 500;
             color: var(--forest-green);
         }
-        .pooling-form input, .pooling-form select, .pooling-form textarea {
+        .pooling-form input, 
+        .pooling-form select, 
+        .pooling-form textarea {
             width: 100%;
-            padding: 0.8rem;
+            padding: 0.6rem;
             margin-bottom: 1rem;
             border: 1px solid var(--forest-green);
             border-radius: 5px;
             font-size: 1rem;
         }
         .pooling-list {
-            margin-top: 3rem;
+            margin-top: 2rem;
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
+            gap: 1.5rem;
             justify-content: center;
         }
         .pool-item {
             background: var(--pale-green);
-            padding: 1.5rem;
+            padding: 1.2rem;
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            flex: 1 1 300px;
-            max-width: 350px;
+            flex: 1 1 280px;
+            max-width: 320px;
             text-align: center;
         }
         footer {
             background: var(--deep-green);
             color: white;
-            padding: 3rem 0 2rem;
-            margin-top: 4rem;
+            padding: 2rem 0;
+            margin-top: 3rem;
         }
         .modal-header {
             background: var(--forest-green);
             color: white;
+            border-bottom: none;
             border-radius: 10px 10px 0 0;
+        }
+        .modal-header .btn-close {
+            filter: invert(1) grayscale(100%) brightness(200%);
         }
         .modal-content {
             border-radius: 10px;
             border: none;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
-        .modal .btn-success {
+        .modal-body .form-label {
+            font-weight: 500;
+            color: var(--deep-green);
+            margin-bottom: 0.3rem;
+        }
+        .modal-body .form-control, 
+        .modal-body .form-select {
+            border-color: var(--lime-green);
+        }
+        .modal-body .form-control:focus, 
+        .modal-body .form-select:focus {
+            box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25);
+            border-color: var(--forest-green);
+        }
+        .modal-body [id$="Error"] {
+            color: var(--orange-accent);
+            font-size: 0.9em;
+            min-height: 1.2em;
+            margin-top: 0.5rem;
+        }
+        .modal button[type="submit"] {
             background: var(--forest-green);
             border: none;
-            padding: 0.8rem;
+            padding: 0.7rem 1.5rem;
             font-weight: 500;
+            color: white;
+            border-radius: 20px;
             transition: all 0.3s;
+            width: 100%;
         }
-        .modal .btn-success:hover {
+        .modal button[type="submit"]:hover {
             background: var(--lime-green);
             transform: translateY(-2px);
         }
+        .modal-body .text-center a {
+            color: var(--forest-green);
+            text-decoration: none;
+            font-weight: 500;
+        }
+        .modal-body .text-center a:hover {
+            text-decoration: underline;
+            color: var(--lime-green);
+        }
         @media (max-width: 768px) {
             .compost-section, .pooling-section {
-                padding: 3rem 1rem;
+                padding: 2rem 1rem;
                 margin: 1rem auto;
+            }
+            .pool-item {
+                flex: 1 1 100%;
+                max-width: 100%;
             }
         }
     </style>
@@ -159,7 +203,18 @@
                     <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link active" href="compost.html">Compost</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a></li>
+                    <li class="nav-item" id="signInLi">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
+                    </li>
+                    <li class="nav-item" id="signUpLi">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a>
+                    </li>
+                    <li class="nav-item d-none" id="logoutLi">
+                        <a class="nav-link" href="#" id="logoutLink">Logout</a>
+                    </li>
+                    <li class="nav-item d-none" id="profileLi">
+                        <a class="nav-link" href="#" id="profileLink">My Profile</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -171,10 +226,10 @@
             <h2>Smart Composting</h2>
             <p class="text-center">When food can't be donated or sold, GreenFork ensures it doesn't go to waste. Our smart composting system turns unsalvageable food into organic fertilizer, reducing landfill waste and methane emissions.</p>
             <ul class="text-center list-unstyled">
-                <li>IoT-enabled monitoring of temperature, humidity, and oxygen levels.</li>
-                <li>Efficient processing with data-driven insights.</li>
-                <li>Supports a circular economy by repurposing waste for agriculture.</li>
-                <li>Contributes to a sustainable future with every compost batch.</li>
+                <li>IoT-enabled monitoring of temperature, humidity, and oxygen levels</li>
+                <li>Efficient processing with data-driven insights</li>
+                <li>Supports a circular economy by repurposing waste for agriculture</li>
+                <li>Contributes to a sustainable future with every compost batch</li>
             </ul>
             <div class="text-center">
                 <a href="#" class="btn btn-learn">Learn More About Composting</a>
@@ -226,29 +281,75 @@
         </div>
     </section>
 
-    <!-- Sign In Modal -->
+    <!-- Updated Sign In Modal -->
     <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="signInForm">
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email" required>
+                            <label for="signInEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signInEmail" placeholder="Email" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Password" required>
+                            <label for="signInPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signInPassword" placeholder="Password" required>
                         </div>
+                        <div class="mb-3" id="signInError"></div>
                         <div class="d-grid">
-                            <button type="submit" class="btn btn-success">Sign In</button>
-                        </div>
-                        <div class="text-center mt-3">
-                            <p>New to GreenFork? <a href="new_account.html" style="color: var(--forest-green);">Create an account</a></p>
+                            <button type="submit" class="btn">Sign In</button>
                         </div>
                     </form>
+                    <div class="text-center mt-3">
+                        <p>New to GreenFork? <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal">Create an account</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Updated Sign Up Modal -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signUpModalLabel">Create Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signUpForm">
+                        <div class="mb-3">
+                            <label for="signUpName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signUpAccountType" class="form-label">I am a...</label>
+                            <select class="form-select" id="signUpAccountType" required>
+                                <option value="" disabled selected>Select Account Type</option>
+                                <option value="Merchant">Merchant (Donor)</option>
+                                <option value="Seeker">Seeker (Recipient)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signUpEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signUpPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required>
+                        </div>
+                        <div class="mb-3" id="signUpError"></div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn">Create Account</button>
+                        </div>
+                    </form>
+                    <div class="text-center mt-3">
+                        <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal">Sign In</a></p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -256,12 +357,17 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
+        <div class="container text-center">
+            <p class="mb-0">© 2025 GreenFork. All rights reserved.</p>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="js/firebase-init.js"></script>
+    <script src="js/auth.js"></script>
     <script>
         // Pooling Form Submission
         document.getElementById('poolingForm').addEventListener('submit', function(e) {
@@ -289,8 +395,7 @@
 
             // Placeholder for backend integration
             console.log('Pooled Item:', { foodType, quantity, notes });
-            // Here, you’d send data to the backend (e.g., via fetch API to Node.js/MongoDB)
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9290dcbdc8146dcb',t:'MTc0MzQzNDc1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</body>
 </html>
