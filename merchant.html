@@ -53,7 +53,6 @@
             margin-bottom: 2rem;
             text-align: center;
         }
-        /* Updated Button Styles */
         .btn-join {
             background: white;
             color: var(--forest-green);
@@ -120,42 +119,52 @@
             background: var(--forest-green);
             transform: translateY(-5px);
         }
-        /* Simplified Modal Styles */
-        .modal-content {
+        /* Compact Modal Styles */
+        .compact-modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
             background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            z-index: 1200;
+            width: 350px; /* Smaller width */
+            padding: 1.5rem;
         }
-        .modal-header {
-            background: var(--forest-green);
-            color: white;
-            border-radius: 15px 15px 0 0;
-            border: none;
+        .compact-modal h3 {
+            color: var(--forest-green);
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+            text-align: center;
         }
-        .modal-body {
-            padding: 2rem;
+        .compact-modal .close {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            color: var(--forest-green);
         }
-        .modal-footer {
-            border-top: none;
-            justify-content: center;
-        }
-        form label {
+        .compact-modal form label {
             display: block;
             margin: 0.5rem 0;
             color: var(--forest-green);
+            font-size: 0.9rem;
         }
-        form input {
+        .compact-modal form input, .compact-modal form select {
             width: 100%;
             padding: 0.5rem;
             margin-bottom: 1rem;
             border: 1px solid #ddd;
             border-radius: 5px;
+            font-size: 0.9rem;
         }
-        form button {
+        .compact-modal form button {
             background: var(--forest-green);
             color: white;
-            padding: 0.7rem 1.5rem;
+            padding: 0.6rem 1.2rem;
             border: none;
             border-radius: 20px;
             cursor: pointer;
@@ -163,15 +172,9 @@
             font-weight: 500;
             width: 100%;
         }
-        form button:hover {
+        .compact-modal form button:hover {
             background: var(--lime-green);
             transform: translateY(-2px);
-        }
-        footer {
-            background: var(--deep-green);
-            color: white;
-            padding: 3rem 0 2rem;
-            margin-top: 4rem;
         }
         /* Toast Notification Styles */
         .toast-container {
@@ -189,18 +192,25 @@
             border-radius: 8px;
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
-        .toast-header {
-            background-color: rgba(255, 255, 255, 0.1);
-            color: white;
-            border-bottom: none;
+        .toast-body {
+            font-size: 0.9rem;
         }
         .btn-close {
             filter: invert(1);
+        }
+        footer {
+            background: var(--deep-green);
+            color: white;
+            padding: 3rem 0 2rem;
+            margin-top: 4rem;
         }
         @media (max-width: 768px) {
             .merchant-section, #stores, #listings {
                 padding: 3rem 1rem;
                 margin: 1rem auto;
+            }
+            .compact-modal {
+                width: 90%;
             }
         }
     </style>
@@ -211,16 +221,15 @@
         <div id="storeToast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
-                    Opening store creation form...
+                    Opening store creation...
                 </div>
                 <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
         </div>
-        
         <div id="listingToast" class="toast align-items-center" role="alert" aria-live="assertive" aria-atomic="true">
             <div class="d-flex">
                 <div class="toast-body">
-                    Opening listing creation form...
+                    Opening listing creation...
                 </div>
                 <button type="button" class="btn-close me-2 m-auto" data-bs-dismiss="toast" aria-label="Close"></button>
             </div>
@@ -296,27 +305,37 @@
         </div>
     </section>
 
-    <!-- Add Store Modal -->
-    <div id="storeModal" class="modal">
-        <div class="modal-content">
-            <span class="close">&times;</span>
-            <h2>Add Store</h2>
-            <form id="storeForm">
-                <label for="storeName">Store Name:</label>
-                <input type="text" id="storeName" required>
-                
-                <label for="storeLocation">Store Location:</label>
-                <input type="text" id="storeLocation" placeholder="Search location..." required>
-                
-                <label for="storeImage">Store Image (optional):</label>
-                <input type="file" id="storeImage" accept="image/*">
-                
-                <button type="submit">Add Store</button>
-            </form>
-        </div>
+    <!-- Add Store Compact Modal -->
+    <div id="storeModal" class="compact-modal">
+        <span class="close">×</span>
+        <h3>Add Store</h3>
+        <form id="storeForm">
+            <label for="storeName">Store Name:</label>
+            <input type="text" id="storeName" required>
+            <label for="storeLocation">Store Location:</label>
+            <input type="text" id="storeLocation" placeholder="Search location..." required>
+            <label for="storeImage">Store Image (optional):</label>
+            <input type="file" id="storeImage" accept="image/*">
+            <button type="submit">Add Store</button>
+        </form>
     </div>
 
-    <!-- Simplified Sign In Modal -->
+    <!-- Add Listing Compact Modal -->
+    <div id="listingModal" class="compact-modal">
+        <span class="close">×</span>
+        <h3>Add Listing</h3>
+        <form id="listingForm">
+            <label for="listingName">Listing Name:</label>
+            <input type="text" id="listingName" required placeholder="e.g., Surprise Bag - Pastries">
+            <label for="listingPrice">Price (₹):</label>
+            <input type="number" id="listingPrice" required placeholder="e.g., 100" min="1">
+            <label for="listingQuantity">Quantity Available:</label>
+            <input type="number" id="listingQuantity" required placeholder="e.g., 5" min="1">
+            <button type="submit">Add Listing</button>
+        </form>
+    </div>
+
+    <!-- Sign In Modal -->
     <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -338,7 +357,7 @@
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <p class="text-center">New to GreenFork? <a href="#" style="color: var(--forest-green);">Create an account</a></p>
+                    <p class="text-center">New to GreenFork? <a href="new_account.html" style="color: var(--forest-green);">Create an account</a></p>
                 </div>
             </div>
         </div>
@@ -356,22 +375,23 @@
         // Initialize Bootstrap Toasts
         const storeToast = new bootstrap.Toast(document.getElementById('storeToast'));
         const listingToast = new bootstrap.Toast(document.getElementById('listingToast'));
-        
-        // Modal Functionality
+
+        // Store Modal Functionality
         const addStoreBtn = document.getElementById('addStoreBtn');
         const storeModal = document.getElementById('storeModal');
-        const closeBtn = document.querySelector('.close');
+        const storeCloseBtn = storeModal.querySelector('.close');
 
         addStoreBtn.onclick = () => {
             storeToast.show();
             setTimeout(() => {
                 storeModal.style.display = 'block';
-            }, 1000);
+                storeToast.hide();
+            }, 500); // Brief toast before modal
         };
-        
-        closeBtn.onclick = () => storeModal.style.display = 'none';
+        storeCloseBtn.onclick = () => storeModal.style.display = 'none';
         window.onclick = (event) => {
             if (event.target === storeModal) storeModal.style.display = 'none';
+            if (event.target === listingModal) listingModal.style.display = 'none';
         };
 
         document.getElementById('storeForm').onsubmit = (e) => {
@@ -380,11 +400,24 @@
             storeModal.style.display = 'none';
         };
 
-        document.getElementById('addListingBtn').onclick = () => {
+        // Listing Modal Functionality
+        const addListingBtn = document.getElementById('addListingBtn');
+        const listingModal = document.getElementById('listingModal');
+        const listingCloseBtn = listingModal.querySelector('.close');
+
+        addListingBtn.onclick = () => {
             listingToast.show();
             setTimeout(() => {
-                console.log('Add Listing clicked (placeholder - connect to backend)');
-            }, 1000);
+                listingModal.style.display = 'block';
+                listingToast.hide();
+            }, 500); // Brief toast before modal
+        };
+        listingCloseBtn.onclick = () => listingModal.style.display = 'none';
+
+        document.getElementById('listingForm').onsubmit = (e) => {
+            e.preventDefault();
+            console.log('Listing added (placeholder - connect to backend)');
+            listingModal.style.display = 'none';
         };
     </script>
 </body>
