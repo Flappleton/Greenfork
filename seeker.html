@@ -6,185 +6,308 @@
     <title>GreenFork - Seekers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Reusing styles - Consider common CSS file */
         :root {
-            --forest-green: #2a9d8f;
-            --lime-green: #8ab17d;
-            --pale-green: #f4f7f3;
-            --deep-green: #264653;
-            --turquoise-blue: #64d5ca;
+            --forest-green: #2a9d8f; --lime-green: #8ab17d; --pale-green: #f4f7f3;
+            --deep-green: #264653; --turquoise-blue: #64d5ca; --orange-accent: #e76f51;
         }
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, var(--pale-green), var(--turquoise-blue));
-            color: #333;
-            line-height: 1.6;
-            background-attachment: fixed;
-        }
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 1rem 0;
-        }
-        .nav-link {
-            color: var(--forest-green) !important;
-            font-weight: 500;
-            transition
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, var(--pale-green), var(--turquoise-blue)); color: #333; line-height: 1.6; background-attachment: fixed; }
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1rem 0; }
+        .nav-link { color: var(--forest-green) !important; font-weight: 500; transition: color 0.3s; margin: 0 0.5rem;}
+        .nav-link:hover, .nav-link.active { color: var(--lime-green) !important; }
+        .navbar-brand img { transition: transform 0.3s; height: 55px; }
+        .navbar-brand img:hover { transform: scale(1.05); }
 
-: color 0.3s;
+        .seeker-section, .listings-section { /* Combine intro and listings styling */
+            padding: 4rem 1rem; background: white; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); margin: 2rem auto; max-width: 95%;
         }
-        .nav-link:hover {
-            color: var(--lime-green) !important;
+         .seeker-section h2, .listings-section h2 {
+             color: var(--forest-green); margin-bottom: 1rem; /* Reduced margin */
+             text-align: center; font-weight: 600;
+         }
+          .section-intro {
+              text-align: center; max-width: 700px; margin: 0 auto 2.5rem auto; /* Increased bottom margin */
+              font-size: 1.1rem; color: #555;
+          }
+         .section-intro ul { list-style: none; padding-left: 0; margin-top: 1.5rem; }
+         .section-intro li::before { content: "✓"; color: var(--lime-green); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+
+         /* Search and Filter Bar */
+         .filter-bar {
+             background-color: var(--pale-green);
+             padding: 1rem;
+             border-radius: 10px;
+             margin-bottom: 2rem;
+             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+         }
+         .filter-bar .form-control, .filter-bar .form-select, .filter-bar .btn {
+             margin-right: 0.5rem; /* Spacing between elements */
+             margin-bottom: 0.5rem; /* Spacing on smaller screens */
+         }
+         .filter-bar .btn-filter {
+             background-color: var(--forest-green);
+             color: white;
+             border: none;
+         }
+         .filter-bar .btn-filter:hover {
+             background-color: var(--lime-green);
+         }
+
+         /* Listings Area */
+         .listings-section h3 { /* Style for Veg/Non-Veg/Store headers */
+             color: var(--deep-green);
+             margin-top: 2rem;
+             margin-bottom: 1.5rem;
+             padding-bottom: 0.5rem;
+             border-bottom: 2px solid var(--lime-green);
+             display: inline-block; /* Fit border to text */
+         }
+         .horizontal-scroll-container {
+             display: flex;
+             overflow-x: auto;
+             padding: 1rem 0.5rem 1.5rem 0.5rem; /* Add padding for scrollbar and cards */
+             gap: 1.5rem;
+             white-space: nowrap; /* Prevent cards wrapping */
+             scrollbar-width: thin; /* Firefox */
+             scrollbar-color: var(--lime-green) var(--pale-green); /* Firefox */
+         }
+         /* Webkit scrollbar styling */
+         .horizontal-scroll-container::-webkit-scrollbar { height: 8px; }
+         .horizontal-scroll-container::-webkit-scrollbar-track { background: var(--pale-green); border-radius: 4px; }
+         .horizontal-scroll-container::-webkit-scrollbar-thumb { background-color: var(--lime-green); border-radius: 4px; }
+         .horizontal-scroll-container::-webkit-scrollbar-thumb:hover { background-color: var(--forest-green); }
+
+         .listing-card { /* Card style within horizontal scroll */
+             background: white;
+             border-radius: 10px;
+             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+             flex: 0 0 auto; /* Prevent stretching, auto width */
+             width: 280px; /* Fixed width for horizontal scroll */
+             padding: 0; /* Remove padding, handle inside */
+             overflow: hidden; /* Clip content like images */
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+             display: flex;
+             flex-direction: column;
+         }
+         .listing-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+         }
+          .listing-card-img {
+             width: 100%;
+             height: 150px; /* Fixed image height */
+             object-fit: cover; /* Crop image nicely */
+             background-color: #eee; /* Placeholder color */
+         }
+         .listing-card-body {
+             padding: 1rem;
+             flex-grow: 1; /* Allow body to grow */
+             display: flex;
+             flex-direction: column;
+             text-align: left; /* Align text left */
+              white-space: normal; /* Allow text wrapping inside card */
+         }
+         .listing-card-body h5 { /* Item Name */
+             font-size: 1.1rem;
+             color: var(--deep-green);
+             margin-bottom: 0.5rem;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis; /* Add ... if title is too long */
+         }
+         .listing-card-body .store-name { /* Store Name */
+             font-size: 0.9rem;
+             color: var(--forest-green);
+             margin-bottom: 0.8rem;
+             font-weight: 500;
+         }
+          .listing-card-body .details { /* Other details */
+             font-size: 0.9rem;
+             color: #555;
+             margin-bottom: 0.3rem;
+             line-height: 1.4;
+         }
+         .listing-card-footer {
+             padding: 0.8rem 1rem;
+             background-color: var(--pale-green);
+             border-top: 1px solid #eee;
+             margin-top: auto; /* Push footer to bottom */
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+         }
+         .listing-card-footer .price {
+             font-weight: bold;
+             color: var(--forest-green);
+             font-size: 1.1rem;
+         }
+          .listing-card-footer .btn-request {
+             background-color: var(--orange-accent);
+             color: white;
+             border: none;
+             padding: 0.4rem 0.8rem;
+             font-size: 0.9rem;
+             border-radius: 15px;
+             transition: background-color 0.3s;
+         }
+         .listing-card-footer .btn-request:hover {
+             background-color: var(--light-orange);
+         }
+
+
+        .btn-explore { /* Main action button */
+            background: white; color: var(--forest-green); border: 2px solid var(--forest-green);
+            border-radius: 25px; padding: 0.8rem 2rem; font-weight: 500; transition: all 0.3s;
+            margin-top: 1.5rem; display: inline-block;
         }
-        .navbar-brand img {
-            transition: transform 0.3s;
-            height: 55px;
-        }
-        .navbar-brand img:hover {
-            transform: scale(1.05);
-        }
-        .seeker-section {
-            padding: 5rem 0;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin: 2rem auto;
-            max-width: 95%;
-        }
-        .seeker-section h2 {
-            color: var(--forest-green);
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-        }
-        .seeker-section p, .seeker-section li {
-            font-size: 1.1rem;
-            margin-bottom: 1rem;
-        }
-        .btn-explore {
-            background: white;
-            color: var(--forest-green);
-            border: 2px solid var(--forest-green);
-            border-radius: 25px;
-            padding: 0.8rem 2rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            margin-top: 1.5rem;
-        }
-        .btn-explore:hover {
-            background: var(--forest-green);
-            color: white;
-            transform: translateY(-2px);
-        }
-        footer {
-            background: var(--deep-green);
-            color: white;
-            padding: 3rem 0 2rem;
-            margin-top: 4rem;
-        }
-        /* Modal Styles */
-        .modal-header {
-            background: var(--forest-green);
-            color: white;
-            border-radius: 10px 10px 0 0;
-        }
-        .modal-content {
-            border-radius: 10px;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        .modal .btn-success {
-            background: var(--forest-green);
-            border: none;
-            padding: 0.8rem;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-        .modal .btn-success:hover {
-            background: var(--lime-green);
-            transform: translateY(-2px);
-        }
+        .btn-explore:hover { background: var(--forest-green); color: white; transform: translateY(-2px); }
+
+        /* Modal Styles (Reusing from index.html) */
+         .modal-header { background: var(--forest-green); color: white; border-bottom: none; border-radius: 10px 10px 0 0; }
+         .modal-header .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+         .modal-content { border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+         .modal-body .form-label { font-weight: 500; color: var(--deep-green); margin-bottom: 0.3rem; }
+        .modal-body .form-control, .modal-body .form-select { border-color: var(--lime-green); }
+        .modal-body .form-control:focus, .modal-body .form-select:focus { box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25); border-color: var(--forest-green); }
+         .modal-body [id$="Error"] { color: var(--orange-accent); font-size: 0.9em; min-height: 1.2em; margin-top: 0.5rem; }
+        .modal button[type="submit"] { background: var(--forest-green); border: none; padding: 0.7rem 1.5rem; font-weight: 500; color: white; border-radius: 20px; transition: all 0.3s; width: 100%; }
+        .modal button[type="submit"]:hover { background: var(--lime-green); transform: translateY(-2px); }
+        .modal-body .text-center a { color: var(--forest-green); text-decoration: none; font-weight: 500; }
+        .modal-body .text-center a:hover { text-decoration: underline; color: var(--lime-green); }
+
+        footer { background: var(--deep-green); color: white; padding: 3rem 0 2rem; margin-top: 4rem; }
+
         @media (max-width: 768px) {
-            .seeker-section {
-                padding: 3rem 1rem;
-                margin: 1rem auto;
-            }
+            .seeker-section, .listings-section { padding: 3rem 1rem; margin: 1.5rem auto; }
+             .section-intro { font-size: 1rem; }
+             .filter-bar { padding: 0.8rem; }
+             .filter-bar .form-control, .filter-bar .form-select, .filter-bar .btn { width: 100%; margin-bottom: 0.8rem; margin-right: 0; } /* Stack filters */
+             .listing-card { width: 250px; } /* Slightly smaller cards on mobile */
+             .horizontal-scroll-container { gap: 1rem; }
         }
     </style>
 </head>
 <body>
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="logo.png" alt="GreenFork Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" href="index.html"> <img src="logo.png" alt="GreenFork Logo"> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#about-us">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link active" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a></li>
+                    <li class="nav-item" id="signInLi"> <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a> </li>
+                    <li class="nav-item" id="signUpLi"> <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a> </li>
+                    <li class="nav-item d-none" id="logoutLi"> <a class="nav-link" href="#" id="logoutLink">Logout</a> </li>
+                    <li class="nav-item d-none" id="profileLi"> <a class="nav-link" href="#" id="profileLink">My Profile</a> </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Seeker Section -->
+    <!-- Seeker Intro Section -->
     <section class="seeker-section">
         <div class="container">
-            <h2 class="text-center">Join as a Seeker</h2>
-            <p class="text-center">Looking for affordable meals? GreenFork connects you with local businesses offering "Surprise Bags" of unsold food at discounted prices.</p>
-            <ul class="text-center list-unstyled">
-                <li>Search nearby surprise bags by location, price, or category.</li>
-                <li>Enjoy seamless one-click purchases with secure payments.</li>
-                <li>Get real-time notifications for new bag availability.</li>
-                <li>Pick up your order with a confirmation code.</li>
-            </ul>
-            <div class="text-center">
-                <a href="#" class="btn btn-explore" data-bs-toggle="modal" data-bs-target="#signInModal">Start Exploring Now</a>
+            <h2 class="text-center">Find Surplus Food Near You</h2>
+            <div class="section-intro">
+                 <p>Looking for affordable meals or food donations? GreenFork connects you with local businesses and individuals offering surplus food at discounted prices or for free.</p>
+                 <ul>
+                     <li>Search nearby listings by location and category.</li>
+                     <li>Filter by dietary needs (Veg/Non-Veg).</li>
+                     <li>Discover great deals and reduce food waste.</li>
+                     <li>Arrange pickup directly (request feature coming soon!).</li>
+                 </ul>
             </div>
         </div>
     </section>
 
-    <!-- Sign In Modal -->
-    <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form>
-                        <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email" required>
-                        </div>
-                        <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Password" required>
-                        </div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn btn-success">Sign In</button>
-                        </div>
-                        <div class="text-center mt-3">
-                            <p>New to GreenFork? <a href="new_account.html" style="color: var(--forest-green);">Create an account</a></p>
-                        </div>
-                    </form>
-                </div>
-            </div>
+    <!-- Filter and Listings Section -->
+    <section class="listings-section">
+        <div class="container">
+             <!-- Filter Bar -->
+             <div class="filter-bar">
+                 <form class="row g-2 align-items-center">
+                     <div class="col-md-4">
+                         <input type="text" class="form-control" id="locationInput" placeholder="Enter your location (e.g., Bandra, Mumbai)">
+                     </div>
+                     <div class="col-md-3">
+                          <select class="form-select" id="radiusSelect">
+                             <option selected value="5">Within 5 km</option>
+                             <option value="10">Within 10 km</option>
+                             <option value="25">Within 25 km</option>
+                             <option value="any">Any Distance</option>
+                         </select>
+                     </div>
+                     <div class="col-md-3">
+                         <input type="text" class="form-control" id="searchInput" placeholder="Search items or stores...">
+                     </div>
+                     <div class="col-md-2">
+                         <button type="button" class="btn btn-filter w-100" id="filterBtn">Filter <i class="fas fa-filter"></i></button>
+                         <!-- Add modal for more filters later -->
+                     </div>
+                 </form>
+             </div>
+
+             <!-- Vegetarian Listings -->
+             <div id="vegListings">
+                 <h3><i class="fas fa-leaf" style="color: var(--lime-green);"></i> Vegetarian Options</h3>
+                 <div class="horizontal-scroll-container" id="vegListingsContainer">
+                     <!-- Veg listing cards will be loaded here by seeker.js -->
+                      <p class="text-muted" id="noVegListings">No vegetarian listings found currently.</p> <!-- Placeholder -->
+                 </div>
+             </div>
+
+             <!-- Non-Vegetarian Listings -->
+              <div id="nonVegListings">
+                 <h3><i class="fas fa-drumstick-bite" style="color: var(--orange-accent);"></i> Non-Vegetarian Options</h3>
+                 <div class="horizontal-scroll-container" id="nonVegListingsContainer">
+                     <!-- Non-Veg listing cards will be loaded here by seeker.js -->
+                      <p class="text-muted" id="noNonVegListings">No non-vegetarian listings found currently.</p> <!-- Placeholder -->
+                 </div>
+             </div>
+
+              <!-- Nearby Stores (Linked to Store Details Page) -->
+             <div id="nearbyStores">
+                  <h3><i class="fas fa-store" style="color: var(--forest-green);"></i> Participating Stores Nearby</h3>
+                  <div class="horizontal-scroll-container" id="storesContainer">
+                      <!-- Store cards will be loaded here by seeker.js -->
+                       <p class="text-muted" id="noStores">No stores found in this area yet.</p> <!-- Placeholder -->
+                  </div>
+             </div>
+
         </div>
-    </div>
+    </section>
+
+
+    <!-- Sign In Modal (Copied) -->
+     <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="signInModalLabel">Sign In</h5> <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body"> <form id="signInForm"> <div class="mb-3"> <label for="signInEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signInEmail" placeholder="Email" required> </div> <div class="mb-3"> <label for="signInPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signInPassword" placeholder="Password" required> </div> <div class="mb-3" id="signInError"></div> <div class="d-grid"> <button type="submit" class="btn">Sign In</button> </div> </form> <div class="text-center mt-3"> <p>New to GreenFork? <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal">Create an account</a> </p> </div> </div> </div> </div> </div>
+
+    <!-- Sign Up Modal (Copied) -->
+     <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="signUpModalLabel">Create Account</h5> <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body"> <form id="signUpForm"> <div class="mb-3"> <label for="signUpName" class="form-label">Full Name</label> <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required> </div> <div class="mb-3"> <label for="signUpAccountType" class="form-label">I am a...</label> <select class="form-select" id="signUpAccountType" required> <option value="" disabled selected>Select Account Type</option> <option value="Merchant">Merchant (Donor)</option> <option value="Seeker">Seeker (Recipient)</option> </select> </div> <div class="mb-3"> <label for="signUpEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required> </div> <div class="mb-3"> <label for="signUpPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required> </div> <div class="mb-3" id="signUpError"></div> <div class="d-grid"> <button type="submit" class="btn">Create Account</button> </div> </form> <div class="text-center mt-3"> <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal">Sign In</a> </p> </div> </div> </div> </div> </div>
+
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
+        <div class="container text-center">
+             <p class="mb-0">© 2025 GreenFork. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- Font Awesome for Icons (Optional, but used in example headers) -->
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> <!-- Replace with your kit or remove if not using icons -->
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'9290dcbdc912db1d',t:'MTc0MzQzNDc1Ni4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <script src="js/firebase-init.js"></script>
+    <script src="js/auth.js"></script>
+    <!-- Seeker specific JS (NEW - We'll add code later for listing display/filtering) -->
+     <script src="js/seeker.js"></script>
+</body>
 </html>

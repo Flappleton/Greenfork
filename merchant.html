@@ -6,13 +6,17 @@
     <title>GreenFork - Merchants</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+         /* Reusing styles from index.html - Consider moving common styles to a separate CSS file */
         :root {
-            --forest-green: #2a9d8f;
-            --lime-green: #8ab17d;
-            --pale-green: #f4f7f3;
-            --deep-green: #264653;
-            --turquoise-blue: #64d5ca;
+            --forest-green: #2a9d8f;    /* Primary green shade */
+            --lime-green: #8ab17d;      /* Softer green for accents */
+            --pale-green: #f4f7f3;      /* Light background green */
+            --deep-green: #264653;      /* Darker green for footer */
+            --turquoise-blue: #64d5ca;  /* New turquoise blue color */
+            --orange-accent: #e76f51;   /* Orange for buttons/accents */
+            --light-orange: #f4a261;   /* Lighter orange */
         }
+
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(135deg, var(--pale-green), var(--turquoise-blue));
@@ -20,28 +24,16 @@
             line-height: 1.6;
             background-attachment: fixed;
         }
-        .navbar {
-            background: white;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-            padding: 1rem 0;
-        }
-        .nav-link {
-            color: var(--forest-green) !important;
-            font-weight: 500;
-            transition: color 0.3s;
-        }
-        .nav-link:hover {
-            color: var(--lime-green) !important;
-        }
-        .navbar-brand img {
-            transition: transform 0.3s;
-            height: 55px;
-        }
-        .navbar-brand img:hover {
-            transform: scale(1.05);
-        }
+        /* Navbar */
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1rem 0; }
+        .nav-link { color: var(--forest-green) !important; font-weight: 500; transition: color 0.3s; margin: 0 0.5rem;}
+        .nav-link:hover, .nav-link.active { color: var(--lime-green) !important; }
+        .navbar-brand img { transition: transform 0.3s; height: 55px; }
+        .navbar-brand img:hover { transform: scale(1.05); }
+
+        /* Page Sections */
         .merchant-section, #stores, #listings {
-            padding: 4rem 0;
+            padding: 4rem 1rem; /* Consistent padding */
             background: white;
             border-radius: 15px;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
@@ -50,43 +42,94 @@
         }
         h2 {
             color: var(--forest-green);
-            margin-bottom: 2rem;
+            margin-bottom: 2.5rem; /* Increased margin */
             text-align: center;
+            font-weight: 600; /* Slightly bolder */
         }
-        .btn-join {
-            background: white;
-            color: var(--forest-green);
-            border: 2px solid var(--forest-green);
+         .section-intro { /* Styling for intro paragraphs */
+             text-align: center;
+             max-width: 700px;
+             margin-left: auto;
+             margin-right: auto;
+             margin-bottom: 2rem;
+             font-size: 1.1rem;
+             color: #555;
+         }
+          .section-intro ul {
+             list-style: none; /* Remove default bullets */
+             padding-left: 0;
+             margin-top: 1.5rem;
+         }
+         .section-intro li::before { /* Custom bullet points */
+             content: "✓"; /* Checkmark */
+             color: var(--lime-green);
+             font-weight: bold;
+             display: inline-block;
+             width: 1em;
+             margin-left: -1em; /* Align with text */
+         }
+
+        /* Button Styles */
+         .btn-custom { /* Base style for custom buttons */
             border-radius: 25px;
             padding: 0.8rem 2rem;
             font-weight: 500;
             transition: all 0.3s;
-        }
-        .btn-join:hover {
-            background: var(--forest-green);
-            color: white;
+             border: 2px solid transparent; /* Placeholder for border */
+             background: white;
+             display: inline-block; /* Ensure proper spacing */
+             margin-top: 1rem;
+         }
+        .btn-custom:hover {
             transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
         }
-        .btn-orange {
-            background: white;
-            color: #e76f51;
-            border: 2px solid #e76f51;
-            border-radius: 25px;
-            padding: 0.8rem 2rem;
-            font-weight: 500;
-            transition: all 0.3s;
+        .btn-join { /* Green button */
+             border-color: var(--forest-green);
+             color: var(--forest-green);
+         }
+        .btn-join:hover {
+             background: var(--forest-green);
+             color: white;
+         }
+        .btn-orange { /* Orange button */
+            border-color: var(--orange-accent);
+            color: var(--orange-accent);
         }
         .btn-orange:hover {
-            background: #f4a261;
+            background: var(--light-orange);
             color: white;
-            border-color: #f4a261;
-            transform: translateY(-2px);
+            border-color: var(--light-orange);
         }
+         .btn-add { /* Lime green add button */
+             background: var(--lime-green);
+             color: white;
+             border: none;
+             padding: 1.2rem; /* Make it squarer/more prominent */
+             border-radius: 10px;
+             cursor: pointer;
+             display: flex;
+             align-items: center;
+             justify-content: center;
+             font-size: 1.1rem;
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+             flex: 1 1 250px; /* Make it fit the grid */
+             max-width: 300px;
+             min-height: 100px; /* Give it some height */
+         }
+         .btn-add:hover {
+             background: var(--forest-green);
+             transform: translateY(-5px);
+             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+         }
+
+        /* Store and Listing Cards */
         .store-container, .listing-container {
             display: flex;
             flex-wrap: wrap;
             gap: 2rem;
             justify-content: center;
+            margin-top: 2rem; /* Add space below heading */
         }
         .store-card, .listing-card {
             background: var(--pale-green);
@@ -94,124 +137,51 @@
             border-radius: 10px;
             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
             text-align: center;
-            flex: 1 1 250px;
-            max-width: 300px;
+            flex: 1 1 250px; /* Allow flexible width */
+            max-width: 300px; /* Max width */
             transition: all 0.3s;
+            border-top: 4px solid var(--lime-green); /* Accent */
         }
         .store-card:hover, .listing-card:hover {
             transform: translateY(-5px);
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+             border-top-color: var(--forest-green); /* Change accent on hover */
         }
-        .add-store, #addListingBtn {
-            background: var(--lime-green);
-            color: white;
-            cursor: pointer;
-            transition: all 0.3s;
-            border: none;
-            padding: 1.5rem;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 500;
-        }
-        .add-store:hover, #addListingBtn:hover {
-            background: var(--forest-green);
-            transform: translateY(-5px);
-        }
-        /* Compact Modal Styles */
-        .compact-modal {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-            z-index: 1200;
-            width: 350px; /* Smaller width */
-            padding: 1.5rem;
-        }
-        .compact-modal h3 {
-            color: var(--forest-green);
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .compact-modal .close {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 1.2rem;
-            cursor: pointer;
-            color: var(--forest-green);
-        }
-        .compact-modal form label {
-            display: block;
-            margin: 0.5rem 0;
-            color: var(--forest-green);
-            font-size: 0.9rem;
-        }
-        .compact-modal form input, .compact-modal form select {
-            width: 100%;
-            padding: 0.5rem;
-            margin-bottom: 1rem;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            font-size: 0.9rem;
-        }
-        .compact-modal form button {
-            background: var(--forest-green);
-            color: white;
-            padding: 0.6rem 1.2rem;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-weight: 500;
-            width: 100%;
-        }
-        .compact-modal form button:hover {
-            background: var(--lime-green);
-            transform: translateY(-2px);
-        }
-        /* Toast Notification Styles */
-        .toast-container {
-            position: fixed;
-            top: 20px;
-            left: 0;
-            right: 0;
-            display: flex;
-            justify-content: center;
-            z-index: 1100;
-        }
-        .toast {
-            background-color: var(--forest-green);
-            color: white;
-            border-radius: 8px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-        }
-        .toast-body {
-            font-size: 0.9rem;
-        }
-        .btn-close {
-            filter: invert(1);
-        }
-        footer {
-            background: var(--deep-green);
-            color: white;
-            padding: 3rem 0 2rem;
-            margin-top: 4rem;
-        }
+         .store-card h3, .listing-card h3 {
+             color: var(--deep-green);
+             font-size: 1.3rem;
+             margin-bottom: 0.8rem;
+         }
+         .store-card p, .listing-card p {
+             font-size: 0.95rem;
+             color: #555;
+             margin-bottom: 0.5rem;
+         }
+
+        /* Add Store/Listing Modal */
+        .modal { /* Ensure modal backdrop is semi-transparent */
+             background: rgba(0, 0, 0, 0.5);
+         }
+         /* Using Bootstrap modal, so reusing index.html styles */
+        .modal-header { background: var(--forest-green); color: white; border-bottom: none; border-radius: 10px 10px 0 0; }
+        .modal-header .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+        .modal-content { border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+         .modal-body .form-label { font-weight: 500; color: var(--deep-green); margin-bottom: 0.3rem; }
+        .modal-body .form-control, .modal-body .form-select, .modal-body textarea { border-color: var(--lime-green); width: 100%; padding: 0.5rem; margin-bottom: 1rem; border: 1px solid var(--lime-green); border-radius: 5px;}
+        .modal-body .form-control:focus, .modal-body .form-select:focus, .modal-body textarea:focus { box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25); border-color: var(--forest-green); }
+         .modal-body [id$="Error"] { color: var(--orange-accent); font-size: 0.9em; min-height: 1.2em; margin-top: 0.5rem; }
+        .modal button[type="submit"] { background: var(--forest-green); border: none; padding: 0.7rem 1.5rem; font-weight: 500; color: white; border-radius: 20px; transition: all 0.3s; width: 100%; }
+        .modal button[type="submit"]:hover { background: var(--lime-green); transform: translateY(-2px); }
+        .modal-body .text-center a { color: var(--forest-green); text-decoration: none; font-weight: 500; }
+        .modal-body .text-center a:hover { text-decoration: underline; color: var(--lime-green); }
+
+        /* Footer */
+        footer { background: var(--deep-green); color: white; padding: 3rem 0 2rem; margin-top: 4rem; }
+
         @media (max-width: 768px) {
-            .merchant-section, #stores, #listings {
-                padding: 3rem 1rem;
-                margin: 1rem auto;
-            }
-            .compact-modal {
-                width: 90%;
-            }
+            .merchant-section, #stores, #listings { padding: 3rem 1rem; margin: 1.5rem auto; }
+             h2 { font-size: 1.8rem; }
+             .store-card, .listing-card, .btn-add { max-width: 90%; flex-basis: 90%; } /* Stack cards */
         }
     </style>
 </head>
@@ -242,35 +212,51 @@
             <a class="navbar-brand" href="index.html">
                 <img src="logo.png" alt="GreenFork Logo">
             </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- NAV ITEMS UPDATED WITH IDs FOR AUTH SCRIPT -->
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#about-us">About</a></li>
                     <li class="nav-item"><a class="nav-link active" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
-                    <li class="nav-item"><a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a></li>
+                     <!-- Auth Links -->
+                    <li class="nav-item" id="signInLi">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
+                    </li>
+                    <li class="nav-item" id="signUpLi">
+                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a>
+                    </li>
+                    <li class="nav-item d-none" id="logoutLi"> <!-- Initially hidden -->
+                        <a class="nav-link" href="#" id="logoutLink">Logout</a>
+                    </li>
+                    <li class="nav-item d-none" id="profileLi"> <!-- Initially hidden -->
+                         <a class="nav-link" href="#" id="profileLink">My Profile</a>
+                    </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Merchant Section -->
+    <!-- Merchant Section Intro -->
     <section class="merchant-section">
         <div class="container">
-            <h2>Join as a Merchant</h2>
-            <p class="text-center">Are you a bakery, restaurant, or food business with unsold food? With GreenFork, you can turn waste into opportunity. List your surplus food as "Surprise Bags" and sell them at discounted prices to nearby customers.</p>
-            <ul class="text-center list-unstyled">
-                <li>Update availability in real-time.</li>
-                <li>Receive secure payments with our integrated system.</li>
-                <li>Generate extra revenue instead of discarding food.</li>
-                <li>Get real-time notifications for orders and pickups.</li>
-            </ul>
-            <div class="text-center mt-4">
-                <a href="#" class="btn btn-orange">Start Selling Now</a>
+            <h2>Merchant Dashboard</h2>
+            <div class="section-intro">
+                 <p>Welcome, Merchant! Turn your surplus food into opportunity with GreenFork. List unsold items for donation or discounted sale, manage your store(s), and contribute to reducing food waste.</p>
+                 <ul>
+                     <li>List food items easily with details.</li>
+                     <li>Manage your store profile(s).</li>
+                     <li>Track your listed items.</li>
+                     <li>Connect with seekers and manage pickups (coming soon!).</li>
+                 </ul>
+                 <div class="text-center mt-4">
+                     <!-- Button might change based on login state, handled by JS potentially -->
+                     <a href="#" class="btn-custom btn-orange" data-bs-toggle="modal" data-bs-target="#signUpModal">Start Selling / Donating Now</a>
+                 </div>
             </div>
         </div>
     </section>
@@ -279,14 +265,18 @@
     <section id="stores">
         <div class="container">
             <h2>Your Stores</h2>
-            <div class="store-container">
-                <div class="store-card add-store" id="addStoreBtn">
-                    <span>+ Add Store</span>
+            <div class="store-container" id="storeContainer"> <!-- Added ID for JS -->
+                <!-- Add Store Button -->
+                <div class="btn-add" id="addStoreBtn" data-bs-toggle="modal" data-bs-target="#storeModal">
+                    <span><i class="fas fa-plus"></i> + Add New Store</span> <!-- Added icon placeholder -->
                 </div>
+                <!-- Sample Store Card (Will be replaced by dynamic data) -->
                 <div class="store-card">
-                    <h3>Sample Bakery</h3>
-                    <p>Location: Mumbai, India</p>
+                    <h3>Your Store Name Here</h3>
+                    <p>Location: Fetch from DB</p>
+                    <button class="btn btn-sm btn-outline-secondary mt-2">Edit</button>
                 </div>
+                <!-- More stores loaded dynamically here -->
             </div>
         </div>
     </section>
@@ -295,69 +285,195 @@
     <section id="listings">
         <div class="container">
             <h2>Your Listings</h2>
-            <div class="listing-container">
-                <button id="addListingBtn" class="add-store">+ Add Listing</button>
+            <div class="listing-container" id="listingContainer"> <!-- Added ID for JS -->
+                 <!-- Add Listing Button -->
+                 <div class="btn-add" id="addListingBtn" data-bs-toggle="modal" data-bs-target="#listingModal">
+                     <span><i class="fas fa-plus"></i> + Add New Listing</span>
+                 </div>
+                <!-- Sample Listing Card (Will be replaced by dynamic data) -->
                 <div class="listing-card">
-                    <h3>Surprise Bag - Pastries</h3>
-                    <p>Price: ₹100 | Available: 5</p>
+                    <h3>Item Name Here (e.g., Veggie Box)</h3>
+                    <p>Quantity: 5kg | Type: Fresh</p>
+                    <p>Status: Available</p>
+                     <button class="btn btn-sm btn-outline-secondary mt-2">Edit</button>
+                     <button class="btn btn-sm btn-outline-danger mt-2">Delete</button>
                 </div>
+                 <!-- More listings loaded dynamically here -->
             </div>
         </div>
     </section>
 
-    <!-- Add Store Compact Modal -->
-    <div id="storeModal" class="compact-modal">
-        <span class="close">×</span>
-        <h3>Add Store</h3>
-        <form id="storeForm">
-            <label for="storeName">Store Name:</label>
-            <input type="text" id="storeName" required>
-            <label for="storeLocation">Store Location:</label>
-            <input type="text" id="storeLocation" placeholder="Search location..." required>
-            <label for="storeImage">Store Image (optional):</label>
-            <input type="file" id="storeImage" accept="image/*">
-            <button type="submit">Add Store</button>
-        </form>
+    <!-- Add Store Modal -->
+    <div class="modal fade" id="storeModal" tabindex="-1" aria-labelledby="storeModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="storeModalLabel">Add/Edit Store</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="storeForm">
+                        <div class="mb-3">
+                             <label for="storeName" class="form-label">Store Name:</label>
+                             <input type="text" id="storeName" class="form-control" required>
+                        </div>
+                         <div class="mb-3">
+                            <label for="storeLocation" class="form-label">Store Location:</label>
+                            <input type="text" id="storeLocation" class="form-control" placeholder="e.g., 123 Main St, Mumbai" required>
+                            <!-- Add map integration later -->
+                         </div>
+                          <div class="mb-3">
+                             <label for="storeDescription" class="form-label">Description (optional):</label>
+                             <textarea id="storeDescription" class="form-control" rows="3"></textarea>
+                          </div>
+                        <!-- <label for="storeImage">Store Image (optional):</label> -->
+                        <!-- <input type="file" id="storeImage" accept="image/*"> -->
+                         <div id="storeFormError" class="mb-3"></div>
+                        <button type="submit" class="btn">Save Store</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Add Listing Compact Modal -->
-    <div id="listingModal" class="compact-modal">
-        <span class="close">×</span>
-        <h3>Add Listing</h3>
-        <form id="listingForm">
-            <label for="listingName">Listing Name:</label>
-            <input type="text" id="listingName" required placeholder="e.g., Surprise Bag - Pastries">
-            <label for="listingPrice">Price (₹):</label>
-            <input type="number" id="listingPrice" required placeholder="e.g., 100" min="1">
-            <label for="listingQuantity">Quantity Available:</label>
-            <input type="number" id="listingQuantity" required placeholder="e.g., 5" min="1">
-            <button type="submit">Add Listing</button>
-        </form>
+     <!-- Add Listing Modal (NEW) -->
+     <div class="modal fade" id="listingModal" tabindex="-1" aria-labelledby="listingModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-lg"> <!-- Larger modal -->
+            <div class="modal-content">
+                 <div class="modal-header">
+                    <h5 class="modal-title" id="listingModalLabel">Add/Edit Listing</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="listingForm">
+                        <!-- Link to Store -->
+                         <div class="mb-3">
+                            <label for="listingStore" class="form-label">Select Store:</label>
+                            <select id="listingStore" class="form-select" required>
+                                <option value="" disabled selected>-- Select your store --</option>
+                                <!-- Options populated dynamically by JS -->
+                            </select>
+                        </div>
+
+                         <div class="row">
+                             <div class="col-md-6 mb-3">
+                                <label for="listingName" class="form-label">Listing Title / Item Name:</label>
+                                <input type="text" id="listingName" class="form-control" placeholder="e.g., Surplus Bread Loaves, Vegetable Box" required>
+                             </div>
+                             <div class="col-md-6 mb-3">
+                                 <label for="listingFoodType" class="form-label">Food Type:</label>
+                                 <select id="listingFoodType" class="form-select" required>
+                                     <option value="" disabled selected>Select type...</option>
+                                     <option value="Fresh">Fresh Produce</option>
+                                     <option value="Leftovers">Prepared Leftovers</option>
+                                     <option value="Packaged">Packaged Goods</option>
+                                     <option value="Bakery">Bakery</option>
+                                     <option value="Expired">Expired (For Compost Only)</option>
+                                 </select>
+                             </div>
+                         </div>
+
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="listingQuantity" class="form-label">Quantity & Unit:</label>
+                                <input type="text" id="listingQuantity" class="form-control" placeholder="e.g., 5 kg, 10 units, 3 boxes" required>
+                             </div>
+                             <div class="col-md-6 mb-3">
+                                 <label for="listingDietary" class="form-label">Dietary Preference:</label>
+                                 <select id="listingDietary" class="form-select">
+                                     <option value="Any" selected>Any</option>
+                                     <option value="Vegetarian">Vegetarian</option>
+                                     <option value="Non-Vegetarian">Non-Vegetarian</option>
+                                     <option value="Vegan">Vegan</option>
+                                 </select>
+                             </div>
+                        </div>
+
+                         <div class="row">
+                             <div class="col-md-6 mb-3">
+                                <label for="listingExpiry" class="form-label">Best Before / Expiry Date:</label>
+                                <input type="date" id="listingExpiry" class="form-control">
+                             </div>
+                              <div class="col-md-6 mb-3">
+                                 <label for="listingPrice" class="form-label">Price (₹) (0 for donation):</label>
+                                 <input type="number" id="listingPrice" class="form-control" min="0" step="1" value="0" required>
+                              </div>
+                         </div>
+
+                         <div class="mb-3">
+                            <label for="listingDescription" class="form-label">Description / Notes (optional):</label>
+                            <textarea id="listingDescription" class="form-control" rows="3" placeholder="e.g., Contains onions and garlic. Pickup by 6 PM."></textarea>
+                         </div>
+
+                         <!-- Add pooling option if food type is 'Expired' -->
+                         <div class="form-check mb-3" id="poolingOptionDiv" style="display: none;">
+                             <input class="form-check-input" type="checkbox" value="" id="listingPooling">
+                             <label class="form-check-label" for="listingPooling">
+                                Allow pooling with other nearby compost donations?
+                             </label>
+                         </div>
+
+                        <div id="listingFormError" class="mb-3"></div>
+                        <button type="submit" class="btn">Save Listing</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <!-- Sign In Modal -->
+
+    <!-- Sign In Modal (Copied from Index - Ensure IDs are correct) -->
     <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
+                <div class="modal-header">
                     <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
-                    <form>
+                    <form id="signInForm">
                         <div class="mb-3">
-                            <input type="email" class="form-control" placeholder="Email" required>
+                            <label for="signInEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signInEmail" placeholder="Email" required>
                         </div>
                         <div class="mb-3">
-                            <input type="password" class="form-control" placeholder="Password" required>
+                             <label for="signInPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signInPassword" placeholder="Password" required>
                         </div>
-                        <div class="d-grid gap-2">
-                            <button type="submit" class="btn" style="background: var(--forest-green); color: white;">Sign In</button>
+                        <div class="mb-3" id="signInError"></div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn">Sign In</button>
                         </div>
                     </form>
+                    <div class="text-center mt-3">
+                        <p>New to GreenFork?
+                           <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal">Create an account</a>
+                        </p>
+                    </div>
                 </div>
-                <div class="modal-footer">
-                    <p class="text-center">New to GreenFork? <a href="new_account.html" style="color: var(--forest-green);">Create an account</a></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sign Up Modal (Copied from Index) -->
+    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
+         <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="signUpModalLabel">Create Account</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="signUpForm">
+                        <div class="mb-3"> <label for="signUpName" class="form-label">Full Name</label> <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required> </div>
+                        <div class="mb-3"> <label for="signUpAccountType" class="form-label">I am a...</label> <select class="form-select" id="signUpAccountType" required> <option value="" disabled selected>Select Account Type</option> <option value="Merchant">Merchant (Donor)</option> <option value="Seeker">Seeker (Recipient)</option> </select> </div>
+                        <div class="mb-3"> <label for="signUpEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required> </div>
+                        <div class="mb-3"> <label for="signUpPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required> </div>
+                        <div class="mb-3" id="signUpError"></div>
+                        <div class="d-grid"> <button type="submit" class="btn">Create Account</button> </div>
+                    </form>
+                    <div class="text-center mt-3"> <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal">Sign In</a> </p> </div>
                 </div>
             </div>
         </div>
@@ -365,60 +481,64 @@
 
     <!-- Footer -->
     <footer>
-        <div class="container">
-            <p class="text-center mt-3">© 2025 GreenFork. All rights reserved.</p>
+        <div class="container text-center">
+            <p class="mb-0">© 2025 GreenFork. All rights reserved.</p>
         </div>
     </footer>
 
+    <!-- SCRIPTS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script>
-        // Initialize Bootstrap Toasts
-        const storeToast = new bootstrap.Toast(document.getElementById('storeToast'));
-        const listingToast = new bootstrap.Toast(document.getElementById('listingToast'));
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
+    <!-- Firebase Init -->
+    <script src="js/firebase-init.js"></script>
+    <!-- Firebase Auth Logic -->
+    <script src="js/auth.js"></script>
+    <!-- Merchant specific JS (NEW - We'll add code later for store/listing logic) -->
+     <script src="js/merchant.js"></script>
 
-        // Store Modal Functionality
-        const addStoreBtn = document.getElementById('addStoreBtn');
-        const storeModal = document.getElementById('storeModal');
-        const storeCloseBtn = storeModal.querySelector('.close');
+    <!-- Example inline script moved or integrated into merchant.js -->
+    <!-- <script>
+        // // Modal Functionality (Consider moving to merchant.js)
+        // const addStoreBtn = document.getElementById('addStoreBtn');
+        // const storeModalEl = document.getElementById('storeModal');
+        // if (storeModalEl) {
+        //     const storeModal = new bootstrap.Modal(storeModalEl);
+        //     const closeBtn = storeModalEl.querySelector('.close'); // Adjust selector if needed
 
-        addStoreBtn.onclick = () => {
-            storeToast.show();
-            setTimeout(() => {
-                storeModal.style.display = 'block';
-                storeToast.hide();
-            }, 500); // Brief toast before modal
-        };
-        storeCloseBtn.onclick = () => storeModal.style.display = 'none';
-        window.onclick = (event) => {
-            if (event.target === storeModal) storeModal.style.display = 'none';
-            if (event.target === listingModal) listingModal.style.display = 'none';
-        };
+        //     if(addStoreBtn) addStoreBtn.onclick = () => storeModal.show();
+        //     if(closeBtn) closeBtn.onclick = () => storeModal.hide();
+        //     // Hiding via backdrop click is default bootstrap behavior
+        // }
 
-        document.getElementById('storeForm').onsubmit = (e) => {
-            e.preventDefault();
-            console.log('Store added (placeholder - connect to backend)');
-            storeModal.style.display = 'none';
-        };
 
-        // Listing Modal Functionality
-        const addListingBtn = document.getElementById('addListingBtn');
-        const listingModal = document.getElementById('listingModal');
-        const listingCloseBtn = listingModal.querySelector('.close');
+        // // Placeholder form submit (Move to merchant.js)
+        // const storeForm = document.getElementById('storeForm');
+        // if(storeForm) {
+        //     storeForm.onsubmit = (e) => {
+        //         e.preventDefault();
+        //         console.log('Store form submitted (placeholder - connect to backend in merchant.js)');
+        //         const storeModalInstance = bootstrap.Modal.getInstance(storeModalEl);
+        //         if(storeModalInstance) storeModalInstance.hide();
+        //     };
+        // }
 
-        addListingBtn.onclick = () => {
-            listingToast.show();
-            setTimeout(() => {
-                listingModal.style.display = 'block';
-                listingToast.hide();
-            }, 500); // Brief toast before modal
-        };
-        listingCloseBtn.onclick = () => listingModal.style.display = 'none';
 
-        document.getElementById('listingForm').onsubmit = (e) => {
-            e.preventDefault();
-            console.log('Listing added (placeholder - connect to backend)');
-            listingModal.style.display = 'none';
-        };
-    </script>
+        // // Placeholder Listing Button (Move to merchant.js)
+        // const addListingBtn = document.getElementById('addListingBtn');
+        // if(addListingBtn) {
+        //      addListingBtn.onclick = () => {
+        //          console.log('Add Listing clicked (placeholder - handle in merchant.js)');
+        //          // Open listing modal here
+        //          const listingModalEl = document.getElementById('listingModal');
+        //          if(listingModalEl) {
+        //              const listingModal = new bootstrap.Modal(listingModalEl);
+        //              listingModal.show();
+        //          }
+        //      };
+        // }
+    </script> -->
 </body>
 </html>
