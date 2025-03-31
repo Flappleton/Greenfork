@@ -422,11 +422,10 @@
     </div>
 
 
-    <!-- Sign In Modal (Copied from Index - Ensure IDs are correct) -->
+    <!-- Updated Sign In Modal -->
     <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
-                <div class="modal-header">
                 <div class="modal-header">
                     <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
                     <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
@@ -438,7 +437,7 @@
                             <input type="email" class="form-control" id="signInEmail" placeholder="Email" required>
                         </div>
                         <div class="mb-3">
-                             <label for="signInPassword" class="form-label">Password</label>
+                            <label for="signInPassword" class="form-label">Password</label>
                             <input type="password" class="form-control" id="signInPassword" placeholder="Password" required>
                         </div>
                         <div class="mb-3" id="signInError"></div>
@@ -456,9 +455,9 @@
         </div>
     </div>
 
-    <!-- Sign Up Modal (Copied from Index) -->
+    <!-- Updated Sign Up Modal -->
     <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
-         <div class="modal-dialog">
+        <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="signUpModalLabel">Create Account</h5>
@@ -466,14 +465,36 @@
                 </div>
                 <div class="modal-body">
                     <form id="signUpForm">
-                        <div class="mb-3"> <label for="signUpName" class="form-label">Full Name</label> <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required> </div>
-                        <div class="mb-3"> <label for="signUpAccountType" class="form-label">I am a...</label> <select class="form-select" id="signUpAccountType" required> <option value="" disabled selected>Select Account Type</option> <option value="Merchant">Merchant (Donor)</option> <option value="Seeker">Seeker (Recipient)</option> </select> </div>
-                        <div class="mb-3"> <label for="signUpEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required> </div>
-                        <div class="mb-3"> <label for="signUpPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required> </div>
+                        <div class="mb-3">
+                            <label for="signUpName" class="form-label">Full Name</label>
+                            <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signUpAccountType" class="form-label">I am a...</label>
+                            <select class="form-select" id="signUpAccountType" required>
+                                <option value="" disabled selected>Select Account Type</option>
+                                <option value="Merchant">Merchant (Donor)</option>
+                                <option value="Seeker">Seeker (Recipient)</option>
+                            </select>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signUpEmail" class="form-label">Email address</label>
+                            <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="signUpPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required>
+                        </div>
                         <div class="mb-3" id="signUpError"></div>
-                        <div class="d-grid"> <button type="submit" class="btn">Create Account</button> </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn">Create Account</button>
+                        </div>
                     </form>
-                    <div class="text-center mt-3"> <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal">Sign In</a> </p> </div>
+                    <div class="text-center mt-3">
+                        <p>Already have an account?
+                            <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal">Sign In</a>
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
@@ -498,47 +519,5 @@
     <script src="js/auth.js"></script>
     <!-- Merchant specific JS (NEW - We'll add code later for store/listing logic) -->
      <script src="js/merchant.js"></script>
-
-    <!-- Example inline script moved or integrated into merchant.js -->
-    <!-- <script>
-        // // Modal Functionality (Consider moving to merchant.js)
-        // const addStoreBtn = document.getElementById('addStoreBtn');
-        // const storeModalEl = document.getElementById('storeModal');
-        // if (storeModalEl) {
-        //     const storeModal = new bootstrap.Modal(storeModalEl);
-        //     const closeBtn = storeModalEl.querySelector('.close'); // Adjust selector if needed
-
-        //     if(addStoreBtn) addStoreBtn.onclick = () => storeModal.show();
-        //     if(closeBtn) closeBtn.onclick = () => storeModal.hide();
-        //     // Hiding via backdrop click is default bootstrap behavior
-        // }
-
-
-        // // Placeholder form submit (Move to merchant.js)
-        // const storeForm = document.getElementById('storeForm');
-        // if(storeForm) {
-        //     storeForm.onsubmit = (e) => {
-        //         e.preventDefault();
-        //         console.log('Store form submitted (placeholder - connect to backend in merchant.js)');
-        //         const storeModalInstance = bootstrap.Modal.getInstance(storeModalEl);
-        //         if(storeModalInstance) storeModalInstance.hide();
-        //     };
-        // }
-
-
-        // // Placeholder Listing Button (Move to merchant.js)
-        // const addListingBtn = document.getElementById('addListingBtn');
-        // if(addListingBtn) {
-        //      addListingBtn.onclick = () => {
-        //          console.log('Add Listing clicked (placeholder - handle in merchant.js)');
-        //          // Open listing modal here
-        //          const listingModalEl = document.getElementById('listingModal');
-        //          if(listingModalEl) {
-        //              const listingModal = new bootstrap.Modal(listingModalEl);
-        //              listingModal.show();
-        //          }
-        //      };
-        // }
-    </script> -->
 </body>
 </html>
