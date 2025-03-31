@@ -1,7 +1,6 @@
 # GreenFork - Food Waste Management 🌍🍴
 
 ![GreenFork Logo](logo.png)  
-*Replace the above URL with the actual hosted URL of your logo, e.g., `https://i.imgur.com/your-image-id.png`*
 
 GreenFork is a web-based platform designed to tackle the food waste crisis by connecting food businesses with consumers, enabling real-time food donations, and promoting sustainable composting practices. Built as a project by students at the Autonomous Institute of Technology, affiliated with the University of Mumbai, GreenFork aims to minimize food waste, support a circular economy, and contribute to a greener planet.
 
