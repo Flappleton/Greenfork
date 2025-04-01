@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Surprise Meal App</title>
+  <!-- Tailwind CSS from CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            primary: {
+              DEFAULT: '#0ea5e9',
+              foreground: '#ffffff',
+            },
+            muted: {
+              DEFAULT: '#f1f5f9',
+              foreground: '#64748b',
+            },
+            background: '#ffffff',
+            destructive: {
+              DEFAULT: '#ef4444',
+            },
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    /* Custom styles */
+    .card {
+      @apply rounded-lg border border-gray-200 bg-white shadow-sm overflow-hidden;
+    }
+    .card-content {
+      @apply p-4;
+    }
+    .card-footer {
+      @apply p-4 pt-0;
+    }
+    .badge {
+      @apply inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold transition-colors focus:outline-none focus:ring-2 focus:ring-ring focus:ring-offset-2;
+    }
+    .badge-green {
+      @apply bg-green-600 text-white;
+    }
+    .badge-red {
+      @apply bg-destructive text-white;
+    }
+    .btn {
+      @apply inline-flex items-center justify-center rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:pointer-events-none disabled:opacity-50;
+    }
+    .btn-primary {
+      @apply bg-primary text-primary-foreground hover:bg-primary/90 h-10 px-4 py-2;
+    }
+    .btn-outline {
+      @apply border border-input bg-background hover:bg-accent hover:text-accent-foreground h-10 px-4 py-2;
+    }
+    .btn-icon {
+      @apply h-10 w-10;
+    }
+    .input {
+      @apply flex h-10 w-full rounded-md border border-input bg-background px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+    }
+    .line-clamp-2 {
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+  </style>
+</head>
+<body class="bg-gray-50">
+  <div class="container mx-auto px-4 py-6 max-w-6xl">
+    <!-- Header section with title and location button -->
+    <header class="mb-6">
+      <div class="flex items-center justify-between mb-4">
+        <h1 class="text-2xl font-bold">Surprise Bags</h1>
+        <button class="btn btn-outline btn-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </button>
+      </div>
+      
+      <!-- Search and filter section -->
+      <div class="flex gap-2">
+        <div class="relative flex-1">
+          <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-muted-foreground text-sm"></i>
+          <input type="text" placeholder="Search stores" class="input pl-9">
+        </div>
+        <button class="btn btn-outline btn-icon">
+          <i class="fas fa-filter text-sm"></i>
+        </button>
+      </div>
+    </header>
+
+    <!-- Main content - Grid of food bag cards -->
+    <section id="food-bag-list" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <!-- Cards will be inserted here by JavaScript -->
+    </section>
+
+    <!-- Add padding at the bottom -->
+    <div class="h-16"></div>
+  </div>
+
+  <!-- Templates -->
+  <template id="food-bag-card-template">
+    <div class="card">
+      <!-- Image section with badges -->
+      <div class="relative">
+        <img src="/placeholder.svg" alt="" class="w-full h-40 object-cover food-bag-image">
+        <span class="badge badge-green absolute top-2 right-2 discount-badge">Save 0%</span>
+        <span class="badge badge-red absolute top-2 left-2 quantity-badge hidden">Only 0 left!</span>
+      </div>
+      
+      <!-- Card content with bag details -->
+      <div class="card-content">
+        <div class="flex justify-between items-start mb-2">
+          <!-- Store name -->
+          <h3 class="font-bold text-lg store-name"></h3>
+          
+          <!-- Number of servings -->
+          <div class="flex items-center gap-1 text-sm text-muted-foreground">
+            <i class="fas fa-users text-sm"></i>
+            <span class="servings">Feeds 0</span>
+          </div>
+        </div>
+        
+        <!-- Bag description -->
+        <p class="text-sm text-muted-foreground mb-2 line-clamp-2 description"></p>
+        
+        <div class="flex justify-between items-center">
+          <!-- Pickup time and distance -->
+          <div>
+            <p class="text-sm text-muted-foreground pickup-time"></p>
+            <p class="text-sm text-muted-foreground distance"></p>
+          </div>
+          
+          <!-- Price information -->
+          <div class="text-right">
+            <p class="text-sm line-through text-muted-foreground original-price">₹0</p>
+            <p class="font-bold text-lg discount-price">₹0</p>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Card footer with reserve button -->
+      <div class="card-footer">
+        <button class="btn btn-primary w-full reserve-btn">
+          Reserve Bag
+        </button>
+      </div>
+    </div>
+  </template>
+
+  <script>
+    // Mock data for surprise bags
+    const surpriseBags = [
+      {
+        id: 1,
+        storeName: "Fresh Bakery",
+        description: "Assorted pastries and bread",
+        originalPrice: 1999, // Original price in rupees
+        discountPrice: 699,  // Discounted price in rupees
+        servings: 3,         // Number of people the bag can feed
+        pickupTime: "Today, 17:00 - 18:00",
+        distance: "1.2 km",
+        imageUrl: "https://source.unsplash.com/random/300x200/?bakery",
+        quantity: 5,         // Number of bags available
+      },
+      {
+        id: 2,
+        storeName: "Green Garden Restaurant",
+        description: "Vegetarian surprise bag",
+        originalPrice: 2499,
+        discountPrice: 899,
+        servings: 2,
+        pickupTime: "Today, 19:30 - 20:30",
+        distance: "0.8 km",
+        imageUrl: "https://source.unsplash.com/random/300x200/?vegetarian",
+        quantity: 3,
+      },
+      {
+        id: 3,
+        storeName: "Pasta Paradise",
+        description: "Italian food surprise",
+        originalPrice: 3200,
+        discountPrice: 1099,
+        servings: 4,
+        pickupTime: "Tomorrow, 12:00 - 13:00",
+        distance: "2.5 km",
+        imageUrl: "https://source.unsplash.com/random/300x200/?pasta",
+        quantity: 2,
+      },
+      {
+        id: 4,
+        storeName: "Sushi Station",
+        description: "Assorted sushi rolls",
+        originalPrice: 2800,
+        discountPrice: 999,
+        servings: 2,
+        pickupTime: "Today, 20:00 - 21:00",
+        distance: "3.1 km",
+        imageUrl: "https://source.unsplash.com/random/300x200/?sushi",
+        quantity: 4,
+      },
+    ];
+
+    // Function to render food bag cards
+    function renderFoodBags() {
+      const foodBagList = document.getElementById('food-bag-list');
+      const template = document.getElementById('food-bag-card-template');
+      
+      // Clear existing content
+      foodBagList.innerHTML = '';
+      
+      // Render each food bag
+      surpriseBags.forEach(bag => {
+        // Clone the template
+        const cardClone = template.content.cloneNode(true);
+        
+        // Calculate discount percentage
+        const discount = Math.round(((bag.originalPrice - bag.discountPrice) / bag.originalPrice) * 100);
+        
+        // Set the content
+        cardClone.querySelector('.food-bag-image').src = bag.imageUrl;
+        cardClone.querySelector('.food-bag-image').alt = bag.storeName;
+        cardClone.querySelector('.discount-badge').textContent = `Save ${discount}%`;
+        cardClone.querySelector('.store-name').textContent = bag.storeName;
+        cardClone.querySelector('.servings').textContent = `Feeds ${bag.servings}`;
+        cardClone.querySelector('.description').textContent = bag.description;
+        cardClone.querySelector('.pickup-time').textContent = bag.pickupTime;
+        cardClone.querySelector('.distance').textContent = `${bag.distance} away`;
+        cardClone.querySelector('.original-price').textContent = `₹${bag.originalPrice}`;
+        cardClone.querySelector('.discount-price').textContent = `₹${bag.discountPrice}`;
+        
+        // Show quantity badge if quantity is low
+        if (bag.quantity <= 2) {
+          const quantityBadge = cardClone.querySelector('.quantity-badge');
+          quantityBadge.textContent = `Only ${bag.quantity} left!`;
+          quantityBadge.classList.remove('hidden');
+        }
+        
+        // Add event listener to reserve button
+        const reserveBtn = cardClone.querySelector('.reserve-btn');
+        reserveBtn.addEventListener('click', () => {
+          reserveBtn.textContent = 'Reserving...';
+          reserveBtn.disabled = true;
+          
+          // Simulate API call
+          setTimeout(() => {
+            // In a real app, you would redirect to a checkout page
+            // For this standalone HTML, we'll just show an alert
+            alert(`Bag from ${bag.storeName} reserved successfully!`);
+            reserveBtn.textContent = 'Reserved!';
+            setTimeout(() => {
+              reserveBtn.textContent = 'Reserve Bag';
+              reserveBtn.disabled = false;
+            }, 2000);
+          }, 1000);
+        });
+        
+        // Append the card to the list
+        foodBagList.appendChild(cardClone);
+      });
+    }
+
+    // Initialize the page
+    document.addEventListener('DOMContentLoaded', () => {
+      renderFoodBags();
+    });
+  </script>
+</body>
+</html>
