@@ -182,34 +182,42 @@
 
         /* Team Section Styles */
         .team-section {
-            margin-top: 3rem;
-            padding: 2rem 0;
+            margin-top: 2rem; /* Reduced margin to make the section more compact */
+            padding: 1.5rem; /* Reduced padding */
             background: var(--pale-green);
-            border-radius: 10px;
+            border-radius: 12px;
+            border: 1px solid var(--lime-green); /* Added a subtle border */
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer shadow */
+            transition: transform 0.3s ease; /* Smooth hover effect */
+        }
+
+        .team-section:hover {
+            transform: translateY(-5px); /* Slight lift on hover */
         }
 
         .team-section h3 {
             color: var(--forest-green);
-            font-size: 2rem;
-            margin-bottom: 1.5rem;
+            font-size: 1.8rem; /* Slightly smaller heading */
+            margin-bottom: 1rem;
             text-align: center;
         }
 
         .team-section img {
-            max-width: 100%;
+            max-width: 300px; /* Reduced image size */
             height: auto;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             margin: 0 auto;
             display: block;
+            border: 2px solid var(--forest-green); /* Added a border to the image */
         }
 
         .team-section p {
-            font-size: 1.1rem;
+            font-size: 1rem; /* Slightly smaller text */
             color: #555;
             text-align: center;
-            max-width: 800px;
-            margin: 1rem auto;
+            max-width: 600px; /* Reduced max-width for compactness */
+            margin: 0.8rem auto;
         }
 
         /* Merchant and Seeker Buttons */
@@ -364,7 +372,7 @@
             color: var(--lime-green);
         }
 
-        /* Responsive adjustments */
+        /* Responsive adjustments Hannah adjustments */
         @media (max-width: 768px) {
             .hero { padding: 5rem 1rem; }
             .hero h1 { font-size: 2.8rem; }
@@ -375,7 +383,7 @@
             .feature-cards { gap: 1.5rem; }
             .about-website .btn { margin-bottom: 0.5rem; }
             .navbar-nav { text-align: center; }
-            .team-section img { max-width: 80%; }
+            .team-section img { max-width: 200px; } /* Smaller image on mobile */
         }
         @media (max-width: 992px) {
             .hero .d-flex {
@@ -441,7 +449,7 @@
                 <div class="col-lg-6">
                     <p>GreenFork is dedicated to reducing food waste by connecting surplus food from merchants to seekers in need. Whether you're a business with excess inventory or an individual looking for affordable meals, we've got you covered. Our smart composting system ensures that unsalvageable food is turned into valuable resources, promoting sustainability.</p>
                     <p>Food waste in India isn't just an inconvenience—it's a crisis. Edible food is discarded in massive quantities while millions sleep on an empty stomach. GreenFork aims to bridge this gap sustainably.</p>
-                    <p>Our platform minimizes food waste by efficiently redistributing surplus food and repurposing what cannot be consumed. By integrating smart composting and real-time donor-seeker connections, we reduce landfill waste, lower carbon emissions, and support a circular economy.</p>
+                    <p>Our platform minimizes food waste by efficiently redistributing surplus food and repurposing what cannot be consumed. By integrating smart composting/real-time donor-seeker connections, we reduce landfill waste, lower carbon emissions, and support a circular economy.</p>
                 </div>
                 <div class="col-lg-6 text-center">
                     <img src="home-image.jpg" alt="Eco-friendly food sharing illustration" class="img-fluid">
