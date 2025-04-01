@@ -67,7 +67,8 @@
     
     body {
       font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      background-color: var(--color-gray-50);
+      /* background-color: var(--color-gray-50); */
+      background-color: #2a9d8f;
       color: var(--color-gray-900);
       line-height: 1.5;
       -webkit-font-smoothing: antialiased;
@@ -259,7 +260,27 @@
     .text-2xl {
       font-size: 1.5rem;
       line-height: 2rem;
-    }
+      border: #111827 3px solid;
+    border-radius: var(--radius-md);
+    text-align: center;
+    color: var(b--color-white);
+    background-color: var(--color-primary-dark);
+    padding: var(--spacing-2) var(--spacing-4);
+    box-shadow: var(--shadow-sm);
+      padding: 0.5rem;
+        background-color: #13ccb7;
+        display: flex;
+        align-items: center;
+        gap: var(--spacing-2);
+        }
+
+        .text-2xl::before {
+            content: '\f290'; /* Unicode for Font Awesome bag icon */
+            font-family: 'Font Awesome 6 Free';
+            font-weight: 900;
+            margin-right: var(--spacing-2);
+        }
+    
     
     .font-medium {
       font-weight: 500;
@@ -292,6 +313,7 @@
     .line-clamp-2 {
       display: -webkit-box;
       -webkit-line-clamp: 2;
+      line-clamp: 2;
       -webkit-box-orient: vertical;
       overflow: hidden;
     }
@@ -447,6 +469,8 @@
     <!-- Header section with title and location button -->
     <header class="mb-6">
       <div class="flex items-center justify-between mb-4">
+        <div>
+        </div>
         <h1 class="text-2xl font-bold">Surprise Bags</h1>
         <button class="btn btn-outline btn-icon">
           <i class="fas fa-map-marker-alt"></i>
