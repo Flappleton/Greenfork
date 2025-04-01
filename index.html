@@ -13,7 +13,7 @@
             --deep-green: #264653;      /* Darker green for footer */
             --turquoise-blue: #64d5ca;  /* New turquoise blue color */
             --orange-accent: #e76f51;   /* Orange for buttons/accents */
-            --light-orange: #f4a261;   /* Lighter orange */
+            --light-orange: #f4a261;    /* Lighter orange */
         }
 
         body {
@@ -180,6 +180,38 @@
             margin: 1rem 0;
         }
 
+        /* Team Section Styles */
+        .team-section {
+            margin-top: 3rem;
+            padding: 2rem 0;
+            background: var(--pale-green);
+            border-radius: 10px;
+        }
+
+        .team-section h3 {
+            color: var(--forest-green);
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+
+        .team-section img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin: 0 auto;
+            display: block;
+        }
+
+        .team-section p {
+            font-size: 1.1rem;
+            color: #555;
+            text-align: center;
+            max-width: 800px;
+            margin: 1rem auto;
+        }
+
         /* Merchant and Seeker Buttons */
         .merchant-btn {
             background: white;
@@ -343,6 +375,7 @@
             .feature-cards { gap: 1.5rem; }
             .about-website .btn { margin-bottom: 0.5rem; }
             .navbar-nav { text-align: center; }
+            .team-section img { max-width: 80%; }
         }
         @media (max-width: 992px) {
             .hero .d-flex {
@@ -368,7 +401,7 @@
                     <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="#about-us">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
-                    <li class="nav-item"><a class="nav-link" href="seekers.html">Seekers</a></li>
+                    <li class="nav-item"><a class="nav-link" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
                     <li class="nav-item" id="signInLi">
                         <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
@@ -409,12 +442,19 @@
                     <p>GreenFork is dedicated to reducing food waste by connecting surplus food from merchants to seekers in need. Whether you're a business with excess inventory or an individual looking for affordable meals, we've got you covered. Our smart composting system ensures that unsalvageable food is turned into valuable resources, promoting sustainability.</p>
                     <p>Food waste in India isn't just an inconvenience—it's a crisis. Edible food is discarded in massive quantities while millions sleep on an empty stomach. GreenFork aims to bridge this gap sustainably.</p>
                     <p>Our platform minimizes food waste by efficiently redistributing surplus food and repurposing what cannot be consumed. By integrating smart composting and real-time donor-seeker connections, we reduce landfill waste, lower carbon emissions, and support a circular economy.</p>
-                    <p class="mt-3"><em>Developed by students from VESIT, GreenFork combines web development expertise with a passion for sustainability.</em></p>
                 </div>
                 <div class="col-lg-6 text-center">
                     <img src="home-image.jpg" alt="Eco-friendly food sharing illustration" class="img-fluid">
                 </div>
             </div>
+
+            <!-- Team Section -->
+            <div class="team-section">
+                <h3>Meet Our Team</h3>
+                <img src="team-image.jpg" alt="GreenFork Team" class="img-fluid">
+                <p>We are a passionate group of students from VESIT, united by a shared vision to combat food waste. Combining our skills in web development, design, and sustainability, we created GreenFork to make a meaningful impact on the environment and society.</p>
+            </div>
+
             <div class="text-center mt-4">
                 <a href="merchant.html" class="btn merchant-btn me-md-2 mb-2 mb-md-0">Join as a Merchant</a>
                 <a href="seeker.html" class="btn btn-outline-success">Join as a Seeker</a>
