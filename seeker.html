@@ -1,277 +1,276 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Surprise Meal App</title>
-  <!-- Font imports -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-  <!-- Font Awesome for icons -->
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-  
-  <style>
-    /* ===== RESET AND BASE STYLES ===== */
-    *, *::before, *::after {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-    }
-    
-    :root {
-      /* Color variables */
-      --color-primary: #0ea5e9;
-      --color-primary-dark: #0284c7;
-      --color-primary-light: #e0f2fe;
-      --color-secondary: #f97316;
-      --color-secondary-dark: #ea580c;
-      --color-success: #22c55e;
-      --color-danger: #ef4444;
-      --color-warning: #f59e0b;
-      --color-gray-50: #f9fafb;
-      --color-gray-100: #f3f4f6;
-      --color-gray-200: #e5e7eb;
-      --color-gray-300: #d1d5db;
-      --color-gray-400: #9ca3af;
-      --color-gray-500: #6b7280;
-      --color-gray-600: #4b5563;
-      --color-gray-700: #374151;
-      --color-gray-800: #1f2937;
-      --color-gray-900: #111827;
-      --color-white: #ffffff;
-      
-      /* Shadow variables */
-      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-      
-      /* Border radius */
-      --radius-sm: 0.25rem;
-      --radius-md: 0.375rem;
-      --radius-lg: 0.5rem;
-      --radius-full: 9999px;
-      
-      /* Spacing */
-      --spacing-1: 0.25rem;
-      --spacing-2: 0.5rem;
-      --spacing-3: 0.75rem;
-      --spacing-4: 1rem;
-      --spacing-5: 1.25rem;
-      --spacing-6: 1.5rem;
-      --spacing-8: 2rem;
-      --spacing-10: 2.5rem;
-      --spacing-12: 3rem;
-      --spacing-16: 4rem;
-    }
-    
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-      /* background-color: var(--color-gray-50); */
-      background-color: #2a9d8f;
-      color: var(--color-gray-900);
-      line-height: 1.5;
-      -webkit-font-smoothing: antialiased;
-      -moz-osx-font-smoothing: grayscale;
-    }
-    
-    /* ===== LAYOUT ===== */
-    .container {
-      width: 100%;
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 0 var(--spacing-4);
-    }
-    
-    .py-6 {
-      padding-top: var(--spacing-6);
-      padding-bottom: var(--spacing-6);
-    }
-    
-    .mb-2 {
-      margin-bottom: var(--spacing-2);
-    }
-    
-    .mb-3 {
-      margin-bottom: var(--spacing-3);
-    }
-    
-    .mb-4 {
-      margin-bottom: var(--spacing-4);
-    }
-    
-    .mb-6 {
-      margin-bottom: var(--spacing-6);
-    }
-    
-    .mt-1 {
-      margin-top: var(--spacing-1);
-    }
-    
-    .mt-2 {
-      margin-top: var(--spacing-2);
-    }
-    
-    .mr-1 {
-      margin-right: var(--spacing-1);
-    }
-    
-    .mr-2 {
-      margin-right: var(--spacing-2);
-    }
-    
-    .ml-1 {
-      margin-left: var(--spacing-1);
-    }
-    
-    .ml-2 {
-      margin-left: var(--spacing-2);
-    }
-    
-    .p-4 {
-      padding: var(--spacing-4);
-    }
-    
-    .pt-0 {
-      padding-top: 0;
-    }
-    
-    .pl-9 {
-      padding-left: 2.25rem;
-    }
-    
-    .h-16 {
-      height: 4rem;
-    }
-    
-    .h-40 {
-      height: 10rem;
-    }
-    
-    .w-full {
-      width: 100%;
-    }
-    
-    .flex {
-      display: flex;
-    }
-    
-    .flex-1 {
-      flex: 1 1 0%;
-    }
-    
-    .flex-col {
-      flex-direction: column;
-    }
-    
-    .items-center {
-      align-items: center;
-    }
-    
-    .items-start {
-      align-items: flex-start;
-    }
-    
-    .justify-between {
-      justify-content: space-between;
-    }
-    
-    .gap-1 {
-      gap: var(--spacing-1);
-    }
-    
-    .gap-2 {
-      gap: var(--spacing-2);
-    }
-    
-    .gap-4 {
-      gap: var(--spacing-4);
-    }
-    
-    .grid {
-      display: grid;
-    }
-    
-    .grid-cols-1 {
-      grid-template-columns: repeat(1, minmax(0, 1fr));
-    }
-    
-    .relative {
-      position: relative;
-    }
-    
-    .absolute {
-      position: absolute;
-    }
-    
-    .top-2 {
-      top: var(--spacing-2);
-    }
-    
-    .right-2 {
-      right: var(--spacing-2);
-    }
-    
-    .left-2 {
-      left: var(--spacing-2);
-    }
-    
-    .left-3 {
-      left: var(--spacing-3);
-    }
-    
-    .top-1\/2 {
-      top: 50%;
-    }
-    
-    .-translate-y-1\/2 {
-      transform: translateY(-50%);
-    }
-    
-    .hidden {
-      display: none;
-    }
-    
-    .text-right {
-      text-align: right;
-    }
-    
-    /* ===== TYPOGRAPHY ===== */
-    .text-xs {
-      font-size: 0.75rem;
-      line-height: 1rem;
-    }
-    
-    .text-sm {
-      font-size: 0.875rem;
-      line-height: 1.25rem;
-    }
-    
-    .text-lg {
-      font-size: 1.125rem;
-      line-height: 1.75rem;
-    }
-    
-    .text-xl {
-      font-size: 1.25rem;
-      line-height: 1.75rem;
-    }
-    
-    .text-2xl {
-      font-size: 1.5rem;
-      line-height: 2rem;
-      border: #111827 3px solid;
-    border-radius: var(--radius-md);
-    text-align: center;
-    color: var(b--color-white);
-    background-color: var(--color-primary-dark);
-    padding: var(--spacing-2) var(--spacing-4);
-    box-shadow: var(--shadow-sm);
-      padding: 0.5rem;
-        background-color: #13ccb7;
-        display: flex;
-        align-items: center;
-        gap: var(--spacing-2);
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Surprise Meal App</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+
+    <style>
+        /* ===== RESET AND BASE STYLES ===== */
+        *, *::before, *::after {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        :root {
+            /* Color variables */
+            --color-primary: #0ea5e9;
+            --color-primary-dark: #0284c7;
+            --color-primary-light: #e0f2fe;
+            --color-secondary: #f97316;
+            --color-secondary-dark: #ea580c;
+            --color-success: #22c55e;
+            --color-danger: #ef4444;
+            --color-warning: #f59e0b;
+            --color-gray-50: #f9fafb;
+            --color-gray-100: #f3f4f6;
+            --color-gray-200: #e5e7eb;
+            --color-gray-300: #d1d5db;
+            --color-gray-400: #9ca3af;
+            --color-gray-500: #6b7280;
+            --color-gray-600: #4b5563;
+            --color-gray-700: #374151;
+            --color-gray-800: #1f2937;
+            --color-gray-900: #111827;
+            --color-white: #ffffff;
+
+            /* Shadow variables */
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+
+            /* Border radius */
+            --radius-sm: 0.25rem;
+            --radius-md: 0.375rem;
+            --radius-lg: 0.5rem;
+            --radius-full: 9999px;
+
+            /* Spacing */
+            --spacing-1: 0.25rem;
+            --spacing-2: 0.5rem;
+            --spacing-3: 0.75rem;
+            --spacing-4: 1rem;
+            --spacing-5: 1.25rem;
+            --spacing-6: 1.5rem;
+            --spacing-8: 2rem;
+            --spacing-10: 2.5rem;
+            --spacing-12: 3rem;
+            --spacing-16: 4rem;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            /* background-color: var(--color-gray-50); */
+            background-color: #2a9d8f;
+            color: var(--color-gray-900);
+            line-height: 1.5;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+
+        /* ===== LAYOUT ===== */
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 var(--spacing-4);
+        }
+
+        .py-6 {
+            padding-top: var(--spacing-6);
+            padding-bottom: var(--spacing-6);
+        }
+
+        .mb-2 {
+            margin-bottom: var(--spacing-2);
+        }
+
+        .mb-3 {
+            margin-bottom: var(--spacing-3);
+        }
+
+        .mb-4 {
+            margin-bottom: var(--spacing-4);
+        }
+
+        .mb-6 {
+            margin-bottom: var(--spacing-6);
+        }
+
+        .mt-1 {
+            margin-top: var(--spacing-1);
+        }
+
+        .mt-2 {
+            margin-top: var(--spacing-2);
+        }
+
+        .mr-1 {
+            margin-right: var(--spacing-1);
+        }
+
+        .mr-2 {
+            margin-right: var(--spacing-2);
+        }
+
+        .ml-1 {
+            margin-left: var(--spacing-1);
+        }
+
+        .ml-2 {
+            margin-left: var(--spacing-2);
+        }
+
+        .p-4 {
+            padding: var(--spacing-4);
+        }
+
+        .pt-0 {
+            padding-top: 0;
+        }
+
+        .pl-9 {
+            padding-left: 2.25rem;
+        }
+
+        .h-16 {
+            height: 4rem;
+        }
+
+        .h-40 {
+            height: 10rem;
+        }
+
+        .w-full {
+            width: 100%;
+        }
+
+        .flex {
+            display: flex;
+        }
+
+        .flex-1 {
+            flex: 1 1 0%;
+        }
+
+        .flex-col {
+            flex-direction: column;
+        }
+
+        .items-center {
+            align-items: center;
+        }
+
+        .items-start {
+            align-items: flex-start;
+        }
+
+        .justify-between {
+            justify-content: space-between;
+        }
+
+        .gap-1 {
+            gap: var(--spacing-1);
+        }
+
+        .gap-2 {
+            gap: var(--spacing-2);
+        }
+
+        .gap-4 {
+            gap: var(--spacing-4);
+        }
+
+        .grid {
+            display: grid;
+        }
+
+        .grid-cols-1 {
+            grid-template-columns: repeat(1, minmax(0, 1fr));
+        }
+
+        .relative {
+            position: relative;
+        }
+
+        .absolute {
+            position: absolute;
+        }
+
+        .top-2 {
+            top: var(--spacing-2);
+        }
+
+        .right-2 {
+            right: var(--spacing-2);
+        }
+
+        .left-2 {
+            left: var(--spacing-2);
+        }
+
+        .left-3 {
+            left: var(--spacing-3);
+        }
+
+        .top-1\/2 {
+            top: 50%;
+        }
+
+        .-translate-y-1\/2 {
+            transform: translateY(-50%);
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        .text-right {
+            text-align: right;
+        }
+
+        /* ===== TYPOGRAPHY ===== */
+        .text-xs {
+            font-size: 0.75rem;
+            line-height: 1rem;
+        }
+
+        .text-sm {
+            font-size: 0.875rem;
+            line-height: 1.25rem;
+        }
+
+        .text-lg {
+            font-size: 1.125rem;
+            line-height: 1.75rem;
+        }
+
+        .text-xl {
+            font-size: 1.25rem;
+            line-height: 1.75rem;
+        }
+
+        .text-2xl {
+            font-size: 1.5rem;
+            line-height: 2rem;
+            border: #111827 3px solid;
+            border-radius: var(--radius-md);
+            text-align: center;
+            color: var(b--color-white);
+            background-color: var(--color-primary-dark);
+            padding: var(--spacing-2) var(--spacing-4);
+            padding: 0.5rem;
+            background-color: #13ccb7;
+            display: flex;
+            align-items: center;
+            gap: var(--spacing-2);
         }
 
         .text-2xl::before {
@@ -280,955 +279,536 @@
             font-weight: 900;
             margin-right: var(--spacing-2);
         }
-    
-    
-    .font-medium {
-      font-weight: 500;
-    }
-    
-    .font-semibold {
-      font-weight: 600;
-    }
-    
-    .font-bold {
-      font-weight: 700;
-    }
-    
-    .line-through {
-      text-decoration: line-through;
-    }
-    
-    .text-primary {
-      color: var(--color-primary);
-    }
-    
-    .text-white {
-      color: var(--color-white);
-    }
-    
-    .text-muted {
-      color: var(--color-gray-500);
-    }
-    
-    .line-clamp-2 {
-      display: -webkit-box;
-      -webkit-line-clamp: 2;
-      line-clamp: 2;
-      -webkit-box-orient: vertical;
-      overflow: hidden;
-    }
-    
-    /* ===== COMPONENTS ===== */
-    /* Card */
-    .card {
-      background-color: var(--color-white);
-      border-radius: var(--radius-lg);
-      box-shadow: var(--shadow-md);
-      overflow: hidden;
-      transition: transform 0.2s ease, box-shadow 0.2s ease;
-    }
-    
-    .card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-lg);
-    }
-    
-    .card-content {
-      padding: var(--spacing-4);
-    }
-    
-    .card-footer {
-      padding: var(--spacing-4);
-      padding-top: 0;
-    }
-    
-    /* Badge */
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      border-radius: var(--radius-full);
-      padding: 0 var(--spacing-2);
-      height: 1.5rem;
-      font-size: 0.75rem;
-      font-weight: 600;
-      text-transform: uppercase;
-      letter-spacing: 0.05em;
-    }
-    
-    .badge-success {
-      background-color: var(--color-success);
-      color: var(--color-white);
-    }
-    
-    .badge-danger {
-      background-color: var(--color-danger);
-      color: var(--color-white);
-    }
-    
-    .badge-warning {
-      background-color: var(--color-warning);
-      color: var(--color-white);
-    }
-    
-    /* Button */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      border-radius: var(--radius-md);
-      padding: 0 var(--spacing-4);
-      height: 2.5rem;
-      font-size: 0.875rem;
-      font-weight: 500;
-      transition: all 0.2s ease;
-      cursor: pointer;
-      border: none;
-      outline: none;
-    }
-    
-    .btn:disabled {
-      opacity: 0.7;
-      cursor: not-allowed;
-    }
-    
-    .btn-primary {
-      background-color: var(--color-primary);
-      color: var(--color-white);
-    }
-    
-    .btn-primary:hover:not(:disabled) {
-      background-color: var(--color-primary-dark);
-    }
-    
-    .btn-outline {
-      background-color: transparent;
-      border: 1px solid var(--color-gray-300);
-      color: var(--color-gray-700);
-    }
-    
-    .btn-outline:hover:not(:disabled) {
-      background-color: var(--color-gray-100);
-    }
-    
-    .btn-icon {
-      width: 2.5rem;
-      padding: 0;
-    }
-    
-    /* Input */
-    .input {
-      height: 2.5rem;
-      width: 100%;
-      border-radius: var(--radius-md);
-      border: 1px solid var(--color-gray-300);
-      background-color: var(--color-white);
-      padding: 0 var(--spacing-3);
-      font-size: 0.875rem;
-      transition: border-color 0.2s ease;
-    }
-    
-    .input:focus {
-      outline: none;
-      border-color: var(--color-primary);
-      box-shadow: 0 0 0 2px var(--color-primary-light);
-    }
-    
-    .input::placeholder {
-      color: var(--color-gray-400);
-    }
-    
-    /* Food image placeholder */
-    .food-image-placeholder {
-      width: 100%;
-      height: 10rem;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: var(--color-white);
-      font-weight: 600;
-      background-size: cover;
-      background-position: center;
-    }
-    
-    /* ===== RESPONSIVE STYLES ===== */
-    @media (min-width: 768px) {
-      .grid-cols-1 {
-        grid-template-columns: repeat(2, minmax(0, 1fr));
-      }
-    }
-    
-    @media (min-width: 1024px) {
-      .grid-cols-1 {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
-      }
-    }
 
-    /* ===== CART STYLES ===== */
-    .cart-btn {
-      position: relative;
-    }
-    
-    .cart-count {
-      position: absolute;
-      top: -8px;
-      right: -8px;
-      background-color: var(--color-success);
-      color: white;
-      border-radius: 50%;
-      width: 20px;
-      height: 20px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 0.75rem;
-      font-weight: bold;
-    }
-    
-    .cart-drawer {
-      position: fixed;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      width: 100%;
-      max-width: 400px;
-      background-color: white;
-      box-shadow: -2px 0 10px rgba(0, 0, 0, 0.1);
-      z-index: 1000;
-      transform: translateX(100%);
-      transition: transform 0.3s ease;
-      display: flex;
-      flex-direction: column;
-    }
-    
-    .cart-drawer.open {
-      transform: translateX(0);
-    }
-    
-    .cart-overlay {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.5);
-      z-index: 999;
-      display: none;
-    }
-    
-    .cart-overlay.open {
-      display: block;
-    }
-    
-    .cart-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: var(--spacing-4);
-      border-bottom: 1px solid var(--color-gray-200);
-    }
-    
-    .cart-items {
-      flex: 1;
-      overflow-y: auto;
-      padding: var(--spacing-4);
-    }
-    
-    .cart-item {
-      display: flex;
-      margin-bottom: var(--spacing-4);
-      padding-bottom: var(--spacing-4);
-      border-bottom: 1px solid var(--color-gray-200);
-    }
-    
-    .cart-item-image {
-      width: 80px;
-      height: 80px;
-      border-radius: var(--radius-md);
-      margin-right: var(--spacing-4);
-      background-size: cover;
-      background-position: center;
-    }
-    
-    .cart-item-details {
-      flex: 1;
-    }
-    
-    .cart-item-name {
-      font-weight: 600;
-      margin-bottom: var(--spacing-1);
-    }
-    
-    .cart-item-price {
-      font-weight: 600;
-      color: var(--color-primary);
-    }
-    
-    .cart-item-quantity {
-      display: flex;
-      align-items: center;
-      margin-top: var(--spacing-2);
-    }
-    
-    .cart-quantity-btn {
-      width: 24px;
-      height: 24px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      border: 1px solid var(--color-gray-300);
-      background: none;
-      cursor: pointer;
-    }
-    
-    .cart-quantity-value {
-      margin: 0 var(--spacing-2);
-    }
-    
-    .cart-footer {
-      padding: var(--spacing-4);
-      border-top: 1px solid var(--color-gray-200);
-    }
-    
-    .cart-total {
-      display: flex;
-      justify-content: space-between;
-      margin-bottom: var(--spacing-4);
-      font-weight: 600;
-    }
-    
-    .cart-empty {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      height: 100%;
-      padding: var(--spacing-4);
-      text-align: center;
-    }
-    
-    .cart-empty i {
-      font-size: 3rem;
-      color: var(--color-gray-400);
-      margin-bottom: var(--spacing-4);
-    }
-    
-    .toast {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background-color: var(--color-success);
-      color: white;
-      padding: 12px 20px;
-      border-radius: var(--radius-md);
-      box-shadow: var(--shadow-md);
-      z-index: 1001;
-      opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.3s, transform 0.3s;
-    }
-    
-    .toast.show {
-      opacity: 1;
-      transform: translateY(0);
-    }
-  </style>
+        .font-medium {
+            font-weight: 500;
+        }
+
+        .font-semibold {
+            font-weight: 600;
+        }
+
+        .font-bold {
+            font-weight: 700;
+        }
+
+        .line-through {
+            text-decoration: line-through;
+        }
+
+        .text-primary {
+            color: var(--color-primary);
+        }
+
+        .text-white {
+            color: var(--color-white);
+        }
+
+        .text-muted {
+            color: var(--color-gray-500);
+        }
+
+        .line-clamp-2 {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        /* ===== COMPONENTS ===== */
+        /* Card */
+        .card {
+            background-color: var(--color-white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            overflow: hidden;
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .card-content {
+            padding: var(--spacing-4);
+        }
+
+        .card-footer {
+            padding: var(--spacing-4);
+            padding-top: 0;
+        }
+
+        /* Badge */
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            border-radius: var(--radius-full);
+            padding: 0 var(--spacing-2);
+            height: 1.5rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .badge-success {
+            background-color: var(--color-success);
+            color: var(--color-white);
+        }
+
+        .badge-danger {
+            background-color: var(--color-danger);
+            color: var(--color-white);
+        }
+
+        .badge-warning {
+            background-color: var(--color-warning);
+            color: var(--color-white);
+        }
+
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-md);
+            padding: 0 var(--spacing-4);
+            height: 2.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            cursor: pointer;
+            border: none;
+            outline: none;
+        }
+
+        .btn:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        .btn-primary {
+            background-color: var(--color-primary);
+            color: var(--color-white);
+        }
+
+        .btn-primary:hover:not(:disabled) {
+            background-color: var(--color-primary-dark);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--color-gray-300);
+            color: var(--color-gray-700);
+        }
+
+        .btn-outline:hover:not(:disabled) {
+            background-color: var(--color-gray-100);
+        }
+
+        .btn-icon {
+            width: 2.5rem;
+            padding: 0;
+        }
+
+        /* Input */
+        .input {
+            height: 2.5rem;
+            width: 100%;
+            border-radius: var(--radius-md);
+            border: 1px solid var(--color-gray-300);
+            background-color: var(--color-white);
+            padding: 0 var(--spacing-3);
+            font-size: 0.875rem;
+            transition: border-color 0.2s ease;
+        }
+
+        .input:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 2px var(--color-primary-light);
+        }
+
+        .input::placeholder {
+            color: var(--color-gray-400);
+        }
+
+        /* Food image placeholder */
+        .food-image-placeholder {
+            width: 100%;
+            height: 10rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--color-white);
+            font-weight: 600;
+            background-size: cover;
+            background-position: center;
+        }
+
+        #map {
+            height: 400px;
+            width: 100%;
+            display: none; /* Initially hide the map */
+            margin-top: 20px;
+        }
+
+        .map-visible {
+            display: block !important;
+        }
+
+        /* ===== RESPONSIVE STYLES ===== */
+        @media (min-width: 768px) {
+            .grid-cols-1 {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .grid-cols-1 {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
+        }
+    </style>
 </head>
 <body>
-  <div class="container py-6">
-    <!-- Header section with title and location button -->
-    <header class="mb-6">
-      <div class="flex items-center justify-between mb-4">
-        <div>
-        </div>
-        <h1 class="text-2xl font-bold">Surprise Bags</h1>
-        <div class="flex gap-2">
-          <!-- Cart button -->
-          <button class="btn btn-outline btn-icon cart-btn" id="cart-button">
-            <i class="fas fa-shopping-cart"></i>
-            <span class="cart-count" id="cart-count">0</span>
-          </button>
-          <!-- Location button -->
-          <button class="btn btn-outline btn-icon">
-            <i class="fas fa-map-marker-alt"></i>
-          </button>
-        </div>
-      </div>
-      
-      <!-- Search and filter section -->
-      <div class="flex gap-2">
-        <div class="relative flex-1">
-          <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-muted"></i>
-          <input type="text" placeholder="        Search stores" class="input pl-9">
-        </div>
-        <button class="btn btn-outline btn-icon">
-          <i class="fas fa-filter"></i>
-        </button>
-      </div>
-    </header>
+    <div class="container py-6">
+        <header class="mb-6">
+            <div class="flex items-center justify-between mb-4">
+                <div>
+                </div>
+                <h1 class="text-2xl font-bold">Surprise Bags</h1>
+                <button id="map-button" class="btn btn-outline btn-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </button>
+            </div>
 
-    <!-- Main content - Grid of food bag cards -->
-    <section id="food-bag-list" class="grid grid-cols-1 gap-4">
-      <!-- Cards will be inserted here by JavaScript -->
-    </section>
+            <div class="flex gap-2">
+                <div class="relative flex-1">
+                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-muted"></i>
+                    <input type="text" placeholder="        Search stores" class="input pl-9">
+                </div>
+                <button class="btn btn-outline btn-icon">
+                    <i class="fas fa-filter"></i>
+                </button>
+            </div>
+        </header>
 
-    <!-- Add padding at the bottom -->
-    <div class="h-16"></div>
-  </div>
+        <section id="food-bag-list" class="grid grid-cols-1 gap-4">
+        </section>
 
-  <!-- Cart drawer -->
-  <div class="cart-overlay" id="cart-overlay"></div>
-  <div class="cart-drawer" id="cart-drawer">
-    <div class="cart-header">
-      <h2 class="text-lg font-bold">Your Cart</h2>
-      <button class="btn btn-icon" id="close-cart">
-        <i class="fas fa-times"></i>
-      </button>
+        <div id="map"></div>
+
+        <div class="h-16"></div>
     </div>
-    <div class="cart-items" id="cart-items">
-      <!-- Cart items will be inserted here by JavaScript -->
-    </div>
-    <div class="cart-footer">
-      <div class="cart-total">
-        <span>Total:</span>
-        <span id="cart-total">₹0</span>
-      </div>
-      <button class="btn btn-primary w-full mb-2" id="checkout-btn">Proceed to Checkout</button>
-      <button class="btn btn-outline w-full" id="continue-shopping">Continue Shopping</button>
-    </div>
-  </div>
 
-  <!-- Toast notification -->
-  <div class="toast" id="toast">
-    <span id="toast-message"></span>
-  </div>
+    <template id="food-bag-card-template">
+        <div class="card">
+            <div class="relative">
+                <div class="food-image-placeholder">
+                    <span class="store-emoji"></span>
+                </div>
+                <span class="badge badge-success absolute top-2 right-2 discount-badge">Save 0%</span>
+                <span class="badge badge-danger absolute top-2 left-2 quantity-badge hidden">Only 0 left!</span>
+            </div>
 
-  <!-- Templates -->
-  <template id="food-bag-card-template">
-    <div class="card">
-      <!-- Colorful placeholder instead of image -->
-      <div class="relative">
-        <div class="food-image-placeholder">
-          <span class="store-emoji"></span>
+            <div class="card-content">
+                <div class="flex justify-between items-start mb-2">
+                    <h3 class="font-bold text-lg store-name"></h3>
+
+                    <div class="flex items-center gap-1 text-sm text-muted">
+                        <i class="fas fa-users"></i>
+                        <span class="servings">Feeds 0</span>
+                    </div>
+                </div>
+
+                <p class="text-sm text-muted mb-2 line-clamp-2 description"></p>
+
+                <div class="flex justify-between items-center">
+                    <div>
+                        <p class="text-sm text-muted pickup-time"></p>
+                        <p class="text-sm text-muted distance"></p>
+                    </div>
+
+                    <div class="text-right">
+                        <p class="text-sm line-through text-muted original-price">₹0</p>
+                        <p class="font-bold text-lg discount-price">₹0</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <button class="btn btn-primary w-full reserve-btn">
+                    Reserve Bag
+                </button>
+            </div>
         </div>
-        <span class="badge badge-success absolute top-2 right-2 discount-badge">Save 0%</span>
-        <span class="badge badge-danger absolute top-2 left-2 quantity-badge hidden">Only 0 left!</span>
-      </div>
-      
-      <!-- Card content with bag details -->
-      <div class="card-content">
-        <div class="flex justify-between items-start mb-2">
-          <!-- Store name -->
-          <h3 class="font-bold text-lg store-name"></h3>
-          
-          <!-- Number of servings -->
-          <div class="flex items-center gap-1 text-sm text-muted">
-            <i class="fas fa-users"></i>
-            <span class="servings">Feeds 0</span>
-          </div>
-        </div>
-        
-        <!-- Bag description -->
-        <p class="text-sm text-muted mb-2 line-clamp-2 description"></p>
-        
-        <div class="flex justify-between items-center">
-          <!-- Pickup time and distance -->
-          <div>
-            <p class="text-sm text-muted pickup-time"></p>
-            <p class="text-sm text-muted distance"></p>
-          </div>
-          
-          <!-- Price information -->
-          <div class="text-right">
-            <p class="text-sm line-through text-muted original-price">₹0</p>
-            <p class="font-bold text-lg discount-price">₹0</p>
-          </div>
-        </div>
-      </div>
-      
-      <!-- Card footer with add to cart button -->
-      <div class="card-footer">
-        <button class="btn btn-primary w-full add-to-cart-btn">
-          <i class="fas fa-shopping-cart mr-2"></i>
-          Add to Cart
-        </button>
-      </div>
-    </div>
-  </template>
+    </template>
 
-  <template id="cart-item-template">
-    <div class="cart-item">
-      <div class="cart-item-image"></div>
-      <div class="cart-item-details">
-        <div class="flex justify-between">
-          <h3 class="cart-item-name"></h3>
-          <button class="btn-icon remove-item">
-            <i class="fas fa-trash-alt text-muted"></i>
-          </button>
-        </div>
-        <p class="text-sm text-muted cart-item-description"></p>
-        <div class="flex justify-between items-center mt-2">
-          <div class="cart-item-quantity">
-            <button class="cart-quantity-btn decrease-quantity">-</button>
-            <span class="cart-quantity-value">1</span>
-            <button class="cart-quantity-btn increase-quantity">+</button>
-          </div>
-          <span class="cart-item-price">₹0</span>
-        </div>
-      </div>
-    </div>
-  </template>
+    <script>
+        // ===== MOCK DATA =====
+        // This is the data for the surprise bags
+        // In a real app, you would fetch this from an API
+        const surpriseBags = [
+            {
+                id: 1,
+                storeName: "Fresh Bakery",
+                description: "Assorted pastries and bread including croissants, pain au chocolat, and sourdough bread.",
+                originalPrice: 1999, // Original price in rupees
+                discountPrice: 699,  // Discounted price in rupees
+                servings: 3,        // Number of people the bag can feed
+                pickupTime: "Today, 17:00 - 18:00",
+                distance: "1.2 km",
+                color: "#FF9F1C",    // Background color for the placeholder
+                emoji: "🥐",        // Emoji representing the food type
+                quantity: 5,        // Number of bags available
+                latitude: 28.6250,
+                longitude: 77.2185,
+            },
+            {
+                id: 2,
+                storeName: "Green Garden Restaurant",
+                description: "Vegetarian surprise bag with fresh salads, wraps, and healthy snacks.",
+                originalPrice: 2499,
+                discountPrice: 899,
+                servings: 2,
+                pickupTime: "Today, 19:30 - 20:30",
+                distance: "0.8 km",
+                color: "#2EC4B6",
+                emoji: "🥗",
+                quantity: 3,
+                latitude: 28.6180,
+                longitude: 77.2000,
+            },
+            {
+                id: 3,
+                storeName: "Pasta Paradise",
+                description: "Italian food surprise with pasta, garlic bread, and tiramisu.",
+                originalPrice: 3200,
+                discountPrice: 1099,
+                servings: 4,
+                pickupTime: "Tomorrow, 12:00 - 13:00",
+                distance: "2.5 km",
+                color: "#E71D36",
+                emoji: "🍝",
+                quantity: 2,
+                latitude: 28.6300,
+                longitude: 77.2250,
+            },
+            {
+                id: 4,
+                storeName: "Sushi Station",
+                description: "Assorted sushi rolls, miso soup, and edamame beans.",
+                originalPrice: 2800,
+                discountPrice: 999,
+                servings: 2,
+                pickupTime: "Today, 20:00 - 21:00",
+                distance: "3.1 km",
+                color: "#011627",
+                emoji: "🍣",
+                quantity: 4,
+                latitude: 28.6100,
+                longitude: 77.2050,
+            },
+            {
+                id: 5,
+                storeName: "Spice of India",
+                description: "Authentic Indian curry, naan bread, and rice dishes.",
+                originalPrice: 2200,
+                discountPrice: 799,
+                servings: 3,
+                pickupTime: "Today, 18:30 - 19:30",
+                distance: "1.7 km",
+                color: "#F71735",
+                emoji: "🍛",
+                quantity: 1,
+                latitude: 28.6200,
+                longitude: 77.2100,
+            },
+            {
+                id: 6,
+                storeName: "Sweet Tooth Bakery",
+                description: "Assorted desserts including cakes, cookies, and pastries.",
+                originalPrice: 1800,
+                discountPrice: 599,
+                servings: 4,
+                pickupTime: "Tomorrow, 10:00 - 11:00",
+                distance: "0.5 km",
+                color: "#FF9F1C",
+                emoji: "🍰",
+                quantity: 6,
+                latitude: 28.6150,
+                longitude: 77.1950,
+            },
+        ];
 
-  <script>
-    // ===== MOCK DATA =====
-    // This is the data for the surprise bags
-    // In a real app, you would fetch this from an API
-    const surpriseBags = [
-      {
-        id: 1,
-        storeName: "Fresh Bakery",
-        description: "Assorted pastries and bread including croissants, pain au chocolat, and sourdough bread.",
-        originalPrice: 1999, // Original price in rupees
-        discountPrice: 699,  // Discounted price in rupees
-        servings: 3,         // Number of people the bag can feed
-        pickupTime: "Today, 17:00 - 18:00",
-        distance: "1.2 km",
-        color: "#FF9F1C",    // Background color for the placeholder
-        emoji: "🥐",         // Emoji representing the food type
-        quantity: 5,         // Number of bags available
-      },
-      {
-        id: 2,
-        storeName: "Green Garden Restaurant",
-        description: "Vegetarian surprise bag with fresh salads, wraps, and healthy snacks.",
-        originalPrice: 2499,
-        discountPrice: 899,
-        servings: 2,
-        pickupTime: "Today, 19:30 - 20:30",
-        distance: "0.8 km",
-        color: "#2EC4B6",
-        emoji: "🥗",
-        quantity: 3,
-      },
-      {
-        id: 3,
-        storeName: "Pasta Paradise",
-        description: "Italian food surprise with pasta, garlic bread, and tiramisu.",
-        originalPrice: 3200,
-        discountPrice: 1099,
-        servings: 4,
-        pickupTime: "Tomorrow, 12:00 - 13:00",
-        distance: "2.5 km",
-        color: "#E71D36",
-        emoji: "🍝",
-        quantity: 2,
-      },
-      {
-        id: 4,
-        storeName: "Sushi Station",
-        description: "Assorted sushi rolls, miso soup, and edamame beans.",
-        originalPrice: 2800,
-        discountPrice: 999,
-        servings: 2,
-        pickupTime: "Today, 20:00 - 21:00",
-        distance: "3.1 km",
-        color: "#011627",
-        emoji: "🍣",
-        quantity: 4,
-      },
-      {
-        id: 5,
-        storeName: "Spice of India",
-        description: "Authentic Indian curry, naan bread, and rice dishes.",
-        originalPrice: 2200,
-        discountPrice: 799,
-        servings: 3,
-        pickupTime: "Today, 18:30 - 19:30",
-        distance: "1.7 km",
-        color: "#F71735",
-        emoji: "🍛",
-        quantity: 1,
-      },
-      {
-        id: 6,
-        storeName: "Sweet Tooth Bakery",
-        description: "Assorted desserts including cakes, cookies, and pastries.",
-        originalPrice: 1800,
-        discountPrice: 599,
-        servings: 4,
-        pickupTime: "Tomorrow, 10:00 - 11:00",
-        distance: "0.5 km",
-        color: "#FF9F1C",
-        emoji: "🍰",
-        quantity: 6,
-      },
-    ];
+        // ===== FUNCTIONS =====
 
-    // ===== CART SYSTEM =====
-    // Cart state
-    let cart = [];
-    let isCartOpen = false;
+        // Function to render all food bag cards
+        function renderFoodBags() {
+            const foodBagList = document.getElementById('food-bag-list');
+            const template = document.getElementById('food-bag-card-template');
 
-    // Load cart from localStorage if available
-    function loadCart() {
-      const savedCart = localStorage.getItem('cart');
-      if (savedCart) {
-        try {
-          cart = JSON.parse(savedCart);
-          updateCartCount();
-          updateCartTotal();
-        } catch (error) {
-          console.error('Failed to parse cart from localStorage:', error);
-          cart = [];
+            // Clear existing content
+            foodBagList.innerHTML = '';
+
+            // Render each food bag
+            surpriseBags.forEach(bag => {
+                // Clone the template
+                const cardClone = template.content.cloneNode(true);
+
+                // Calculate discount percentage
+                const discount = Math.round(((bag.originalPrice - bag.discountPrice) / bag.originalPrice) * 100);
+
+                // Set the food image placeholder background and emoji
+                const foodImagePlaceholder = cardClone.querySelector('.food-image-placeholder');
+                foodImagePlaceholder.style.backgroundColor = bag.color;
+                foodImagePlaceholder.style.fontSize = '3rem';
+
+                // Set the content
+                cardClone.querySelector('.store-emoji').textContent = bag.emoji;
+                cardClone.querySelector('.discount-badge').textContent = `Save ${discount}%`;
+                cardClone.querySelector('.store-name').textContent = bag.storeName;
+                cardClone.querySelector('.servings').textContent = `Feeds ${bag.servings}`;
+                cardClone.querySelector('.description').textContent = bag.description;
+                cardClone.querySelector('.pickup-time').textContent = bag.pickupTime;
+                cardClone.querySelector('.distance').textContent = `${bag.distance} away`;
+                cardClone.querySelector('.original-price').textContent = `₹${bag.originalPrice}`;
+                cardClone.querySelector('.discount-price').textContent = `₹${bag.discountPrice}`;
+
+                // Show quantity badge if quantity is low
+                if (bag.quantity <= 2) {
+                    const quantityBadge = cardClone.querySelector('.quantity-badge');
+                    quantityBadge.textContent = `Only ${bag.quantity} left!`;
+                    quantityBadge.classList.remove('hidden');
+                }
+
+                // Add event listener to reserve button
+                const reserveBtn = cardClone.querySelector('.reserve-btn');
+                reserveBtn.addEventListener('click', () => {
+                    reserveBtn.textContent = 'Reserving...';
+                    reserveBtn.disabled = true;
+
+                    // Simulate API call
+                    setTimeout(() => {
+                        // In a real app, you would redirect to a checkout page
+                        alert(`Bag from ${bag.storeName} reserved successfully!`);
+                        reserveBtn.textContent = 'Reserved!';
+                        setTimeout(() => {
+                            reserveBtn.textContent = 'Reserve Bag';
+                            reserveBtn.disabled = false;
+                        }, 2000);
+                    }, 1000);
+                });
+
+                // Append the card to the list
+                foodBagList.appendChild(cardClone);
+            });
         }
-      }
-    }
 
-    // Save cart to localStorage
-    function saveCart() {
-      localStorage.setItem('cart', JSON.stringify(cart));
-    }
+        // ===== INITIALIZATION =====
+        // Initialize the page when the DOM is fully loaded
+        document.addEventListener('DOMContentLoaded', () => {
+            renderFoodBags();
 
-    // Add item to cart
-    function addToCart(item) {
-      // Check if item already exists in cart
-      const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
-      
-      if (existingItemIndex >= 0) {
-        // Item exists, update quantity
-        cart[existingItemIndex].quantity += 1;
-      } else {
-        // Item doesn't exist, add new item
-        cart.push({ ...item, quantity: 1 });
-      }
-      
-      // Update UI
-      updateCartCount();
-      updateCartTotal();
-      renderCartItems();
-      saveCart();
-      
-      // Show toast notification
-      showToast(`${item.storeName} added to cart!`);
-      
-      // Open cart drawer
-      openCart();
-    }
+            // Add event listener to search input
+            const searchInput = document.querySelector('.input');
+            searchInput.addEventListener('input', (e) => {
+                const searchTerm = e.target.value.toLowerCase();
 
-    // Remove item from cart
-    function removeFromCart(itemId) {
-      cart = cart.filter(item => item.id !== itemId);
-      
-      // Update UI
-      updateCartCount();
-      updateCartTotal();
-      renderCartItems();
-      saveCart();
-    }
+                // Filter the bags based on the search term
+                const filteredBags = surpriseBags.filter(bag =>
+                    bag.storeName.toLowerCase().includes(searchTerm) ||
+                    bag.description.toLowerCase().includes(searchTerm)
+                );
 
-    // Update item quantity
-    function updateQuantity(itemId, newQuantity) {
-      if (newQuantity <= 0) {
-        removeFromCart(itemId);
-        return;
-      }
-      
-      const itemIndex = cart.findIndex(item => item.id === itemId);
-      if (itemIndex !== -1) {
-        cart[itemIndex].quantity = newQuantity;
-        
-        // Update UI
-        updateCartTotal();
-        renderCartItems();
-        saveCart();
-      }
-    }
+                // Re-render the filtered bags
+                const foodBagList = document.getElementById('food-bag-list');
+                foodBagList.innerHTML = '';
 
-    // Update cart count badge
-    function updateCartCount() {
-      const cartCount = document.getElementById('cart-count');
-      const itemCount = cart.reduce((count, item) => count + item.quantity, 0);
-      cartCount.textContent = itemCount;
-      
-      // Hide count if zero
-      if (itemCount === 0) {
-        cartCount.classList.add('hidden');
-      } else {
-        cartCount.classList.remove('hidden');
-      }
-    }
+                if (filteredBags.length === 0) {
+                    foodBagList.innerHTML = '<div class="text-center p-4 text-muted">No results found</div>';
+                    return;
+                }
 
-    // Update cart total
-    function updateCartTotal() {
-      const cartTotal = document.getElementById('cart-total');
-      const total = cart.reduce((sum, item) => sum + (item.discountPrice * item.quantity), 0);
-      cartTotal.textContent = `₹${total}`;
-    }
+                // Render each filtered bag
+                filteredBags.forEach(bag => {
+                    // Clone the template
+                    const template = document.getElementById('food-bag-card-template');
+                    const cardClone = template.content.cloneNode(true);
 
-    // Render cart items
-    function renderCartItems() {
-      const cartItemsContainer = document.getElementById('cart-items');
-      const template = document.getElementById('cart-item-template');
-      
-      // Clear existing content
-      cartItemsContainer.innerHTML = '';
-      
-      if (cart.length === 0) {
-        // Show empty cart message
-        const emptyCart = document.createElement('div');
-        emptyCart.className = 'cart-empty';
-        emptyCart.innerHTML = `
-          <i class="fas fa-shopping-cart"></i>
-          <p class="font-medium mb-2">Your cart is empty</p>
-          <p class="text-muted mb-4">Add some surprise bags to get started!</p>
-          <button class="btn btn-primary" id="empty-cart-continue">Continue Shopping</button>
-        `;
-        cartItemsContainer.appendChild(emptyCart);
-        
-        // Add event listener to continue shopping button
-        document.getElementById('empty-cart-continue').addEventListener('click', closeCart);
-        return;
-      }
-      
-      // Render each cart item
-      cart.forEach(item => {
-        // Clone the template
-        const cartItemClone = template.content.cloneNode(true);
-        
-        // Set the content
-        const itemImage = cartItemClone.querySelector('.cart-item-image');
-        itemImage.style.backgroundColor = item.color;
-        itemImage.textContent = item.emoji;
-        itemImage.style.fontSize = '2rem';
-        itemImage.style.display = 'flex';
-        itemImage.style.alignItems = 'center';
-        itemImage.style.justifyContent = 'center';
-        
-        cartItemClone.querySelector('.cart-item-name').textContent = item.storeName;
-        cartItemClone.querySelector('.cart-item-description').textContent = item.description;
-        cartItemClone.querySelector('.cart-quantity-value').textContent = item.quantity;
-        cartItemClone.querySelector('.cart-item-price').textContent = `₹${item.discountPrice * item.quantity}`;
-        
-        // Add event listeners
-        cartItemClone.querySelector('.remove-item').addEventListener('click', () => {
-          removeFromCart(item.id);
+                    // Calculate discount percentage
+                    const discount = Math.round(((bag.originalPrice - bag.discountPrice) / bag.originalPrice) * 100);
+
+                    // Set the food image placeholder background and emoji
+                    const foodImagePlaceholder = cardClone.querySelector('.food-image-placeholder');
+                    foodImagePlaceholder.style.backgroundColor = bag.color;
+                    foodImagePlaceholder.style.fontSize = '3rem';
+
+                    // Set the content
+                    cardClone.querySelector('.store-emoji').textContent = bag.emoji;
+                    cardClone.querySelector('.discount-badge').textContent = `Save ${discount}%`;
+                    cardClone.querySelector('.store-name').textContent = bag.storeName;
+                    cardClone.querySelector('.servings').textContent = `Feeds ${bag.servings}`;
+                    cardClone.querySelector('.description').textContent = bag.description;
+                    cardClone.querySelector('.pickup-time').textContent = bag.pickupTime;
+                    cardClone.querySelector('.distance').textContent = `${bag.distance} away`;
+                    cardClone.querySelector('.original-price').textContent = `₹${bag.originalPrice}`;
+                    cardClone.querySelector('.discount-price').textContent = `₹${bag.discountPrice}`;
+
+                    // Show quantity badge if quantity is low
+                    if (bag.quantity <= 2) {
+                        const quantityBadge = cardClone.querySelector('.quantity-badge');
+                        quantityBadge.textContent = `Only ${bag.quantity} left!`;
+                        quantityBadge.classList.remove('hidden');
+                    }
+
+                    // Add event listener to reserve button
+                    const reserveBtn = cardClone.querySelector('.reserve-btn');
+                    reserveBtn.addEventListener('click', () => {
+                        reserveBtn.textContent = 'Reserving...';
+                        reserveBtn.disabled = true;
+
+                        // Simulate API call
+                        setTimeout(() => {
+                            // In a real app, you would redirect to a checkout page
+                            alert(`Bag from ${bag.storeName} reserved successfully!`);
+                            reserveBtn.textContent = 'Reserved!';
+                            setTimeout(() => {
+                                reserveBtn.textContent = 'Reserve Bag';
+                                reserveBtn.disabled = false;
+                            }, 2000);
+                        });
+                    });
+
+                    // Append the card to the list
+                    foodBagList.appendChild(cardClone);
+                });
+            });
+
+            const mapButton = document.getElementById('map-button');
+            const mapDiv = document.getElementById('map');
+            let map;
+
+            mapButton.addEventListener('click', () => {
+                mapDiv.classList.toggle('map-visible');
+                if (mapDiv.classList.contains('map-visible')) {
+                    if (!map) {
+                        map = L.map('map').setView([28.6139, 77.2090], 12);
+                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                        }).addTo(map);
+                        surpriseBags.forEach(bag => {
+                            if (bag.latitude && bag.longitude) {
+                                L.marker([bag.latitude, bag.longitude]).addTo(map).bindPopup(bag.storeName);
+                            }
+                        });
+                    }
+                }
+            });
         });
-        
-        cartItemClone.querySelector('.decrease-quantity').addEventListener('click', () => {
-          updateQuantity(item.id, item.quantity - 1);
-        });
-        
-        cartItemClone.querySelector('.increase-quantity').addEventListener('click', () => {
-          updateQuantity(item.id, item.quantity + 1);
-        });
-        
-        // Append the item to the container
-        cartItemsContainer.appendChild(cartItemClone);
-      });
-    }
-
-    // Open cart drawer
-    function openCart() {
-      const cartDrawer = document.getElementById('cart-drawer');
-      const cartOverlay = document.getElementById('cart-overlay');
-      
-      cartDrawer.classList.add('open');
-      cartOverlay.classList.add('open');
-      isCartOpen = true;
-      
-      // Prevent body scrolling
-      document.body.style.overflow = 'hidden';
-    }
-
-    // Close cart drawer
-    function closeCart() {
-      const cartDrawer = document.getElementById('cart-drawer');
-      const cartOverlay = document.getElementById('cart-overlay');
-      
-      cartDrawer.classList.remove('open');
-      cartOverlay.classList.remove('open');
-      isCartOpen = false;
-      
-      // Restore body scrolling
-      document.body.style.overflow = 'auto';
-    }
-
-    // Show toast notification
-    function showToast(message) {
-      const toast = document.getElementById('toast');
-      const toastMessage = document.getElementById('toast-message');
-      
-      toastMessage.textContent = message;
-      toast.classList.add('show');
-      
-      // Hide toast after 3 seconds
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
-    }
-
-    // ===== FUNCTIONS =====
-    
-    // Function to render all food bag cards
-    function renderFoodBags() {
-      const foodBagList = document.getElementById('food-bag-list');
-      const template = document.getElementById('food-bag-card-template');
-      
-      // Clear existing content
-      foodBagList.innerHTML = '';
-      
-      // Render each food bag
-      surpriseBags.forEach(bag => {
-        // Clone the template
-        const cardClone = template.content.cloneNode(true);
-        
-        // Calculate discount percentage
-        const discount = Math.round(((bag.originalPrice - bag.discountPrice) / bag.originalPrice) * 100);
-        
-        // Set the food image placeholder background and emoji
-        const foodImagePlaceholder = cardClone.querySelector('.food-image-placeholder');
-        foodImagePlaceholder.style.backgroundColor = bag.color;
-        foodImagePlaceholder.style.fontSize = '3rem';
-        
-        // Set the content
-        cardClone.querySelector('.store-emoji').textContent = bag.emoji;
-        cardClone.querySelector('.discount-badge').textContent = `Save ${discount}%`;
-        cardClone.querySelector('.store-name').textContent = bag.storeName;
-        cardClone.querySelector('.servings').textContent = `Feeds ${bag.servings}`;
-        cardClone.querySelector('.description').textContent = bag.description;
-        cardClone.querySelector('.pickup-time').textContent = bag.pickupTime;
-        cardClone.querySelector('.distance').textContent = `${bag.distance} away`;
-        cardClone.querySelector('.original-price').textContent = `₹${bag.originalPrice}`;
-        cardClone.querySelector('.discount-price').textContent = `₹${bag.discountPrice}`;
-        
-        // Show quantity badge if quantity is low
-        if (bag.quantity <= 2) {
-          const quantityBadge = cardClone.querySelector('.quantity-badge');
-          quantityBadge.textContent = `Only ${bag.quantity} left!`;
-          quantityBadge.classList.remove('hidden');
-        }
-        
-        // Add event listener to add to cart button
-        const addToCartBtn = cardClone.querySelector('.add-to-cart-btn');
-        addToCartBtn.addEventListener('click', () => {
-          addToCartBtn.textContent = 'Adding...';
-          addToCartBtn.disabled = true;
-          
-          // Simulate API call
-          setTimeout(() => {
-            addToCart(bag);
-            addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart mr-2"></i>Add to Cart';
-            addToCartBtn.disabled = false;
-          }, 500);
-        });
-        
-        // Append the card to the list
-        foodBagList.appendChild(cardClone);
-      });
-    }
-
-    // ===== INITIALIZATION =====
-    // Initialize the page when the DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', () => {
-      // Load cart from localStorage
-      loadCart();
-      
-      // Render food bags
-      renderFoodBags();
-      
-      // Render cart items
-      renderCartItems();
-      
-      // Add event listeners for cart
-      document.getElementById('cart-button').addEventListener('click', openCart);
-      document.getElementById('close-cart').addEventListener('click', closeCart);
-      document.getElementById('cart-overlay').addEventListener('click', closeCart);
-      document.getElementById('continue-shopping').addEventListener('click', closeCart);
-      
-      // Add event listener for checkout button
-      document.getElementById('checkout-btn').addEventListener('click', () => {
-        if (cart.length === 0) {
-          showToast('Your cart is empty!');
-          return;
-        }
-        
-        // In a real app, you would redirect to a checkout page
-        showToast('Redirecting to checkout...');
-        setTimeout(() => {
-          alert('This would redirect to the checkout page in a real app.');
-        }, 1000);
-      });
-      
-      // Add event listener to search input
-      const searchInput = document.querySelector('.input');
-      searchInput.addEventListener('input', (e) => {
-        const searchTerm = e.target.value.toLowerCase();
-        
-        // Filter the bags based on the search term
-        const filteredBags = surpriseBags.filter(bag => 
-          bag.storeName.toLowerCase().includes(searchTerm) || 
-          bag.description.toLowerCase().includes(searchTerm)
-        );
-        
-        // Re-render the filtered bags
-        const foodBagList = document.getElementById('food-bag-list');
-        foodBagList.innerHTML = '';
-        
-        if (filteredBags.length === 0) {
-          foodBagList.innerHTML = '<div class="text-center p-4 text-muted">No results found</div>';
-          return;
-        }
-        
-        // Render each filtered bag
-        filteredBags.forEach(bag => {
-          // Clone the template
-          const template = document.getElementById('food-bag-card-template');
-          const cardClone = template.content.cloneNode(true);
-          
-          // Calculate discount percentage
-          const discount = Math.round(((bag.originalPrice - bag.discountPrice) / bag.originalPrice) * 100);
-          
-          // Set the food image placeholder background and emoji
-          const foodImagePlaceholder = cardClone.querySelector('.food-image-placeholder');
-          foodImagePlaceholder.style.backgroundColor = bag.color;
-          foodImagePlaceholder.style.fontSize = '3rem';
-          
-          // Set the content
-          cardClone.querySelector('.store-emoji').textContent = bag.emoji;
-          cardClone.querySelector('.discount-badge').textContent = `Save ${discount}%`;
-          cardClone.querySelector('.store-name').textContent = bag.storeName;
-          cardClone.querySelector('.servings').textContent = `Feeds ${bag.servings}`;
-          cardClone.querySelector('.description').textContent = bag.description;
-          cardClone.querySelector('.pickup-time').textContent = bag.pickupTime;
-          cardClone.querySelector('.distance').textContent = `${bag.distance} away`;
-          cardClone.querySelector('.original-price').textContent = `₹${bag.originalPrice}`;
-          cardClone.querySelector('.discount-price').textContent = `₹${bag.discountPrice}`;
-          
-          // Show quantity badge if quantity is low
-          if (bag.quantity <= 2) {
-            const quantityBadge = cardClone.querySelector('.quantity-badge');
-            quantityBadge.textContent = `Only ${bag.quantity} left!`;
-            quantityBadge.classList.remove('hidden');
-          }
-          
-          // Add event listener to add to cart button
-          const addToCartBtn = cardClone.querySelector('.add-to-cart-btn');
-          addToCartBtn.addEventListener('click', () => {
-            addToCartBtn.textContent = 'Adding...';
-            addToCartBtn.disabled = true;
-            
-            // Simulate API call
-            setTimeout(() => {
-              addToCart(bag);
-              addToCartBtn.innerHTML = '<i class="fas fa-shopping-cart mr-2"></i>Add to Cart';
-              addToCartBtn.disabled = false;
-            }, 500);
-          });
-          
-          // Append the card to the list
-          foodBagList.appendChild(cardClone);
-        });
-      });
-    });
-  </script>
+    </script>
 </body>
 </html>
