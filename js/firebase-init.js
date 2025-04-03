@@ -7,7 +7,16 @@ const firebaseConfig = {
     storageBucket: "greenfork-alpha.firebasestorage.app",
     messagingSenderId: "322988359787",
     appId: "1:322988359787:web:12b68b7f97f7b384fcf12e",
-    measurementId: "G-ZTJTRHSE83" // Optional, only if you enabled Analytics
+    measurementId: "G-ZTJTRHSE83", // Optional, only if you enabled Analytics
+
+    //Compost-Firebase
+    apiKey: "AIzaSyAuTcWKtzTmqtvBqLeWHQtAnw0TO8FdRMY",
+    authDomain: "greenfork-compost.firebaseapp.com",
+    projectId: "greenfork-compost",
+    storageBucket: "greenfork-compost.firebasestorage.app",
+    messagingSenderId: "1014388321188",
+    appId: "1:1014388321188:web:8ab72c0bf52d5b41b1af31",
+    measurementId: "G-YXJLT15P9R"
 };
 
 // Initialize Firebase
@@ -24,3 +33,7 @@ try {
     // Optionally display an error message to the user on the page
     // document.body.innerHTML = 'Error initializing connection. Please try again later.';
 }
+
+firebase.initializeApp(firebaseConfig);
+const app = initializeApp(firebaseConfig);
+const analytics = getAnalytics(app);
