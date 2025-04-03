@@ -388,34 +388,5 @@
     <script src="js/firebase-init.js"></script>
     <script src="js/auth.js"></script>
     <script src="js/compost.js"></script>
-    <script>
-        // Pooling Form Submission
-        document.getElementById('poolingForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-
-            // Get form values
-            const foodType = document.getElementById('foodType').value;
-            const quantity = document.getElementById('quantity').value;
-            const notes = document.getElementById('notes').value || 'None';
-
-            // Create new pool item
-            const poolItem = document.createElement('div');
-            poolItem.className = 'pool-item';
-            poolItem.innerHTML = `
-                <h3>${foodType}</h3>
-                <p>Quantity: ${quantity} kg</p>
-                <p>Notes: ${notes}</p>
-            `;
-
-            // Append to pooling list
-            document.getElementById('poolingList').appendChild(poolItem);
-
-            // Reset form
-            this.reset();
-
-            // Placeholder for backend integration
-            console.log('Pooled Item:', { foodType, quantity, notes });
-        });
-    </script>
 </body>
 </html>
