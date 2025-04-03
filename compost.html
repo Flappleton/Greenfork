@@ -6,202 +6,121 @@
     <title>GreenFork - Compost</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
+        /* Reusing styles - Consider common CSS file */
         :root {
-            --forest-green: #2a9d8f;
-            --lime-green: #8ab17d;
-            --pale-green: #f4f7f3;
-            --deep-green: #264653;
-            --turquoise-blue: #64d5ca;
-            --orange-accent: #e76f51;
+            --forest-green: #2a9d8f; --lime-green: #8ab17d; --pale-green: #f4f7f3;
+            --deep-green: #264653; --turquoise-blue: #64d5ca; --orange-accent: #e76f51;
         }
-        body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(135deg, var(--pale-green), var(--turquoise-blue));
-            color: #333;
-            line-height: 1.6;
-            background-attachment: fixed;
-        }
-        /* Updated Navbar with consistent alignment */
-        .navbar { 
-            background: white;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            padding: 1rem 0;
-        }
-        .navbar-nav {
-            align-items: center;
-        }
-        .nav-link {
-            color: var(--forest-green) !important;
-            font-weight: 500;
-            transition: color 0.3s;
-            margin: 0 0.5rem;
-            padding: 0.5rem 0;
-            display: flex;
-            align-items: center;
-            height: 100%;
-        }
-        .nav-link:hover, .nav-link.active {
-            color: var(--lime-green) !important;
-        }
-        .navbar-brand {
-            display: flex;
-            align-items: center;
-        }
-        .navbar-brand img {
-            transition: transform 0.3s;
-            height: 55px;
-            margin: 0;
-        }
-        .navbar-brand img:hover {
-            transform: scale(1.05);
-        }
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, var(--pale-green), var(--turquoise-blue)); color: #333; line-height: 1.6; background-attachment: fixed; }
+        .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1rem 0; }
+        .nav-link { color: var(--forest-green) !important; font-weight: 500; transition: color 0.3s; margin: 0 0.5rem;}
+        .nav-link:hover, .nav-link.active { color: var(--lime-green) !important; }
+        .navbar-brand img { transition: transform 0.3s; height: 55px; }
+        .navbar-brand img:hover { transform: scale(1.05); }
+
         .compost-section, .pooling-section {
-            padding: 4rem 1rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
-            margin: 2rem auto;
-            max-width: 95%;
+            padding: 4rem 1rem; background: white; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); margin: 2rem auto; max-width: 95%;
         }
         h2 {
-            color: var(--forest-green);
-            margin-bottom: 1.5rem;
-            text-align: center;
-            font-weight: 600;
-        }
-        p, li {
-            font-size: 1rem;
-            margin-bottom: 1rem;
-        }
-        .btn-learn, .btn-pool {
-            background: white;
-            color: var(--forest-green);
-            border: 2px solid var(--forest-green);
-            border-radius: 25px;
-            padding: 0.8rem 2rem;
-            font-weight: 500;
-            transition: all 0.3s;
-            margin-top: 1.5rem;
-        }
+             color: var(--forest-green); margin-bottom: 1.5rem; /* Reduced bottom margin */
+             text-align: center; font-weight: 600; font-size: 2.2rem; /* Slightly smaller */
+         }
+         h3 { /* Style for subheadings like "Recently Added" */
+             color: var(--deep-green);
+             margin-top: 3rem;
+             margin-bottom: 1.5rem;
+             text-align: center;
+             font-weight: 500;
+         }
+         .section-intro {
+             text-align: center; max-width: 700px; margin: 0 auto 2rem auto; /* Reduced bottom margin */
+             font-size: 1.1rem; color: #555;
+         }
+        .section-intro ul {
+             list-style: none; padding-left: 0; margin-top: 1.5rem; text-align: left; display: inline-block; /* Center the list block */
+         }
+        .section-intro li::before {
+             content: "♻"; /* Recycle symbol */ color: var(--lime-green); font-weight: bold;
+             display: inline-block; width: 1.5em; margin-left: -1.5em; /* Adjust spacing */
+         }
+
+        .btn-learn, .btn-pool { /* Base style for buttons */
+             background: white; color: var(--forest-green); border: 2px solid var(--forest-green);
+             border-radius: 25px; padding: 0.8rem 2rem; font-weight: 500; transition: all 0.3s;
+             margin-top: 1.5rem; display: inline-block;
+         }
         .btn-learn:hover, .btn-pool:hover {
-            background: var(--forest-green);
-            color: white;
-            transform: translateY(-2px);
-        }
-        .pooling-form {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-        .pooling-form label {
-            display: block;
-            margin: 0.5rem 0;
-            font-weight: 500;
-            color: var(--forest-green);
-        }
-        .pooling-form input, 
-        .pooling-form select, 
-        .pooling-form textarea {
-            width: 100%;
-            padding: 0.6rem;
-            margin-bottom: 1rem;
-            border: 1px solid var(--forest-green);
-            border-radius: 5px;
-            font-size: 1rem;
-        }
+             background: var(--forest-green); color: white; transform: translateY(-2px);
+             box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+         }
+
+        /* Pooling Form Styling */
+        .pooling-form { max-width: 600px; margin: 1.5rem auto 0 auto; /* Reduced top margin */ }
+        .pooling-form label { display: block; margin-bottom: 0.5rem; font-weight: 500; color: var(--deep-green); }
+        .pooling-form input, .pooling-form select, .pooling-form textarea {
+             width: 100%; padding: 0.8rem; margin-bottom: 1rem; border: 1px solid var(--lime-green);
+             border-radius: 5px; font-size: 1rem; box-shadow: inset 0 1px 3px rgba(0,0,0,0.06);
+         }
+         .pooling-form input:focus, .pooling-form select:focus, .pooling-form textarea:focus {
+             border-color: var(--forest-green); box-shadow: 0 0 0 0.2rem rgba(42, 157, 143, 0.25); outline: none;
+         }
+         .pooling-form .btn-pool { width: 100%; /* Make button full width */ }
+          /* Error Message Styling */
+         #poolingFormError {
+             color: var(--orange-accent); font-size: 0.9em; min-height: 1.2em; margin-bottom: 1rem; display: none; /* Hide initially */
+         }
+
+        /* Pooling List Display */
         .pooling-list {
-            margin-top: 2rem;
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-        }
+             margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1.5rem; justify-content: center;
+             min-height: 100px; /* Ensure container has height even when empty */
+         }
         .pool-item {
-            background: var(--pale-green);
-            padding: 1.2rem;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
-            flex: 1 1 280px;
-            max-width: 320px;
-            text-align: center;
-        }
-        footer {
-            background: var(--deep-green);
-            color: white;
-            padding: 2rem 0;
-            margin-top: 3rem;
-        }
-        .modal-header {
-            background: var(--forest-green);
-            color: white;
-            border-bottom: none;
-            border-radius: 10px 10px 0 0;
-        }
-        .modal-header .btn-close {
-            filter: invert(1) grayscale(100%) brightness(200%);
-        }
-        .modal-content {
-            border-radius: 10px;
-            border: none;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-        .modal-body .form-label {
-            font-weight: 500;
-            color: var(--deep-green);
-            margin-bottom: 0.3rem;
-        }
-        .modal-body .form-control, 
-        .modal-body .form-select {
-            border-color: var(--lime-green);
-        }
-        .modal-body .form-control:focus, 
-        .modal-body .form-select:focus {
-            box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25);
-            border-color: var(--forest-green);
-        }
-        .modal-body [id$="Error"] {
-            color: var(--orange-accent);
-            font-size: 0.9em;
-            min-height: 1.2em;
-            margin-top: 0.5rem;
-        }
-        .modal button[type="submit"] {
-            background: var(--forest-green);
-            border: none;
-            padding: 0.7rem 1.5rem;
-            font-weight: 500;
-            color: white;
-            border-radius: 20px;
-            transition: all 0.3s;
-            width: 100%;
-        }
-        .modal button[type="submit"]:hover {
-            background: var(--lime-green);
-            transform: translateY(-2px);
-        }
-        .modal-body .text-center a {
-            color: var(--forest-green);
-            text-decoration: none;
-            font-weight: 500;
-        }
-        .modal-body .text-center a:hover {
-            text-decoration: underline;
-            color: var(--lime-green);
-        }
+             background: var(--pale-green); padding: 1.5rem; border-radius: 10px;
+             box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); flex: 1 1 280px; max-width: 320px;
+             text-align: left; border-left: 5px solid var(--lime-green); /* Accent */
+             transition: transform 0.2s ease;
+             display: flex; /* Use flexbox for better internal layout */
+             flex-direction: column;
+         }
+          .pool-item:hover { transform: scale(1.02); }
+         .pool-item h3 { font-size: 1.2rem; color: var(--deep-green); margin-bottom: 0.8rem; text-align: center;}
+         .pool-item p { font-size: 1rem; color: #555; margin-bottom: 0.4rem; line-height: 1.5; flex-grow: 1; /* Allow notes to take space */}
+         .pool-item p strong { color: var(--deep-green); }
+          .pool-item .timestamp, .pool-item .donor-info { /* Style for timestamp and donor info */
+             font-size: 0.85rem; color: #777; margin-top: 1rem; text-align: right;
+             border-top: 1px solid var(--color-gray-200); /* Separator line */
+             padding-top: 0.5rem;
+         }
+         #noCompostItems { /* Style the placeholder message */
+             width: 100%;
+             text-align: center;
+             padding: 2rem;
+             color: var(--color-gray-500);
+         }
+
+
+        /* Modal Styles (Reusing from index.html) */
+         .modal-header { background: var(--forest-green); color: white; border-bottom: none; border-radius: 10px 10px 0 0; }
+         .modal-header .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+         .modal-content { border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+         .modal-body .form-label { font-weight: 500; color: var(--deep-green); margin-bottom: 0.3rem; }
+        .modal-body .form-control, .modal-body .form-select { border-color: var(--lime-green); }
+        .modal-body .form-control:focus, .modal-body .form-select:focus { box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25); border-color: var(--forest-green); }
+         .modal-body [id$="Error"] { color: var(--orange-accent); font-size: 0.9em; min-height: 1.2em; margin-top: 0.5rem; }
+        .modal button[type="submit"] { background: var(--forest-green); border: none; padding: 0.7rem 1.5rem; font-weight: 500; color: white; border-radius: 20px; transition: all 0.3s; width: 100%; }
+        .modal button[type="submit"]:hover { background: var(--lime-green); transform: translateY(-2px); }
+        .modal-body .text-center a { color: var(--forest-green); text-decoration: none; font-weight: 500; }
+        .modal-body .text-center a:hover { text-decoration: underline; color: var(--lime-green); }
+
+        footer { background: var(--deep-green); color: white; padding: 3rem 0 2rem; margin-top: 4rem; }
+
         @media (max-width: 768px) {
-            .compost-section, .pooling-section {
-                padding: 2rem 1rem;
-                margin: 1rem auto;
-            }
-            .pool-item {
-                flex: 1 1 100%;
-                max-width: 100%;
-            }
-            .navbar-nav {
-                padding: 1rem 0;
-            }
-            .nav-link {
-                padding: 0.5rem 1rem;
-            }
+            .compost-section, .pooling-section { padding: 3rem 1rem; margin: 1.5rem auto; }
+             h2 { font-size: 1.8rem; }
+             .section-intro ul { text-align: center; } /* Center list on mobile */
+             .pool-item { flex-basis: 90%; max-width: 90%; } /* Stack cards */
         }
     </style>
 </head>
@@ -209,170 +128,107 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="logo.png" alt="GreenFork Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" href="index.html"> <img src="logo.png" alt="GreenFork Logo"> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <ul class="navbar-nav ms-auto">
+                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#about-us">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link active" href="compost.html">Compost</a></li>
-                    <li class="nav-item" id="signInLi">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
-                    </li>
-                    <li class="nav-item" id="signUpLi">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a>
-                    </li>
-                    <li class="nav-item d-none" id="logoutLi">
-                        <a class="nav-link" href="#" id="logoutLink">Logout</a>
-                    </li>
-                    <li class="nav-item d-none" id="profileLi">
-                        <a class="nav-link" href="#" id="profileLink">My Profile</a>
-                    </li>
+                     <li class="nav-item" id="signInLi"> <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a> </li>
+                    <li class="nav-item" id="signUpLi"> <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a> </li>
+                    <li class="nav-item d-none" id="logoutLi"> <a class="nav-link" href="#" id="logoutLink">Logout</a> </li>
+                    <li class="nav-item d-none" id="profileLi"> <a class="nav-link" href="#" id="profileLink">My Profile</a> </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <!-- Compost Section -->
+    <!-- Smart Composting Info Section -->
     <section class="compost-section">
         <div class="container">
-            <h2>Smart Composting</h2>
-            <p class="text-center">When food can't be donated or sold, GreenFork ensures it doesn't go to waste. Our smart composting system turns unsalvageable food into organic fertilizer, reducing landfill waste and methane emissions.</p>
-            <ul class="text-center list-unstyled">
-                <li>IoT-enabled monitoring of temperature, humidity, and oxygen levels</li>
-                <li>Efficient processing with data-driven insights</li>
-                <li>Supports a circular economy by repurposing waste for agriculture</li>
-                <li>Contributes to a sustainable future with every compost batch</li>
-            </ul>
-            <div class="text-center">
-                <a href="#" class="btn btn-learn">Learn More About Composting</a>
+            <h2>Smart Composting Initiative</h2>
+            <div class="section-intro">
+                 <p>When food can't be donated or sold, GreenFork helps ensure it doesn't go to waste. Our composting initiative connects those with unsalvageable food scraps to local composting facilities or collectors.</p>
+                 <ul>
+                     <li>Reduce landfill waste and methane emissions.</li>
+                     <li>Support a circular economy by turning waste into fertilizer.</li>
+                     <li>Easy listing for anyone with organic waste.</li>
+                     <li>Contribute to a sustainable future with every batch diverted.</li>
+                 </ul>
+                 <div class="text-center">
+                     <a href="#pooling-section" class="btn-learn">List Items for Composting</a>
+                 </div>
             </div>
         </div>
     </section>
 
     <!-- Compost Pooling Section -->
-    <section class="pooling-section">
+    <section class="pooling-section" id="pooling-section">
         <div class="container">
-            <h2>Compost Pooling for Merchants</h2>
-            <p class="text-center">Merchants can list expired or unsalvageable food here for composting. Help us turn waste into resources by pooling your surplus food.</p>
-            
+            <h2>List Items for Composting</h2>
+             <p class="text-center section-intro" style="font-size: 1rem; margin-bottom: 1rem;">Anyone can list expired or unsalvageable food items here. Help turn waste into valuable resources by adding your items to the compost pool.</p>
+
             <!-- Pooling Form -->
             <div class="pooling-form">
+                <!-- ADDED id="poolingForm" -->
                 <form id="poolingForm">
-                    <label for="foodType">Food Type:</label>
-                    <select id="foodType" name="foodType" required>
-                        <option value="" disabled selected>Select Food Type</option>
-                        <option value="Fruits">Fruits</option>
-                        <option value="Vegetables">Vegetables</option>
-                        <option value="Bakery">Bakery Items</option>
-                        <option value="Dairy">Dairy Products</option>
-                        <option value="Other">Other</option>
-                    </select>
+                    <div class="mb-3">
+                        <!-- CHANGED id="compostFoodType" -->
+                        <label for="compostFoodType" class="form-label">Food Type:</label>
+                        <select id="compostFoodType" name="foodType" class="form-select" required>
+                            <option value="" disabled selected>Select Food Type</option>
+                            <option value="Fruits">Fruits</option>
+                            <option value="Vegetables">Vegetables</option>
+                            <option value="Bakery">Bakery Items (No Frosting/Oil)</option>
+                            <option value="Coffee Grounds/Tea Bags">Coffee Grounds / Tea Bags</option>
+                            <option value="Egg Shells">Egg Shells</option>
+                            <option value="Yard Trimmings">Yard Trimmings (Small)</option>
+                            <option value="Other Organic">Other Organic (No Meat/Oil/Dairy)</option>
+                        </select>
+                    </div>
 
-                    <label for="quantity">Quantity (in kg):</label>
-                    <input type="number" id="quantity" name="quantity" min="0.1" step="0.1" required placeholder="e.g., 2.5">
+                    <div class="mb-3">
+                        <!-- CHANGED id="compostQuantity" -->
+                        <label for="compostQuantity" class="form-label">Estimated Quantity:</label>
+                        <input type="text" id="compostQuantity" name="quantity" class="form-control" required placeholder="e.g., 2.5 kg, 1 small bag, 3 liters">
+                     </div>
 
-                    <label for="notes">Additional Notes (optional):</label>
-                    <textarea id="notes" name="notes" rows="3" placeholder="e.g., 'Overripe bananas' or 'Expired bread'"></textarea>
+                     <div class="mb-3">
+                         <!-- CHANGED id="compostNotes" -->
+                         <label for="compostNotes" class="form-label">Additional Notes (optional):</label>
+                         <textarea id="compostNotes" name="notes" rows="3" class="form-control" placeholder="e.g., 'Mostly fruit peels', 'Available for pickup after 5 PM', 'Contains coffee filters'"></textarea>
+                    </div>
+
+                     <!-- ADDED id="poolingFormError" -->
+                     <div id="poolingFormError" class="mb-3 text-danger" style="display: none;">
+                         <!-- Form error messages will appear here -->
+                     </div>
 
                     <div class="text-center">
-                        <button type="submit" class="btn btn-pool">Add to Compost Pool</button>
+                        <button type="submit" class="btn-pool">Add to Compost Pool</button>
                     </div>
                 </form>
             </div>
 
             <!-- Pooled Items Display -->
+            <h3>Recently Added Compost Items</h3>
+             <!-- ADDED id="poolingList" and id="noCompostItems" -->
             <div class="pooling-list" id="poolingList">
-                <!-- Sample Item -->
-                <div class="pool-item">
-                    <h3>Fruits</h3>
-                    <p>Quantity: 3 kg</p>
-                    <p>Notes: Overripe apples</p>
-                </div>
-                <!-- More items will be added dynamically via JS -->
+                <!-- Items will be added dynamically via compost.js -->
+                 <p class="text-muted w-100 text-center" id="noCompostItems">No compost items listed yet.</p>
             </div>
         </div>
     </section>
 
-    <!-- Sign In Modal -->
-    <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="signInForm">
-                        <div class="mb-3">
-                            <label for="signInEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="signInEmail" placeholder="Email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signInPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signInPassword" placeholder="Password" required>
-                        </div>
-                        <div class="mb-3" id="signInError"></div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn">Sign In</button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <p>New to GreenFork? <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal">Create an account</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Sign In Modal (Copied - Ensure IDs are correct) -->
+     <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="signInModalLabel">Sign In</h5> <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body"> <form id="signInForm"> <div class="mb-3"> <label for="signInEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signInEmail" placeholder="Email" required> </div> <div class="mb-3"> <label for="signInPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signInPassword" placeholder="Password" required> </div> <div class="mb-3" id="signInError"></div> <div class="d-grid"> <button type="submit" class="btn">Sign In</button> </div> </form> <div class="text-center mt-3"> <p>New to GreenFork? <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal">Create an account</a> </p> </div> </div> </div> </div> </div>
 
-    <!-- Sign Up Modal -->
-    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="signUpModalLabel">Create Account</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="signUpForm">
-                        <div class="mb-3">
-                            <label for="signUpName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signUpAccountType" class="form-label">I am a...</label>
-                            <select class="form-select" id="signUpAccountType" required>
-                                <option value="" disabled selected>Select Account Type</option>
-                                <option value="Merchant">Merchant (Donor)</option>
-                                <option value="Seeker">Seeker (Recipient)</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signUpEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signUpPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required>
-                        </div>
-                        <div class="mb-3" id="signUpError"></div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn">Create Account</button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal">Sign In</a></p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+    <!-- Sign Up Modal (Copied - Ensure IDs are correct) -->
+     <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="signUpModalLabel">Create Account</h5> <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body"> <form id="signUpForm"> <div class="mb-3"> <label for="signUpName" class="form-label">Full Name</label> <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required> </div> <div class="mb-3"> <label for="signUpAccountType" class="form-label">I am a...</label> <select class="form-select" id="signUpAccountType" required> <option value="" disabled selected>Select Account Type</option> <option value="Merchant">Merchant (Donor)</option> <option value="Seeker">Seeker (Recipient)</option> </select> </div> <div class="mb-3"> <label for="signUpEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required> </div> <div class="mb-3"> <label for="signUpPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required> </div> <div class="mb-3" id="signUpError"></div> <div class="d-grid"> <button type="submit" class="btn">Create Account</button> </div> </form> <div class="text-center mt-3"> <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal">Sign In</a> </p> </div> </div> </div> </div> </div>
+
 
     <!-- Footer -->
     <footer>
@@ -381,12 +237,14 @@
         </div>
     </footer>
 
+    <!-- SCRIPTS (Ensure order is correct) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
-    <script src="js/firebase-init.js"></script>
-    <script src="js/auth.js"></script>
-    <script src="js/compost.js"></script>
+    <script src="js/firebase-init.js"></script> <!-- Initializes Firebase -->
+    <script src="js/auth.js"></script>         <!-- Handles Login/Logout UI -->
+    <script src="js/compost.js"></script>      <!-- Handles Compost Form/List -->
+
 </body>
 </html>
