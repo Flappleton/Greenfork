@@ -182,41 +182,41 @@
 
         /* Team Section Styles */
         .team-section {
-            margin-top: 2rem; /* Reduced margin to make the section more compact */
-            padding: 1.5rem; /* Reduced padding */
+            margin-top: 2rem;
+            padding: 1.5rem;
             background: var(--pale-green);
             border-radius: 12px;
-            border: 1px solid var(--lime-green); /* Added a subtle border */
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05); /* Softer shadow */
-            transition: transform 0.3s ease; /* Smooth hover effect */
+            border: 1px solid var(--lime-green);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
         }
 
         .team-section:hover {
-            transform: translateY(-5px); /* Slight lift on hover */
+            transform: translateY(-5px);
         }
 
         .team-section h3 {
             color: var(--forest-green);
-            font-size: 1.8rem; /* Slightly smaller heading */
+            font-size: 1.8rem;
             margin-bottom: 1rem;
             text-align: center;
         }
 
         .team-section img {
-            max-width: 300px; /* Reduced image size */
+            max-width: 300px;
             height: auto;
             border-radius: 10px;
             box-shadow: 0 3px 10px rgba(0, 0, 0, 0.1);
             margin: 0 auto;
             display: block;
-            border: 2px solid var(--forest-green); /* Added a border to the image */
+            border: 2px solid var(--forest-green);
         }
 
         .team-section p {
-            font-size: 1rem; /* Slightly smaller text */
+            font-size: 1rem;
             color: #555;
             text-align: center;
-            max-width: 600px; /* Reduced max-width for compactness */
+            max-width: 600px;
             margin: 0.8rem auto;
         }
 
@@ -321,17 +321,28 @@
             border-radius: 10px;
             border: none;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            background: white; /* Ensure no translucent effect */
         }
 
-        /* Modal Form Adjustments */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.2); /* Lighter backdrop */
+            opacity: 1 !important;
+        }
+
+        .modal-body {
+            background: white; /* Ensure no translucent effect */
+        }
+
         .modal-body .form-label {
             font-weight: 500;
             color: var(--deep-green);
             margin-bottom: 0.3rem;
         }
+
         .modal-body .form-control, .modal-body .form-select {
             border-color: var(--lime-green);
         }
+
         .modal-body .form-control:focus, .modal-body .form-select:focus {
             box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25);
             border-color: var(--forest-green);
@@ -361,18 +372,18 @@
             transform: translateY(-2px);
         }
 
-        /* Modal link styling */
         .modal-body .text-center a {
             color: var(--forest-green);
             text-decoration: none;
             font-weight: 500;
         }
+
         .modal-body .text-center a:hover {
             text-decoration: underline;
             color: var(--lime-green);
         }
 
-        /* Responsive adjustments Hannah adjustments */
+        /* Responsive adjustments */
         @media (max-width: 768px) {
             .hero { padding: 5rem 1rem; }
             .hero h1 { font-size: 2.8rem; }
@@ -383,8 +394,9 @@
             .feature-cards { gap: 1.5rem; }
             .about-website .btn { margin-bottom: 0.5rem; }
             .navbar-nav { text-align: center; }
-            .team-section img { max-width: 200px; } /* Smaller image on mobile */
+            .team-section img { max-width: 200px; }
         }
+
         @media (max-width: 992px) {
             .hero .d-flex {
                 flex-direction: column;
@@ -456,30 +468,27 @@
                 </div>
             </div>
 
-          <!-- Team Section -->
-<div style="display: flex; align-items: flex-start; border: 2px solid #000; padding: 20px; border-radius: 10px; 
-    background: linear-gradient(45deg, #f3f4f6, #e0e0e0);">
-    <!-- Image Section with Gradient Overlay -->
-    <div style="position: relative; width: 180px; height: 180px; margin-right: 20px;">
-        <img src="team-image.jpg" alt="Team Image" 
-            style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
-        <!-- Gradient Overlay on Image -->
-        <div style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; 
-            background: linear-gradient(45deg, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.5)); 
-            border-radius: 10px;">
+            <!-- Team Section -->
+            <div style="display: flex; align-items: flex-start; border: 2px solid #000; padding: 20px; border-radius: 10px; 
+                background: linear-gradient(45deg, #f3f4f6, #e0e0e0);">
+                <!-- Image Section without Gradient Overlay -->
+                <div style="width: 180px; height: 180px; margin-right: 20px;">
+                    <img src="team-image.jpg" alt="Team Image" 
+                        style="width: 100%; height: 100%; object-fit: cover; border-radius: 10px;">
+                </div>
+                
+                <!-- Description Section -->
+                <p style="flex: 1; font-size: 16px; line-height: 1.5; color: #333;">
+                    Meet our amazing team! We are dedicated to providing the best experience and ensuring smooth expense management.
+                    <br><br>
+                    <strong>Atharva Lotankar</strong> – Our creative genius, Atharva is in charge of the app's overall design and user experience. <br>
+                    <strong>Om Manglani</strong> – The tech wizard, Om handles the backend development and ensures the app runs smoothly on all devices. <br>
+                    <strong>Saniya Kadam</strong> – A dynamic individual with a keen eye for detail, Saniya is responsible for user interface design and ensuring the app is easy to use. <br>
+                    <strong>Ishaan Khan</strong> – With a passion for coding, Ishaan focuses on the database and system integration, keeping everything secure. <br>
+                </p>
+            </div>
         </div>
-    </div>
-    
-    <!-- Description Section -->
-    <p style="flex: 1; font-size: 16px; line-height: 1.5; color: #333;">
-        Meet our amazing team! We are dedicated to providing the best experience and ensuring smooth expense management.
-        <br><br>
-        <strong>Atharva Lotankar</strong> – Our creative genius, Atharva is in charge of the app's overall design and user experience. <br>
-        <strong>Om Manglani</strong> – The tech wizard, Om handles the backend development and ensures the app runs smoothly on all devices. <br>
-        <strong>Saniya Kadam</strong> – A dynamic individual with a keen eye for detail, Saniya is responsible for user interface design and ensuring the app is easy to use. <br>
-        <strong>Ishaan Khan</strong> – With a passion for coding, Ishaan focuses on the database and system integration, keeping everything secure. <br>
-    </p>
-</div>
+    </section>
 
     <!-- Features Section -->
     <section class="features">
