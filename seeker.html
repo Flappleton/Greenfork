@@ -3,954 +3,334 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Surprise Meal App</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
-    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <title>GreenFork - Seekers</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <!-- Font Awesome (Optional for icons) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
-        /* ===== RESET AND BASE STYLES ===== */
-        *, *::before, *::after {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
-
+        /* Reusing styles - Consider common CSS file */
         :root {
-            /* Color variables */
-            --color-primary: #0ea5e9;
-            --color-primary-dark: #0284c7;
-            --color-primary-light: #e0f2fe;
-            --color-secondary: #f97316;
-            --color-secondary-dark: #ea580c;
-            --color-success: #22c55e;
-            --color-danger: #ef4444;
-            --color-warning: #f59e0b;
-            --color-gray-50: #f9fafb;
-            --color-gray-100: #f3f4f6;
-            --color-gray-200: #e5e7eb;
-            --color-gray-300: #d1d5db;
-            --color-gray-400: #9ca3af;
-            --color-gray-500: #6b7280;
-            --color-gray-600: #4b5563;
-            --color-gray-700: #374151;
-            --color-gray-800: #1f2937;
-            --color-gray-900: #111827;
-            --color-white: #ffffff;
-
-            /* Shadow variables */
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
-            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-
-            /* Border radius */
-            --radius-sm: 0.25rem;
-            --radius-md: 0.375rem;
-            --radius-lg: 0.5rem;
-            --radius-full: 9999px;
-
-            /* Spacing */
-            --spacing-1: 0.25rem;
-            --spacing-2: 0.5rem;
-            --spacing-3: 0.75rem;
-            --spacing-4: 1rem;
-            --spacing-5: 1.25rem;
-            --spacing-6: 1.5rem;
-            --spacing-8: 2rem;
-            --spacing-10: 2.5rem;
-            --spacing-12: 3rem;
-            --spacing-16: 4rem;
+            --forest-green: #2a9d8f; --lime-green: #8ab17d; --pale-green: #f4f7f3;
+            --deep-green: #264653; --turquoise-blue: #64d5ca; --orange-accent: #e76f51; --light-orange: #f4a261;
         }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
-            /* background-color: var(--color-gray-50); */
-            background-color: #2a9d8f;
-            color: var(--color-gray-900);
-            line-height: 1.5;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* ===== LAYOUT ===== */
-        .container {
-            width: 100%;
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 var(--spacing-4);
-        }
-
-        .py-6 {
-            padding-top: var(--spacing-6);
-            padding-bottom: var(--spacing-6);
-        }
-
-        .mb-2 {
-            margin-bottom: var(--spacing-2);
-        }
-
-        .mb-3 {
-            margin-bottom: var(--spacing-3);
-        }
-
-        .mb-4 {
-            margin-bottom: var(--spacing-4);
-        }
-
-        .mb-6 {
-            margin-bottom: var(--spacing-6);
-        }
-
-        .mt-1 {
-            margin-top: var(--spacing-1);
-        }
-
-        .mt-2 {
-            margin-top: var(--spacing-2);
-        }
-
-        .mr-1 {
-            margin-right: var(--spacing-1);
-        }
-
-        .mr-2 {
-            margin-right: var(--spacing-2);
-        }
-
-        .ml-1 {
-            margin-left: var(--spacing-1);
-        }
-
-        .ml-2 {
-            margin-left: var(--spacing-2);
-        }
-
-        .p-4 {
-            padding: var(--spacing-4);
-        }
-
-        .pt-0 {
-            padding-top: 0;
-        }
-
-        .pl-9 {
-            padding-left: 2.25rem;
-        }
-
-        .h-16 {
-            height: 4rem;
-        }
-
-        .h-40 {
-            height: 10rem;
-        }
-
-        .w-full {
-            width: 100%;
-        }
-
-        .flex {
-            display: flex;
-        }
-
-        .flex-1 {
-            flex: 1 1 0%;
-        }
-
-        .flex-col {
-            flex-direction: column;
-        }
-
-        .items-center {
-            align-items: center;
-        }
-
-        .items-start {
-            align-items: flex-start;
-        }
-
-        .justify-between {
-            justify-content: space-between;
-        }
-
-        .gap-1 {
-            gap: var(--spacing-1);
-        }
-
-        .gap-2 {
-            gap: var(--spacing-2);
-        }
-
-        .gap-4 {
-            gap: var(--spacing-4);
-        }
-
-        .grid {
-            display: grid;
-        }
-
-        .grid-cols-1 {
-            grid-template-columns: repeat(1, minmax(0, 1fr));
-        }
-
-        .relative {
-            position: relative;
-        }
-
-        .absolute {
-            position: absolute;
-        }
-
-        .top-2 {
-            top: var(--spacing-2);
-        }
-
-        .right-2 {
-            right: var(--spacing-2);
-        }
-
-        .left-2 {
-            left: var(--spacing-2);
-        }
-
-        .left-3 {
-            left: var(--spacing-3);
-        }
-
-        .top-1\/2 {
-            top: 50%;
-        }
-
-        .-translate-y-1\/2 {
-            transform: translateY(-50%);
-        }
-
-        .hidden {
-            display: none;
-        }
-
-        .text-right {
-            text-align: right;
-        }
-
-        /* ===== TYPOGRAPHY ===== */
-        .text-xs {
-            font-size: 0.75rem;
-            line-height: 1rem;
-        }
-
-        .text-sm {
-            font-size: 0.875rem;
-            line-height: 1.25rem;
-        }
-
-        .text-lg {
-            font-size: 1.125rem;
-            line-height: 1.75rem;
-        }
-
-        .text-xl {
-            font-size: 1.25rem;
-            line-height: 1.75rem;
-        }
-
-        .text-2xl {
-            font-size: 1.5rem;
-            line-height: 2rem;
-            border: #111827 3px solid;
-            border-radius: var(--radius-md);
-            text-align: center;
-            color: var(b--color-white);
-            background-color: var(--color-primary-dark);
-            padding: var(--spacing-2) var(--spacing-4);
-            padding: 0.5rem;
-            background-color: #13ccb7;
-            display: flex;
-            align-items: center;
-            gap: var(--spacing-2);
-        }
-
-        .text-2xl::before {
-            content: '\f290'; /* Unicode for Font Awesome bag icon */
-            font-family: 'Font Awesome 6 Free';
-            font-weight: 900;
-            margin-right: var(--spacing-2);
-        }
-
-        .font-medium {
-            font-weight: 500;
-        }
-
-        .font-semibold {
-            font-weight: 600;
-        }
-
-        .font-bold {
-            font-weight: 700;
-        }
-
-        .line-through {
-            text-decoration: line-through;
-        }
-
-        .text-primary {
-            color: var(--color-primary);
-        }
-
-        .text-white {
-            color: var(--color-white);
-        }
-
-        .text-muted {
-            color: var(--color-gray-500);
-        }
-
-        .line-clamp-2 {
-            display: -webkit-box;
-            -webkit-line-clamp: 2;
-            line-clamp: 2;
-            -webkit-box-orient: vertical;
-            overflow: hidden;
-        }
-
-        /* ===== COMPONENTS ===== */
-        /* Card */
-        .card {
-            background-color: var(--color-white);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-md);
-            overflow: hidden;
-            transition: transform 0.2s ease, box-shadow 0.2s ease;
-        }
-
-        .card:hover {
-            transform: translateY(-4px);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .card-content {
-            padding: var(--spacing-4);
-        }
-
-        .card-footer {
-            padding: var(--spacing-4);
-            padding-top: 0;
-        }
-
-        /* Badge */
-        .badge {
-            display: inline-flex;
-            align-items: center;
-            border-radius: var(--radius-full);
-            padding: 0 var(--spacing-2);
-            height: 1.5rem;
-            font-size: 0.75rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-        }
-
-        .badge-success {
-            background-color: var(--color-success);
-            color: var(--color-white);
-        }
-
-        .badge-danger {
-            background-color: var(--color-danger);
-            color: var(--color-white);
-        }
-
-        .badge-warning {
-            background-color: var(--color-warning);
-            color: var(--color-white);
-        }
-
-        /* Button */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: var(--radius-md);
-            padding: 0 var(--spacing-4);
-            height: 2.5rem;
-            font-size: 0.875rem;
-            font-weight: 500;
-            transition: all 0.2s ease;
-            cursor: pointer;
-            border: none;
-            outline: none;
-        }
-
-        .btn:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-        }
-
-        .btn-primary {
-            background-color: var(--color-primary);
-            color: var(--color-white);
-        }
-
-        .btn-primary:hover:not(:disabled) {
-            background-color: var(--color-primary-dark);
-        }
-
-        .btn-outline {
-            background-color: transparent;
-            border: 1px solid var(--color-gray-300);
-            color: var(--color-gray-700);
-        }
-
-        .btn-outline:hover:not(:disabled) {
-            background-color: var(--color-gray-100);
-        }
-
-        .btn-icon {
-            width: 2.5rem;
-            padding: 0;
-        }
-
-        /* Input */
-        .input {
-            height: 2.5rem;
-            width: 100%;
-            border-radius: var(--radius-md);
-            border: 1px solid var(--color-gray-300);
-            background-color: var(--color-white);
-            padding: 0 var(--spacing-3);
-            font-size: 0.875rem;
-            transition: border-color 0.2s ease;
-        }
-
-        .input:focus {
-            outline: none;
-            border-color: var(--color-primary);
-            box-shadow: 0 0 0 2px var(--color-primary-light);
-        }
-
-        .input::placeholder {
-            color: var(--color-gray-400);
-        }
-
-        /* Food image placeholder */
-        .food-image-placeholder {
-            width: 100%;
-            height: 10rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: var(--color-white);
-            font-weight: 600;
-            background-size: cover;
-            background-position: center;
-        }
-
-        #map {
-            height: 400px;
-            width: 100%;
-            display: none; /* Initially hide the map */
-            margin-top: 20px;
-        }
-
-        .map-visible {
-            display: block !important;
-        }
-
-        /* ===== RESPONSIVE STYLES ===== */
-        @media (min-width: 768px) {
-            .grid-cols-1 {
-                grid-template-columns: repeat(2, minmax(0, 1fr));
-            }
-        }
-
-        @media (min-width: 1024px) {
-            .grid-cols-1 {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
-        }
-
-        /* Navbar styles from merchant.html */
+        body { font-family: 'Arial', sans-serif; background: linear-gradient(135deg, var(--pale-green), var(--turquoise-blue)); color: #333; line-height: 1.6; background-attachment: fixed; }
         .navbar { background: white; box-shadow: 0 2px 10px rgba(0,0,0,0.05); padding: 1rem 0; }
-        .nav-link { color: #2a9d8f !important; font-weight: 500; transition: color 0.3s; margin: 0 0.5rem;}
-        .nav-link:hover, .nav-link.active { color: #8ab17d !important; }
+        .nav-link { color: var(--forest-green) !important; font-weight: 500; transition: color 0.3s; margin: 0 0.5rem;}
+        .nav-link:hover, .nav-link.active { color: var(--lime-green) !important; }
         .navbar-brand img { transition: transform 0.3s; height: 55px; }
         .navbar-brand img:hover { transform: scale(1.05); }
 
-        /* Footer styles from merchant.html */
-        footer { background: #264653; color: white; padding: 3rem 0 2rem; margin-top: 4rem; }
+        .seeker-section, .listings-section { /* Combine intro and listings styling */
+            padding: 4rem 1rem; background: white; border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1); margin: 2rem auto; max-width: 95%;
+        }
+         .seeker-section h2, .listings-section h2 {
+             color: var(--forest-green); margin-bottom: 1rem; /* Reduced margin */
+             text-align: center; font-weight: 600; font-size: 2.2rem;
+         }
+         .listings-section h2 { margin-bottom: 2rem; } /* More space above filters */
+
+          .section-intro {
+              text-align: center; max-width: 700px; margin: 0 auto 2.5rem auto; /* Increased bottom margin */
+              font-size: 1.1rem; color: #555;
+          }
+         .section-intro ul { list-style: none; padding-left: 0; margin-top: 1.5rem; display: inline-block; text-align: left;}
+         .section-intro li::before { content: "✓"; color: var(--lime-green); font-weight: bold; display: inline-block; width: 1em; margin-left: -1em; }
+
+         /* Search and Filter Bar */
+         .filter-bar {
+             background-color: var(--pale-green);
+             padding: 1rem;
+             border-radius: 10px;
+             margin-bottom: 3rem; /* Increased space below filters */
+             box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+         }
+         .filter-bar .form-control, .filter-bar .form-select, .filter-bar .btn {
+             margin-right: 0.5rem; /* Spacing between elements */
+             margin-bottom: 0.5rem; /* Spacing on smaller screens */
+             font-size: 0.95rem; /* Slightly smaller form elements */
+         }
+         .filter-bar .btn-filter {
+             background-color: var(--forest-green);
+             color: white;
+             border: none;
+         }
+         .filter-bar .btn-filter:hover {
+             background-color: var(--lime-green);
+         }
+
+         /* Listings Area */
+         .listings-section h3 { /* Style for Veg/Non-Veg/Store headers */
+             color: var(--deep-green);
+             margin-top: 2rem;
+             margin-bottom: 1.5rem;
+             padding-bottom: 0.5rem;
+             border-bottom: 2px solid var(--lime-green);
+             display: inline-block; /* Fit border to text */
+             font-size: 1.5rem; /* Make headers stand out */
+         }
+          .listings-section h3 i { /* Icon styling */
+             margin-right: 0.5rem;
+             font-size: 1.3rem; /* Adjust icon size */
+          }
+         .horizontal-scroll-container {
+             display: flex;
+             overflow-x: auto;
+             padding: 1rem 0.5rem 1.5rem 0.5rem; /* Add padding for scrollbar and cards */
+             gap: 1.5rem;
+             white-space: nowrap; /* Prevent cards wrapping */
+             scrollbar-width: thin; /* Firefox */
+             scrollbar-color: var(--lime-green) var(--pale-green); /* Firefox */
+             min-height: 250px; /* Give space even when empty */
+         }
+         /* Webkit scrollbar styling */
+         .horizontal-scroll-container::-webkit-scrollbar { height: 8px; }
+         .horizontal-scroll-container::-webkit-scrollbar-track { background: var(--pale-green); border-radius: 4px; }
+         .horizontal-scroll-container::-webkit-scrollbar-thumb { background-color: var(--lime-green); border-radius: 4px; }
+         .horizontal-scroll-container::-webkit-scrollbar-thumb:hover { background-color: var(--forest-green); }
+
+         .listing-card { /* Card style within horizontal scroll */
+             background: white;
+             border-radius: 10px;
+             box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+             flex: 0 0 auto; /* Prevent stretching, auto width */
+             width: 280px; /* Fixed width for horizontal scroll */
+             padding: 0; /* Remove padding, handle inside */
+             overflow: hidden; /* Clip content like images */
+             transition: transform 0.3s ease, box-shadow 0.3s ease;
+             display: flex;
+             flex-direction: column;
+         }
+         .listing-card:hover {
+             transform: translateY(-5px);
+             box-shadow: 0 8px 20px rgba(0,0,0,0.12);
+         }
+          .listing-card-img {
+             width: 100%;
+             height: 150px; /* Fixed image height */
+             object-fit: cover; /* Crop image nicely */
+             background-color: #eee; /* Placeholder color */
+         }
+         .listing-card-body {
+             padding: 1rem;
+             flex-grow: 1; /* Allow body to grow */
+             display: flex;
+             flex-direction: column;
+             text-align: left; /* Align text left */
+              white-space: normal; /* Allow text wrapping inside card */
+         }
+         .listing-card-body h5 { /* Item Name */
+             font-size: 1.1rem;
+             color: var(--deep-green);
+             margin-bottom: 0.5rem;
+              white-space: nowrap;
+              overflow: hidden;
+              text-overflow: ellipsis; /* Add ... if title is too long */
+             font-weight: 600; /* Bolder title */
+         }
+         .listing-card-body .store-name { /* Store Name */
+             font-size: 0.9rem;
+             color: var(--forest-green);
+             margin-bottom: 0.8rem;
+             font-weight: 500;
+         }
+          .listing-card-body .details { /* Other details */
+             font-size: 0.9rem;
+             color: #555;
+             margin-bottom: 0.3rem;
+             line-height: 1.4;
+         }
+         .listing-card-body .description-clamp {
+             display: -webkit-box;
+             -webkit-line-clamp: 2; /* Limit to 2 lines */
+             line-clamp: 2; /* Standard property for compatibility */
+             -webkit-box-orient: vertical;
+             overflow: hidden;
+             text-overflow: ellipsis;
+             margin-bottom: 0.5rem; /* Space below description */
+             min-height: 2.7em; /* Reserve space for ~2 lines */
+         }
+         .listing-card-footer {
+             padding: 0.8rem 1rem;
+             background-color: var(--pale-green);
+             border-top: 1px solid #eee;
+             margin-top: auto; /* Push footer to bottom */
+             display: flex;
+             justify-content: space-between;
+             align-items: center;
+         }
+         .listing-card-footer .price {
+             font-weight: bold;
+             color: var(--forest-green);
+             font-size: 1.1rem;
+         }
+         .listing-card-footer .price .text-muted { /* Styling for original price */
+             margin-left: 0.5rem;
+             font-weight: normal;
+         }
+          .listing-card-footer .btn-request {
+             background-color: var(--orange-accent);
+             color: white;
+             border: none;
+             padding: 0.4rem 0.8rem;
+             font-size: 0.9rem;
+             border-radius: 15px;
+             transition: background-color 0.3s;
+             font-weight: 500;
+         }
+         .listing-card-footer .btn-request:hover {
+             background-color: var(--light-orange);
+         }
+         /* Placeholder Message Styling */
+         .no-listings-message {
+             width: 100%;
+             text-align: center;
+             padding: 2rem;
+             color: var(--color-gray-500);
+         }
+
+
+        /* Modal Styles (Reusing from index.html) */
+         .modal-header { background: var(--forest-green); color: white; border-bottom: none; border-radius: 10px 10px 0 0; }
+         .modal-header .btn-close { filter: invert(1) grayscale(100%) brightness(200%); }
+         .modal-content { border-radius: 10px; border: none; box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+         .modal-body .form-label { font-weight: 500; color: var(--deep-green); margin-bottom: 0.3rem; }
+        .modal-body .form-control, .modal-body .form-select { border-color: var(--lime-green); }
+        .modal-body .form-control:focus, .modal-body .form-select:focus { box-shadow: 0 0 0 0.25rem rgba(42, 157, 143, 0.25); border-color: var(--forest-green); }
+         .modal-body [id$="Error"] { color: var(--orange-accent); font-size: 0.9em; min-height: 1.2em; margin-top: 0.5rem; }
+        .modal button[type="submit"] { background: var(--forest-green); border: none; padding: 0.7rem 1.5rem; font-weight: 500; color: white; border-radius: 20px; transition: all 0.3s; width: 100%; }
+        .modal button[type="submit"]:hover { background: var(--lime-green); transform: translateY(-2px); }
+        .modal-body .text-center a { color: var(--forest-green); text-decoration: none; font-weight: 500; }
+        .modal-body .text-center a:hover { text-decoration: underline; color: var(--lime-green); }
+
+        footer { background: var(--deep-green); color: white; padding: 3rem 0 2rem; margin-top: 4rem; }
+
+        @media (max-width: 768px) {
+            .seeker-section, .listings-section { padding: 3rem 1rem; margin: 1.5rem auto; }
+             .section-intro { font-size: 1rem; }
+             .filter-bar { padding: 0.8rem; }
+             .filter-bar .form-control, .filter-bar .form-select, .filter-bar .btn { width: 100%; margin-bottom: 0.8rem; margin-right: 0; } /* Stack filters */
+             .listing-card { width: 250px; } /* Slightly smaller cards on mobile */
+             .horizontal-scroll-container { gap: 1rem; }
+        }
     </style>
 </head>
 <body>
-    <!-- Navigation from merchant.html -->
-    <nav class="navbar navbar-expand-lg navbar-light">
+    <!-- Navigation -->
+     <nav class="navbar navbar-expand-lg navbar-light">
         <div class="container">
-            <a class="navbar-brand" href="index.html">
-                <img src="logo.png" alt="GreenFork Logo">
-            </a>
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
+            <a class="navbar-brand" href="index.html"> <img src="logo.png" alt="GreenFork Logo"> </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
             <div class="collapse navbar-collapse" id="navbarNav">
-                <!-- NAV ITEMS UPDATED WITH IDs FOR AUTH SCRIPT -->
-                <ul class="navbar-nav ms-auto">
+                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
                     <li class="nav-item"><a class="nav-link" href="index.html#about-us">About</a></li>
                     <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link active" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
-                    <!-- Auth Links -->
-                    <li class="nav-item" id="signInLi">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a>
-                    </li>
-                    <li class="nav-item" id="signUpLi">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a>
-                    </li>
-                    <li class="nav-item d-none" id="logoutLi"> <!-- Initially hidden -->
-                        <a class="nav-link" href="#" id="logoutLink">Logout</a>
-                    </li>
-                    <li class="nav-item d-none" id="profileLi"> <!-- Initially hidden -->
-                        <a class="nav-link" href="#" id="profileLink">My Profile</a>
-                    </li>
+                    <li class="nav-item" id="signInLi"> <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a> </li>
+                    <li class="nav-item" id="signUpLi"> <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a> </li>
+                    <li class="nav-item d-none" id="logoutLi"> <a class="nav-link" href="#" id="logoutLink">Logout</a> </li>
+                    <li class="nav-item d-none" id="profileLi"> <a class="nav-link" href="#" id="profileLink">My Profile</a> </li>
                 </ul>
             </div>
         </div>
     </nav>
 
-    <div class="container py-6">
-        <header class="mb-6">
-            <div class="flex items-center justify-between mb-4">
-                <div>
-                </div>
-                <h1 class="text-2xl font-bold">Surprise Bags</h1>
-                <button id="map-button" class="btn btn-outline btn-icon">
-                    <i class="fas fa-map-marker-alt"></i>
-                </button>
+    <!-- Seeker Intro Section -->
+    <section class="seeker-section">
+        <div class="container">
+            <h2 class="text-center">Find Surplus Food Near You</h2>
+            <div class="section-intro">
+                 <p>Looking for affordable meals or food donations? GreenFork connects you with local businesses and individuals offering surplus food at discounted prices or for free.</p>
+                    <p>Join our community and help reduce food waste while enjoying delicious meals!</p>
             </div>
+        </div>
+    </section>
 
-            <div class="flex gap-2">
-                <div class="relative flex-1">
-                    <i class="fas fa-search absolute left-3 top-1/2 -translate-y-1/2 text-muted"></i>
-                    <input type="text" placeholder="        Search stores" class="input pl-9">
-                </div>
-                <button class="btn btn-outline btn-icon">
-                    <i class="fas fa-filter"></i>
-                </button>
-            </div>
-        </header>
+    <!-- Filter and Listings Section -->
+    <section class="listings-section">
+        <div class="container">
+             <!-- Filter Bar -->
+             <div class="filter-bar">
+                 <form class="row g-2 align-items-center">
+                     <div class="col-md-4">
+                         <input type="text" class="form-control" id="locationInput" placeholder="Enter your location (e.g., Bandra, Mumbai)">
+                     </div>
+                     <div class="col-md-3">
+                          <select class="form-select" id="radiusSelect">
+                             <option selected value="5">Within 5 km</option>
+                             <option value="10">Within 10 km</option>
+                             <option value="25">Within 25 km</option>
+                             <option value="any">Any Distance</option>
+                         </select>
+                     </div>
+                     <div class="col-md-3">
+                         <input type="text" class="form-control" id="searchInput" placeholder="Search items or stores...">
+                     </div>
+                     <div class="col-md-2">
+                         <button type="button" class="btn btn-filter w-100" id="filterBtn">Filter <i class="fas fa-filter fa-fw"></i></button> <!-- Added icon -->
+                         <!-- Add modal for more filters later -->
+                     </div>
+                 </form>
+             </div>
 
-        <section id="food-bag-list" class="grid grid-cols-1 gap-4">
-        </section>
+             <!-- Vegetarian Listings -->
+             <div id="vegListings">
+                 <h3><i class="fas fa-leaf fa-fw" style="color: var(--lime-green);"></i> Vegetarian Options</h3>
+                 <div class="horizontal-scroll-container" id="vegListingsContainer">
+                      <!-- Placeholder message if no items -->
+                      <p class="text-muted no-listings-message" id="noVegListings">Searching for vegetarian listings...</p>
+                 </div>
+             </div>
 
-        <div id="map"></div>
+             <!-- Non-Vegetarian Listings -->
+              <div id="nonVegListings">
+                 <h3><i class="fas fa-drumstick-bite fa-fw" style="color: var(--orange-accent);"></i> Non-Vegetarian Options</h3>
+                 <div class="horizontal-scroll-container" id="nonVegListingsContainer">
+                     <!-- Placeholder message if no items -->
+                      <p class="text-muted no-listings-message" id="noNonVegListings">Searching for non-vegetarian listings...</p>
+                 </div>
+             </div>
 
-        <div class="h-16"></div>
-    </div>
+              <!-- Nearby Stores (Linked to Store Details Page) -->
+             <div id="nearbyStores">
+                  <h3><i class="fas fa-store fa-fw" style="color: var(--forest-green);"></i> Participating Stores Nearby</h3>
+                  <div class="horizontal-scroll-container" id="storesContainer">
+                      <!-- Placeholder message if no items -->
+                       <p class="text-muted no-listings-message" id="noStores">Loading nearby stores...</p>
+                  </div>
+             </div>
 
-    <!-- Footer from merchant.html -->
+        </div>
+    </section>
+
+    <!-- Sign In Modal (Copied) -->
+     <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="signInModalLabel">Sign In</h5> <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body"> <form id="signInForm"> <div class="mb-3"> <label for="signInEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signInEmail" placeholder="Email" required> </div> <div class="mb-3"> <label for="signInPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signInPassword" placeholder="Password" required> </div> <div class="mb-3" id="signInError"></div> <div class="d-grid"> <button type="submit" class="btn">Sign In</button> </div> </form> <div class="text-center mt-3"> <p>New to GreenFork? <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal">Create an account</a> </p> </div> </div> </div> </div> </div>
+
+    <!-- Sign Up Modal (Copied) -->
+     <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="signUpModalLabel">Create Account</h5> <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body"> <form id="signUpForm"> <div class="mb-3"> <label for="signUpName" class="form-label">Full Name</label> <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required> </div> <div class="mb-3"> <label for="signUpAccountType" class="form-label">I am a...</label> <select class="form-select" id="signUpAccountType" required> <option value="" disabled selected>Select Account Type</option> <option value="Merchant">Merchant (Donor)</option> <option value="Seeker">Seeker (Recipient)</option> </select> </div> <div class="mb-3"> <label for="signUpEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required> </div> <div class="mb-3"> <label for="signUpPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required> </div> <div class="mb-3" id="signUpError"></div> <div class="d-grid"> <button type="submit" class="btn">Create Account</button> </div> </form> <div class="text-center mt-3"> <p>Already have an account? <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal">Sign In</a> </p> </div> </div> </div> </div> </div>
+
+    <!-- Footer -->
     <footer>
         <div class="container text-center">
-            <p class="mb-0">© 2025 GreenFork. All rights reserved.</p>
+             <p class="mb-0">© 2025 GreenFork. All rights reserved.</p>
         </div>
     </footer>
 
-    <!-- Sign In Modal from merchant.html -->
-    <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="background: #2a9d8f; color: white; border-bottom: none; border-radius: 10px 10px 0 0;">
-                    <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="signInForm">
-                        <div class="mb-3">
-                            <label for="signInEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="signInEmail" placeholder="Email" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signInPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signInPassword" placeholder="Password" required>
-                        </div>
-                        <div class="mb-3" id="signInError"></div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn" style="background: #2a9d8f; color: white; border-radius: 20px;">Sign In</button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <p>New to GreenFork?
-                           <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal" style="color: #2a9d8f;">Create an account</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Sign Up Modal from merchant.html -->
-    <div class="modal fade" id="signUpModal" tabindex="-1" aria-labelledby="signUpModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header" style="background: #2a9d8f; color: white; border-bottom: none; border-radius: 10px 10px 0 0;">
-                    <h5 class="modal-title" id="signUpModalLabel">Create Account</h5>
-                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="signUpForm">
-                        <div class="mb-3">
-                            <label for="signUpName" class="form-label">Full Name</label>
-                            <input type="text" class="form-control" id="signUpName" placeholder="Your Name" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signUpAccountType" class="form-label">I am a...</label>
-                            <select class="form-select" id="signUpAccountType" required>
-                                <option value="" disabled selected>Select Account Type</option>
-                                <option value="Merchant">Merchant (Donor)</option>
-                                <option value="Seeker">Seeker (Recipient)</option>
-                            </select>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signUpEmail" class="form-label">Email address</label>
-                            <input type="email" class="form-control" id="signUpEmail" placeholder="name@example.com" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="signUpPassword" class="form-label">Password</label>
-                            <input type="password" class="form-control" id="signUpPassword" placeholder="Min. 6 characters" required>
-                        </div>
-                        <div class="mb-3" id="signUpError"></div>
-                        <div class="d-grid">
-                            <button type="submit" class="btn" style="background: #2a9d8f; color: white; border-radius: 20px;">Create Account</button>
-                        </div>
-                    </form>
-                    <div class="text-center mt-3">
-                        <p>Already have an account?
-                            <a href="#" data-bs-toggle="modal" data-bs-target="#signInModal" data-bs-dismiss="modal" style="color: #2a9d8f;">Sign In</a>
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- SCRIPTS -->
+    <!-- ========= SCRIPTS ========= -->
+    <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <!-- Firebase SDK -->
+    <!-- Firebase SDK - ENSURE ORDER IS CORRECT AND FILES ARE ACCESSIBLE -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth W.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> <!-- CHECK THIS LINE -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-firestore.js"></script>
     <!-- Firebase Init -->
     <script src="js/firebase-init.js"></script>
-    <!-- Firebase Auth Logic -->
+    <!-- Auth Logic -->
     <script src="js/auth.js"></script>
+    <!-- Seeker Page Specific Logic -->
+    <script src="js/seeker.js"></script>
 
-    <template id="food-bag-card-template">
-        <div class="card">
-            <div class="relative">
-                <div class="food-image-placeholder">
-                    <span class="store-emoji"></span>
-                </div>
-                <span class="badge badge-success absolute top-2 right-2 discount-badge">Save 0%</span>
-                <span class="badge badge-danger absolute top-2 left-2 quantity-badge hidden">Only 0 left!</span>
-            </div>
-
-            <div class="card-content">
-                <div class="flex justify-between items-start mb-2">
-                    <h3 class="font-bold text-lg store-name"></h3>
-
-                    <div class="flex items-center gap-1 text-sm text-muted">
-                        <i class="fas fa-users"></i>
-                        <span class="servings">Feeds 0</span>
-                    </div>
-                </div>
-
-                <p class="text-sm text-muted mb-2 line-clamp-2 description"></p>
-
-                <div class="flex justify-between items-center">
-                    <div>
-                        <p class="text-sm text-muted pickup-time"></p>
-                        <p class="text-sm text-muted distance"></p>
-                    </div>
-
-                    <div class="text-right">
-                        <p class="text-sm line-through text-muted original-price">₹0</p>
-                        <p class="font-bold text-lg discount-price">₹0</p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card-footer">
-                <button class="btn btn-primary w-full reserve-btn">
-                    Add to Cart
-                </button>
-            </div>
-        </div>
-    </template>
-
-    <script>
-        // ===== MOCK DATA =====
-        // This is the data for the surprise bags
-        // In a real app, you would fetch this from an API
-        const surpriseBags = [
-            {
-                id: 1,
-                storeName: "Fresh Bakery",
-                description: "Assorted pastries and bread including croissants, pain au chocolat, and sourdough bread.",
-                originalPrice: 1999, // Original price in rupees
-                discountPrice: 699,  // Discounted price in rupees
-                servings: 3,        // Number of people the bag can feed
-                pickupTime: "Today, 17:00 - 18:00",
-                distance: "1.2 km",
-                color: "#FF9F1C",    // Background color for the placeholder
-                emoji: "🥐",        // Emoji representing the food type
-                quantity: 5,        // Number of bags available
-                latitude: 28.6250,
-                longitude: 77.2185,
-            },
-            {
-                id: 2,
-                storeName: "Green Garden Restaurant",
-                description: "Vegetarian surprise bag with fresh salads, wraps, and healthy snacks.",
-                originalPrice: 2499,
-                discountPrice: 899,
-                servings: 2,
-                pickupTime: "Today, 19:30 - 20:30",
-                distance: "0.8 km",
-                color: "#2EC4B6",
-                emoji: "🥗",
-                quantity: 3,
-                latitude: 28.6180,
-                longitude: 77.2000,
-            },
-            {
-                id: 3,
-                storeName: "Pasta Paradise",
-                description: "Italian food surprise with pasta, garlic bread, and tiramisu.",
-                originalPrice: 3200,
-                discountPrice: 1099,
-                servings: 4,
-                pickupTime: "Tomorrow, 12:00 - 13:00",
-                distance: "2.5 km",
-                color: "#E71D36",
-                emoji: "🍝",
-                quantity: 2,
-                latitude: 28.6300,
-                longitude: 77.2250,
-            },
-            {
-                id: 4,
-                storeName: "Sushi Station",
-                description: "Assorted sushi rolls, miso soup, and edamame beans.",
-                originalPrice: 2800,
-                discountPrice: 999,
-                servings: 2,
-                pickupTime: "Today, 20:00 - 21:00",
-                distance: "3.1 km",
-                color: "#011627",
-                emoji: "🍣",
-                quantity: 4,
-                latitude: 28.6100,
-                longitude: 77.2050,
-            },
-            {
-                id: 5,
-                storeName: "Spice of India",
-                description: "Authentic Indian curry, naan bread, and rice dishes.",
-                originalPrice: 2200,
-                discountPrice: 799,
-                servings: 3,
-                pickupTime: "Today, 18:30 - 19:30",
-                distance: "1.7 km",
-                color: "#F71735",
-                emoji: "🍛",
-                quantity: 1,
-                latitude: 28.6200,
-                longitude: 77.2100,
-            },
-            {
-                id: 6,
-                storeName: "Sweet Tooth Bakery",
-                description: "Assorted desserts including cakes, cookies, and pastries.",
-                originalPrice: 1800,
-                discountPrice: 599,
-                servings: 4,
-                pickupTime: "Tomorrow, 10:00 - 11:00",
-                distance: "0.5 km",
-                color: "#FF9F1C",
-                emoji: "🍰",
-                quantity: 6,
-                latitude: 28.6150,
-                longitude: 77.1950,
-            },
-        ];
-
-        // ===== FUNCTIONS =====
-
-        // Function to render all food bag cards
-        function renderFoodBags() {
-            const foodBagList = document.getElementById('food-bag-list');
-            const template = document.getElementById('food-bag-card-template');
-
-            // Clear existing content
-            foodBagList.innerHTML = '';
-
-            // Render each food bag
-            surpriseBags.forEach(bag => {
-                // Clone the template
-                const cardClone = template.content.cloneNode(true);
-
-                // Calculate discount percentage
-                const discount = Math.round(((bag.originalPrice - bag.discountPrice) / bag.originalPrice) * 100);
-
-                // Set the food image placeholder background and emoji
-                const foodImagePlaceholder = cardClone.querySelector('.food-image-placeholder');
-                foodImagePlaceholder.style.backgroundColor = bag.color;
-                foodImagePlaceholder.style.fontSize = '3rem';
-
-                // Set the content
-                cardClone.querySelector('.store-emoji').textContent = bag.emoji;
-                cardClone.querySelector('.discount-badge').textContent = `Save ${discount}%`;
-                cardClone.querySelector('.store-name').textContent = bag.storeName;
-                cardClone.querySelector('.servings').textContent = `Feeds ${bag.servings}`;
-                cardClone.querySelector('.description').textContent = bag.description;
-                cardClone.querySelector('.pickup-time').textContent = bag.pickupTime;
-                cardClone.querySelector('.distance').textContent = `${bag.distance} away`;
-                cardClone.querySelector('.original-price').textContent = `₹${bag.originalPrice}`;
-                cardClone.querySelector('.discount-price').textContent = `₹${bag.discountPrice}`;
-
-                // Show quantity badge if quantity is low
-                if (bag.quantity <= 2) {
-                    const quantityBadge = cardClone.querySelector('.quantity-badge');
-                    quantityBadge.textContent = `Only ${bag.quantity} left!`;
-                    quantityBadge.classList.remove('hidden');
-                }
-
-                // Add event listener to reserve button
-                const reserveBtn = cardClone.querySelector('.reserve-btn');
-                reserveBtn.addEventListener('click', () => {
-                    reserveBtn.textContent = 'Reserving...';
-                    reserveBtn.disabled = true;
-
-                    // Simulate API call
-                    setTimeout(() => {
-                        // In a real app, you would redirect to a checkout page
-                        alert(`Bag from ${bag.storeName} reserved successfully!`);
-                        reserveBtn.textContent = 'Reserved!';
-                        setTimeout(() => {
-                            reserveBtn.textContent = 'Reserve Bag';
-                            reserveBtn.disabled = false;
-                        }, 2000);
-                    }, 1000);
-                });
-
-                // Append the card to the list
-                foodBagList.appendChild(cardClone);
-            });
-        }
-
-        // ===== INITIALIZATION =====
-        // Initialize the page when the DOM is fully loaded
-        document.addEventListener('DOMContentLoaded', () => {
-            renderFoodBags();
-
-            // Add event listener to search input
-            const searchInput = document.querySelector('.input');
-            searchInput.addEventListener('input', (e) => {
-                const searchTerm = e.target.value.toLowerCase();
-
-                // Filter the bags based on the search term
-                const filteredBags = surpriseBags.filter(bag =>
-                    bag.storeName.toLowerCase().includes(searchTerm) ||
-                    bag.description.toLowerCase().includes(searchTerm)
-                );
-
-                // Re-render the filtered bags
-                const foodBagList = document.getElementById('food-bag-list');
-                foodBagList.innerHTML = '';
-
-                if (filteredBags.length === 0) {
-                    foodBagList.innerHTML = '<div class="text-center p-4 text-muted">No results found</div>';
-                    return;
-                }
-
-                // Render each filtered bag
-                filteredBags.forEach(bag => {
-                    // Clone the template
-                    const template = document.getElementById('food-bag-card-template');
-                    const cardClone = template.content.cloneNode(true);
-
-                    // Calculate discount percentage
-                    const discount = Math.round(((bag.originalPrice - bag.discountPrice) / bag.originalPrice) * 100);
-
-                    // Set the food image placeholder background and emoji
-                    const foodImagePlaceholder = cardClone.querySelector('.food-image-placeholder');
-                    foodImagePlaceholder.style.backgroundColor = bag.color;
-                    foodImagePlaceholder.style.fontSize = '3rem';
-
-                    // Set the content
-                    cardClone.querySelector('.store-emoji').textContent = bag.emoji;
-                    cardClone.querySelector('.discount-badge').textContent = `Save ${discount}%`;
-                    cardClone.querySelector('.store-name').textContent = bag.storeName;
-                    cardClone.querySelector('.servings').textContent = `Feeds ${bag.servings}`;
-                    cardClone.querySelector('.description').textContent = bag.description;
-                    cardClone.querySelector('.pickup-time').textContent = bag.pickupTime;
-                    cardClone.querySelector('.distance').textContent = `${bag.distance} away`;
-                    cardClone.querySelector('.original-price').textContent = `₹${bag.originalPrice}`;
-                    cardClone.querySelector('.discount-price').textContent = `₹${bag.discountPrice}`;
-
-                    // Show quantity badge if quantity is low
-                    if (bag.quantity <= 2) {
-                        const quantityBadge = cardClone.querySelector('.quantity-badge');
-                        quantityBadge.textContent = `Only ${bag.quantity} left!`;
-                        quantityBadge.classList.remove('hidden');
-                    }
-
-                    // Add event listener to reserve button
-                    const reserveBtn = cardClone.querySelector('.reserve-btn');
-                    reserveBtn.addEventListener('click', () => {
-                        reserveBtn.textContent = 'Reserving...';
-                        reserveBtn.disabled = true;
-
-                        // Simulate API call
-                        setTimeout(() => {
-                            // In a real app, you would redirect to a checkout page
-                            alert(`Bag from ${bag.storeName} reserved successfully!`);
-                            reserveBtn.textContent = 'Reserved!';
-                            setTimeout(() => {
-                                reserveBtn.textContent = 'Reserve Bag';
-                                reserveBtn.disabled = false;
-                            }, 2000);
-                        });
-                    });
-
-                    // Append the card to the list
-                    foodBagList.appendChild(cardClone);
-                });
-            });
-
-            const mapButton = document.getElementById('map-button');
-            const mapDiv = document.getElementById('map');
-            let map;
-
-            mapButton.addEventListener('click', () => {
-                mapDiv.classList.toggle('map-visible');
-                if (mapDiv.classList.contains('map-visible')) {
-                    if (!map) {
-                        map = L.map('map').setView([28.6139, 77.2090], 12);
-                        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-                            attribution: '© <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                        }).addTo(map);
-                        surpriseBags.forEach(bag => {
-                            if (bag.latitude && bag.longitude) {
-                                L.marker([bag.latitude, bag.longitude]).addTo(map).bindPopup(bag.storeName);
-                            }
-                        });
-                    }
-                }
-            });
-        });
-    </script>
 </body>
 </html>
