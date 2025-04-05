@@ -205,6 +205,300 @@
 
         footer { background: var(--deep-green); color: white; padding: 3rem 0 2rem; margin-top: 4rem; }
 
+        /* CART SYSTEM STYLES */
+        .cart-icon {
+            position: relative;
+            margin-right: 15px;
+        }
+        .cart-count-badge {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            background-color: var(--orange-accent);
+            color: white;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            font-weight: bold;
+        }
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 100%;
+            max-width: 400px;
+            height: 100vh;
+            background: white;
+            z-index: 1050;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.1);
+            transition: right 0.3s ease;
+            display: flex;
+            flex-direction: column;
+        }
+        .cart-drawer.open {
+            right: 0;
+        }
+        .cart-drawer-header {
+            padding: 1rem;
+            background-color: var(--forest-green);
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .cart-drawer-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1rem;
+        }
+        .cart-drawer-footer {
+            padding: 1rem;
+            border-top: 1px solid #eee;
+            background-color: var(--pale-green);
+        }
+        .cart-item {
+            display: flex;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #eee;
+        }
+        .cart-item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            margin-right: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+        }
+        .cart-item-details {
+            flex: 1;
+        }
+        .cart-item-title {
+            font-weight: 600;
+            color: var(--deep-green);
+            margin-bottom: 0.2rem;
+        }
+        .cart-item-store {
+            font-size: 0.85rem;
+            color: var(--forest-green);
+            margin-bottom: 0.5rem;
+        }
+        .cart-item-price {
+            font-weight: 600;
+            color: var(--forest-green);
+        }
+        .cart-item-quantity {
+            display: flex;
+            align-items: center;
+            margin-top: 0.5rem;
+        }
+        .cart-quantity-btn {
+            width: 25px;
+            height: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--pale-green);
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .cart-quantity-value {
+            margin: 0 0.5rem;
+            min-width: 20px;
+            text-align: center;
+        }
+        .cart-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            z-index: 1040;
+            display: none;
+        }
+        .cart-overlay.open {
+            display: block;
+        }
+        .cart-empty {
+            text-align: center;
+            padding: 2rem;
+        }
+        .cart-empty i {
+            font-size: 3rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+        
+        /* Toast notification */
+        .toast-notification {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: var(--forest-green);
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+            z-index: 1060;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.3s, transform 0.3s;
+        }
+        .toast-notification.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Page system */
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        
+        /* Checkout page styles */
+        .checkout-section {
+            padding: 4rem 1rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 95%;
+        }
+        .checkout-section h2 {
+            color: var(--forest-green);
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 600;
+            font-size: 2.2rem;
+        }
+        .checkout-form-group {
+            margin-bottom: 1.5rem;
+        }
+        .checkout-form-label {
+            font-weight: 500;
+            color: var(--deep-green);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+        .checkout-summary-card {
+            background-color: var(--pale-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            position: sticky;
+            top: 20px;
+        }
+        .checkout-summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+        }
+        .checkout-summary-total {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #ddd;
+        }
+        
+        /* Order confirmation page styles */
+        .order-confirmation-section {
+            padding: 4rem 1rem;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            margin: 2rem auto;
+            max-width: 95%;
+            text-align: center;
+        }
+        .order-confirmation-section h2 {
+            color: var(--forest-green);
+            margin-bottom: 1.5rem;
+            font-weight: 600;
+            font-size: 2.2rem;
+        }
+        .order-success-icon {
+            width: 100px;
+            height: 100px;
+            background-color: rgba(138, 177, 125, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+        }
+        .order-success-icon i {
+            font-size: 3rem;
+            color: var(--lime-green);
+        }
+        .order-details-card {
+            background-color: var(--pale-green);
+            border-radius: 10px;
+            padding: 1.5rem;
+            margin: 2rem auto;
+            max-width: 600px;
+            text-align: left;
+        }
+        .order-detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            padding-bottom: 0.8rem;
+            border-bottom: 1px solid rgba(0,0,0,0.1);
+        }
+        .order-detail-item:last-child {
+            border-bottom: none;
+        }
+        .order-detail-label {
+            font-weight: 500;
+            color: var(--deep-green);
+        }
+        .order-detail-value {
+            font-weight: 600;
+        }
+        .order-items-list {
+            margin: 1.5rem 0;
+        }
+        .order-item {
+            display: flex;
+            margin-bottom: 1rem;
+        }
+        .order-item-details {
+            flex: 1;
+        }
+        .order-item-title {
+            font-weight: 600;
+            color: var(--deep-green);
+        }
+        .order-item-store {
+            font-size: 0.85rem;
+            color: var(--forest-green);
+        }
+        .order-item-price {
+            font-weight: 600;
+            text-align: right;
+        }
+        .back-button {
+            display: inline-flex;
+            align-items: center;
+            color: var(--deep-green);
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            cursor: pointer;
+        }
+        .back-button i {
+            margin-right: 0.5rem;
+        }
+
         @media (max-width: 768px) {
             .seeker-section, .listings-section { padding: 3rem 1rem; margin: 1.5rem auto; }
              .section-intro { font-size: 1rem; }
@@ -212,6 +506,11 @@
              .filter-bar .form-control, .filter-bar .form-select, .filter-bar .btn { width: 100%; margin-bottom: 0.8rem; margin-right: 0; } /* Stack filters */
              .listing-card { width: 250px; } /* Slightly smaller cards on mobile */
              .horizontal-scroll-container { gap: 1rem; }
+             
+             /* Cart drawer takes full width on mobile */
+             .cart-drawer {
+                 max-width: 100%;
+             }
         }
     </style>
 </head>
@@ -228,6 +527,12 @@
                     <li class="nav-item"><a class="nav-link" href="merchant.html">Merchants</a></li>
                     <li class="nav-item"><a class="nav-link active" href="seeker.html">Seekers</a></li>
                     <li class="nav-item"><a class="nav-link" href="compost.html">Compost</a></li>
+                    <li class="nav-item" id="cartNavItem">
+                        <a class="nav-link cart-icon" href="#" id="cartButton">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count-badge" id="cartCountBadge">0</span>
+                        </a>
+                    </li>
                     <li class="nav-item" id="signInLi"> <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signInModal">Sign In</a> </li>
                     <li class="nav-item" id="signUpLi"> <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#signUpModal">Sign Up</a> </li>
                     <li class="nav-item d-none" id="logoutLi"> <a class="nav-link" href="#" id="logoutLink">Logout</a> </li>
@@ -237,73 +542,331 @@
         </div>
     </nav>
 
-    <!-- Seeker Intro Section -->
-    <section class="seeker-section">
-        <div class="container">
-            <h2 class="text-center">Find Surplus Food Near You</h2>
-            <div class="section-intro">
-                 <p>Looking for affordable meals or food donations? GreenFork connects you with local businesses and individuals offering surplus food at discounted prices or for free.</p>
-                    <p>Join our community and help reduce food waste while enjoying delicious meals!</p>
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active">
+        <!-- Seeker Intro Section -->
+        <section class="seeker-section">
+            <div class="container">
+                <h2 class="text-center">Find Surplus Food Near You</h2>
+                <div class="section-intro">
+                     <p>Looking for affordable meals or food donations? GreenFork connects you with local businesses and individuals offering surplus food at discounted prices or for free.</p>
+                        <p>Join our community and help reduce food waste while enjoying delicious meals!</p>
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- Filter and Listings Section -->
-    <section class="listings-section">
-        <div class="container">
-             <!-- Filter Bar -->
-             <div class="filter-bar">
-                 <form class="row g-2 align-items-center">
-                     <div class="col-md-4">
-                         <input type="text" class="form-control" id="locationInput" placeholder="Enter your location (e.g., Bandra, Mumbai)">
-                     </div>
-                     <div class="col-md-3">
-                          <select class="form-select" id="radiusSelect">
-                             <option selected value="5">Within 5 km</option>
-                             <option value="10">Within 10 km</option>
-                             <option value="25">Within 25 km</option>
-                             <option value="any">Any Distance</option>
-                         </select>
-                     </div>
-                     <div class="col-md-3">
-                         <input type="text" class="form-control" id="searchInput" placeholder="Search items or stores...">
-                     </div>
-                     <div class="col-md-2">
-                         <button type="button" class="btn btn-filter w-100" id="filterBtn">Filter <i class="fas fa-filter fa-fw"></i></button> <!-- Added icon -->
-                         <!-- Add modal for more filters later -->
-                     </div>
-                 </form>
-             </div>
-
-             <!-- Vegetarian Listings -->
-             <div id="vegListings">
-                 <h3><i class="fas fa-leaf fa-fw" style="color: var(--lime-green);"></i> Vegetarian Options</h3>
-                 <div class="horizontal-scroll-container" id="vegListingsContainer">
-                      <!-- Placeholder message if no items -->
-                      <p class="text-muted no-listings-message" id="noVegListings">Searching for vegetarian listings...</p>
+        <!-- Filter and Listings Section -->
+        <section class="listings-section">
+            <div class="container">
+                 <!-- Filter Bar -->
+                 <div class="filter-bar">
+                     <form class="row g-2 align-items-center">
+                         <div class="col-md-4">
+                             <input type="text" class="form-control" id="locationInput" placeholder="Enter your location (e.g., Bandra, Mumbai)">
+                         </div>
+                         <div class="col-md-3">
+                              <select class="form-select" id="radiusSelect">
+                                 <option selected value="5">Within 5 km</option>
+                                 <option value="10">Within 10 km</option>
+                                 <option value="25">Within 25 km</option>
+                                 <option value="any">Any Distance</option>
+                             </select>
+                         </div>
+                         <div class="col-md-3">
+                             <input type="text" class="form-control" id="searchInput" placeholder="Search items or stores...">
+                         </div>
+                         <div class="col-md-2">
+                             <button type="button" class="btn btn-filter w-100" id="filterBtn">Filter <i class="fas fa-filter fa-fw"></i></button> <!-- Added icon -->
+                             <!-- Add modal for more filters later -->
+                         </div>
+                     </form>
                  </div>
-             </div>
 
-             <!-- Non-Vegetarian Listings -->
-              <div id="nonVegListings">
-                 <h3><i class="fas fa-drumstick-bite fa-fw" style="color: var(--orange-accent);"></i> Non-Vegetarian Options</h3>
-                 <div class="horizontal-scroll-container" id="nonVegListingsContainer">
-                     <!-- Placeholder message if no items -->
-                      <p class="text-muted no-listings-message" id="noNonVegListings">Searching for non-vegetarian listings...</p>
+                 <!-- Vegetarian Listings -->
+                 <div id="vegListings">
+                     <h3><i class="fas fa-leaf fa-fw" style="color: var(--lime-green);"></i> Vegetarian Options</h3>
+                     <div class="horizontal-scroll-container" id="vegListingsContainer">
+                          <!-- Placeholder message if no items -->
+                          <p class="text-muted no-listings-message" id="noVegListings">Searching for vegetarian listings...</p>
+                     </div>
                  </div>
-             </div>
 
-              <!-- Nearby Stores (Linked to Store Details Page) -->
-             <div id="nearbyStores">
-                  <h3><i class="fas fa-store fa-fw" style="color: var(--forest-green);"></i> Participating Stores Nearby</h3>
-                  <div class="horizontal-scroll-container" id="storesContainer">
-                      <!-- Placeholder message if no items -->
-                       <p class="text-muted no-listings-message" id="noStores">Loading nearby stores...</p>
-                  </div>
-             </div>
+                 <!-- Non-Vegetarian Listings -->
+                  <div id="nonVegListings">
+                     <h3><i class="fas fa-drumstick-bite fa-fw" style="color: var(--orange-accent);"></i> Non-Vegetarian Options</h3>
+                     <div class="horizontal-scroll-container" id="nonVegListingsContainer">
+                         <!-- Placeholder message if no items -->
+                          <p class="text-muted no-listings-message" id="noNonVegListings">Searching for non-vegetarian listings...</p>
+                     </div>
+                 </div>
 
+                  <!-- Nearby Stores (Linked to Store Details Page) -->
+                 <div id="nearbyStores">
+                      <h3><i class="fas fa-store fa-fw" style="color: var(--forest-green);"></i> Participating Stores Nearby</h3>
+                      <div class="horizontal-scroll-container" id="storesContainer">
+                          <!-- Placeholder message if no items -->
+                           <p class="text-muted no-listings-message" id="noStores">Loading nearby stores...</p>
+                      </div>
+                 </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CART PAGE -->
+    <div id="cart-page" class="page">
+        <section class="checkout-section">
+            <div class="container">
+                <div class="back-button" onclick="navigateTo('home-page')">
+                    <i class="fas fa-arrow-left"></i> Back to listings
+                </div>
+                
+                <h2>Your Cart</h2>
+                
+                <div id="cart-content">
+                    <!-- Cart content will be dynamically inserted here -->
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- CHECKOUT PAGE -->
+    <div id="checkout-page" class="page">
+        <section class="checkout-section">
+            <div class="container">
+                <div class="back-button" onclick="navigateTo('cart-page')">
+                    <i class="fas fa-arrow-left"></i> Back to cart
+                </div>
+                
+                <h2>Checkout</h2>
+                
+                <div class="row">
+                    <div class="col-lg-8">
+                        <form id="checkout-form">
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="mb-3">Personal Information</h4>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="checkout-form-group">
+                                                <label class="checkout-form-label" for="fullName">Full Name</label>
+                                                <input type="text" class="form-control" id="fullName" name="fullName" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="checkout-form-group">
+                                                <label class="checkout-form-label" for="email">Email Address</label>
+                                                <input type="email" class="form-control" id="email" name="email" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <div class="checkout-form-group">
+                                                <label class="checkout-form-label" for="phone">Phone Number</label>
+                                                <input type="tel" class="form-control" id="phone" name="phone" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="mb-3">Delivery Address</h4>
+                                    
+                                    <div class="checkout-form-group">
+                                        <label class="checkout-form-label" for="address">Street Address</label>
+                                        <input type="text" class="form-control" id="address" name="address" required>
+                                    </div>
+                                    
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <div class="checkout-form-group">
+                                                <label class="checkout-form-label" for="city">City</label>
+                                                <input type="text" class="form-control" id="city" name="city" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="checkout-form-group">
+                                                <label class="checkout-form-label" for="state">State</label>
+                                                <input type="text" class="form-control" id="state" name="state" required>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="checkout-form-group">
+                                                <label class="checkout-form-label" for="pincode">PIN Code</label>
+                                                <input type="text" class="form-control" id="pincode" name="pincode" required>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="mb-3">Payment Method</h4>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCash" value="cash" checked>
+                                        <label class="form-check-label" for="paymentCash">
+                                            <i class="fas fa-money-bill-wave me-2"></i> Cash on Pickup
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentCard" value="card">
+                                        <label class="form-check-label" for="paymentCard">
+                                            <i class="fas fa-credit-card me-2"></i> Credit/Debit Card
+                                        </label>
+                                    </div>
+                                    
+                                    <div class="form-check mb-3">
+                                        <input class="form-check-input" type="radio" name="paymentMethod" id="paymentUPI" value="upi">
+                                        <label class="form-check-label" for="paymentUPI">
+                                            <i class="fas fa-mobile-alt me-2"></i> UPI Payment
+                                        </label>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="card mb-4">
+                                <div class="card-body">
+                                    <h4 class="mb-3">Special Instructions</h4>
+                                    
+                                    <div class="checkout-form-group">
+                                        <label class="checkout-form-label" for="instructions">Pickup Instructions (Optional)</label>
+                                        <textarea class="form-control" id="instructions" name="instructions" rows="3" placeholder="Any special instructions for pickup..."></textarea>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-lg w-100" style="background-color: var(--forest-green); color: white;">Place Order</button>
+                        </form>
+                    </div>
+                    
+                    <div class="col-lg-4">
+                        <div class="checkout-summary-card">
+                            <h4 class="mb-3">Order Summary</h4>
+                            
+                            <div id="checkout-items">
+                                <!-- Order items will be dynamically inserted here -->
+                            </div>
+                            
+                            <hr>
+                            
+                            <div class="checkout-summary-item">
+                                <span>Subtotal</span>
+                                <span id="checkout-subtotal">₹0</span>
+                            </div>
+                            
+                            <div class="checkout-summary-item">
+                                <span>Service Fee</span>
+                                <span>₹0</span>
+                            </div>
+                            
+                            <div class="checkout-summary-item checkout-summary-total">
+                                <span>Total</span>
+                                <span id="checkout-total">₹0</span>
+                            </div>
+                            
+                            <div class="mt-4 p-3 bg-light rounded">
+                                <div class="d-flex">
+                                    <div class="me-2">
+                                        <i class="fas fa-shield-alt text-success"></i>
+                                    </div>
+                                    <div>
+                                        <p class="mb-1 fw-bold" style="color: var(--forest-green);">Secure Checkout</p>
+                                        <p class="mb-0 small text-muted">Your information is protected by secure encryption</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ORDER CONFIRMATION PAGE -->
+    <div id="order-confirmation-page" class="page">
+        <section class="order-confirmation-section">
+            <div class="container">
+                <div class="order-success-icon">
+                    <i class="fas fa-check-circle"></i>
+                </div>
+                
+                <h2>Order Confirmed!</h2>
+                <p class="lead mb-4">Thank you for your order. Your food will be ready for pickup soon.</p>
+                
+                <div class="order-details-card">
+                    <h4 class="mb-3">Order Details</h4>
+                    
+                    <div class="order-detail-item">
+                        <span class="order-detail-label">Order Number</span>
+                        <span class="order-detail-value" id="order-number">ORD-12345</span>
+                    </div>
+                    
+                    <div class="order-detail-item">
+                        <span class="order-detail-label">Order Date</span>
+                        <span class="order-detail-value" id="order-date">May 1, 2025</span>
+                    </div>
+                    
+                    <div class="order-detail-item">
+                        <span class="order-detail-label">Payment Method</span>
+                        <span class="order-detail-value" id="order-payment">Cash on Pickup</span>
+                    </div>
+                    
+                    <div class="order-detail-item">
+                        <span class="order-detail-label">Total Amount</span>
+                        <span class="order-detail-value" id="order-total">₹0</span>
+                    </div>
+                    
+                    <h5 class="mt-4 mb-3">Order Items</h5>
+                    <div id="order-items" class="order-items-list">
+                        <!-- Order items will be dynamically inserted here -->
+                    </div>
+                    
+                    <div class="alert alert-info mt-4">
+                        <i class="fas fa-info-circle me-2"></i>
+                        <span>Please show your order number at the store during pickup.</span>
+                    </div>
+                </div>
+                
+                <div class="mt-4">
+                    <button class="btn btn-lg" style="background-color: var(--forest-green); color: white;" onclick="navigateTo('home-page')">
+                        <i class="fas fa-home me-2"></i> Back to Home
+                    </button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Cart Drawer -->
+    <div class="cart-overlay" id="cartOverlay"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="cart-drawer-header">
+            <h5 class="mb-0">Your Cart</h5>
+            <button type="button" class="btn-close btn-close-white" id="closeCartBtn" aria-label="Close"></button>
         </div>
-    </section>
+        <div class="cart-drawer-body" id="cartDrawerBody">
+            <!-- Cart items will be dynamically inserted here -->
+        </div>
+        <div class="cart-drawer-footer">
+            <div class="d-flex justify-content-between mb-3">
+                <span class="fw-bold">Total:</span>
+                <span class="fw-bold" id="cartDrawerTotal">₹0</span>
+            </div>
+            <button class="btn w-100 mb-2" style="background-color: var(--forest-green); color: white;" id="viewCartBtn">View Cart</button>
+            <button class="btn btn-outline-secondary w-100" id="continueShoppingBtn">Continue Shopping</button>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-notification" id="toastNotification">
+        <span id="toastMessage"></span>
+    </div>
 
     <!-- Sign In Modal (Copied) -->
      <div class="modal fade" id="signInModal" tabindex="-1" aria-labelledby="signInModalLabel" aria-hidden="true"> <div class="modal-dialog"> <div class="modal-content"> <div class="modal-header"> <h5 class="modal-title" id="signInModalLabel">Sign In</h5> <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button> </div> <div class="modal-body"> <form id="signInForm"> <div class="mb-3"> <label for="signInEmail" class="form-label">Email address</label> <input type="email" class="form-control" id="signInEmail" placeholder="Email" required> </div> <div class="mb-3"> <label for="signInPassword" class="form-label">Password</label> <input type="password" class="form-control" id="signInPassword" placeholder="Password" required> </div> <div class="mb-3" id="signInError"></div> <div class="d-grid"> <button type="submit" class="btn">Sign In</button> </div> </form> <div class="text-center mt-3"> <p>New to GreenFork? <a href="#" data-bs-toggle="modal" data-bs-target="#signUpModal" data-bs-dismiss="modal">Create an account</a> </p> </div> </div> </div> </div> </div>
@@ -321,6 +884,635 @@
     <!-- ========= SCRIPTS ========= -->
     <!-- Bootstrap Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        // Cart System and Page Navigation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Cart state
+            let cart = [];
+            let isCartOpen = false;
+            let currentPage = 'home-page';
+            
+            // Load cart from localStorage
+            function loadCart() {
+                const savedCart = localStorage.getItem('greenfork-cart');
+                if (savedCart) {
+                    try {
+                        cart = JSON.parse(savedCart);
+                        updateCartCount();
+                        updateCartTotal();
+                    } catch (error) {
+                        console.error('Failed to parse cart from localStorage:', error);
+                        cart = [];
+                    }
+                }
+            }
+            
+            // Save cart to localStorage
+            function saveCart() {
+                localStorage.setItem('greenfork-cart', JSON.stringify(cart));
+            }
+            
+            // Add item to cart
+            window.addToCart = function(item) {
+                // Check if item already exists in cart
+                const existingItemIndex = cart.findIndex(cartItem => cartItem.id === item.id);
+                
+                if (existingItemIndex >= 0) {
+                    // Item exists, update quantity
+                    cart[existingItemIndex].quantity += 1;
+                } else {
+                    // Item doesn't exist, add new item
+                    cart.push({ ...item, quantity: 1 });
+                }
+                
+                // Update UI
+                updateCartCount();
+                updateCartTotal();
+                renderCartDrawer();
+                saveCart();
+                
+                // Show toast notification
+                showToast(`${item.listingName} added to cart!`);
+                
+                // Open cart drawer
+                openCartDrawer();
+            };
+            
+            // Remove item from cart
+            window.removeFromCart = function(itemId) {
+                cart = cart.filter(item => item.id !== itemId);
+                
+                // Update UI
+                updateCartCount();
+                updateCartTotal();
+                renderCartDrawer();
+                renderCartPage();
+                renderCheckoutItems();
+                saveCart();
+            };
+            
+            // Update item quantity
+            window.updateQuantity = function(itemId, newQuantity) {
+                if (newQuantity <= 0) {
+                    removeFromCart(itemId);
+                    return;
+                }
+                
+                const itemIndex = cart.findIndex(item => item.id === itemId);
+                if (itemIndex !== -1) {
+                    cart[itemIndex].quantity = newQuantity;
+                    
+                    // Update UI
+                    updateCartTotal();
+                    renderCartDrawer();
+                    renderCartPage();
+                    renderCheckoutItems();
+                    saveCart();
+                }
+            };
+            
+            // Update cart count badge
+            function updateCartCount() {
+                const cartCountBadge = document.getElementById('cartCountBadge');
+                if (!cartCountBadge) return;
+                
+                const itemCount = cart.reduce((count, item) => count + item.quantity, 0);
+                
+                cartCountBadge.textContent = itemCount;
+                
+                // Hide badge if zero
+                if (itemCount === 0) {
+                    cartCountBadge.style.display = 'none';
+                } else {
+                    cartCountBadge.style.display = 'flex';
+                }
+            }
+            
+            // Update cart total
+            function updateCartTotal() {
+                const cartDrawerTotal = document.getElementById('cartDrawerTotal');
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                if (cartDrawerTotal) {
+                    cartDrawerTotal.textContent = `₹${total}`;
+                }
+                
+                // Update checkout page totals if they exist
+                const checkoutSubtotal = document.getElementById('checkout-subtotal');
+                const checkoutTotal = document.getElementById('checkout-total');
+                
+                if (checkoutSubtotal) checkoutSubtotal.textContent = `₹${total}`;
+                if (checkoutTotal) checkoutTotal.textContent = `₹${total}`;
+                
+                // Update order confirmation total if it exists
+                const orderTotal = document.getElementById('order-total');
+                if (orderTotal) orderTotal.textContent = `₹${total}`;
+            }
+            
+            // Render cart drawer
+            function renderCartDrawer() {
+                const cartDrawerBody = document.getElementById('cartDrawerBody');
+                if (!cartDrawerBody) return;
+                
+                // Clear existing content
+                cartDrawerBody.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    // Show empty cart message
+                    cartDrawerBody.innerHTML = `
+                        <div class="cart-empty">
+                            <i class="fas fa-shopping-cart"></i>
+                            <p class="fw-bold mb-2">Your cart is empty</p>
+                            <p class="text-muted mb-4">Add some items to get started!</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Render each cart item
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'cart-item';
+                    
+                    // Create cart item HTML
+                    cartItem.innerHTML = `
+                        <div class="cart-item-image" style="background-color: ${item.color || '#ccc'}; color: white;">
+                            ${item.emoji || '📦'}
+                        </div>
+                        <div class="cart-item-details">
+                            <div class="d-flex justify-content-between">
+                                <h6 class="cart-item-title">${escapeHtml(item.listingName)}</h6>
+                                <button class="btn btn-sm text-danger remove-item" data-id="${item.id}">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <p class="cart-item-store">${escapeHtml(item.storeName)}</p>
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div class="cart-item-quantity">
+                                    <button class="cart-quantity-btn decrease-quantity" data-id="${item.id}">-</button>
+                                    <span class="cart-quantity-value">${item.quantity}</span>
+                                    <button class="cart-quantity-btn increase-quantity" data-id="${item.id}">+</button>
+                                </div>
+                                <span class="cart-item-price">₹${item.price * item.quantity}</span>
+                            </div>
+                        </div>
+                    `;
+                    
+                    // Append to cart drawer
+                    cartDrawerBody.appendChild(cartItem);
+                });
+                
+                // Add event listeners
+                document.querySelectorAll('.remove-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const itemId = e.currentTarget.dataset.id;
+                        removeFromCart(itemId);
+                    });
+                });
+                
+                document.querySelectorAll('.decrease-quantity').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const itemId = e.currentTarget.dataset.id;
+                        const item = cart.find(item => item.id === itemId);
+                        if (item) {
+                            updateQuantity(itemId, item.quantity - 1);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.increase-quantity').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const itemId = e.currentTarget.dataset.id;
+                        const item = cart.find(item => item.id === itemId);
+                        if (item) {
+                            updateQuantity(itemId, item.quantity + 1);
+                        }
+                    });
+                });
+            }
+            
+            // Render cart page
+            window.renderCartPage = function() {
+                const cartContent = document.getElementById('cart-content');
+                if (!cartContent) return;
+                
+                // Clear existing content
+                cartContent.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    // Show empty cart message
+                    cartContent.innerHTML = `
+                        <div class="text-center py-5">
+                            <div style="font-size: 4rem; color: var(--lime-green);">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <h3 class="mt-4">Your cart is empty</h3>
+                            <p class="text-muted mb-4">Looks like you haven't added any items to your cart yet.</p>
+                            <button class="btn btn-lg" style="background-color: var(--forest-green); color: white;" onclick="navigateTo('home-page')">
+                                Browse Food Options
+                            </button>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                // Create cart content
+                const cartContainer = document.createElement('div');
+                cartContainer.className = 'row';
+                
+                // Cart items column
+                const itemsColumn = document.createElement('div');
+                itemsColumn.className = 'col-lg-8';
+                
+                // Cart items card
+                const itemsCard = document.createElement('div');
+                itemsCard.className = 'card mb-4';
+                itemsCard.innerHTML = `
+                    <div class="card-header d-flex justify-content-between align-items-center">
+                        <h5 class="mb-0">Cart Items (${cart.length})</h5>
+                        <button class="btn btn-sm btn-outline-danger" id="clearCartBtn">
+                            <i class="fas fa-trash-alt me-1"></i> Clear Cart
+                        </button>
+                    </div>
+                    <div class="card-body" id="cartItemsList"></div>
+                `;
+                
+                // Append items card to column
+                itemsColumn.appendChild(itemsCard);
+                
+                // Cart summary column
+                const summaryColumn = document.createElement('div');
+                summaryColumn.className = 'col-lg-4';
+                
+                // Cart summary card
+                const summaryCard = document.createElement('div');
+                summaryCard.className = 'card';
+                
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                summaryCard.innerHTML = `
+                    <div class="card-header">
+                        <h5 class="mb-0">Order Summary</h5>
+                    </div>
+                    <div class="card-body">
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Subtotal</span>
+                            <span>₹${total}</span>
+                        </div>
+                        <div class="d-flex justify-content-between mb-2">
+                            <span>Service Fee</span>
+                            <span>₹0</span>
+                        </div>
+                        <hr>
+                        <div class="d-flex justify-content-between mb-4">
+                            <span class="fw-bold">Total</span>
+                            <span class="fw-bold">₹${total}</span>
+                        </div>
+                        <button class="btn btn-lg w-100" style="background-color: var(--forest-green); color: white;" id="proceedToCheckoutBtn">
+                            Proceed to Checkout
+                        </button>
+                        <button class="btn btn-outline-secondary w-100 mt-2" onclick="navigateTo('home-page')">
+                            Continue Shopping
+                        </button>
+                    </div>
+                `;
+                
+                // Append summary card to column
+                summaryColumn.appendChild(summaryCard);
+                
+                // Append columns to container
+                cartContainer.appendChild(itemsColumn);
+                cartContainer.appendChild(summaryColumn);
+                
+                // Append container to cart content
+                cartContent.appendChild(cartContainer);
+                
+                // Render cart items
+                const cartItemsList = document.getElementById('cartItemsList');
+                
+                cart.forEach(item => {
+                    const cartItem = document.createElement('div');
+                    cartItem.className = 'mb-3 pb-3 border-bottom';
+                    
+                    cartItem.innerHTML = `
+                        <div class="d-flex">
+                            <div style="width: 80px; height: 80px; background-color: ${item.color || '#ccc'}; color: white; display: flex; align-items: center; justify-content: center; font-size: 2rem; border-radius: 8px; margin-right: 1rem;">
+                                ${item.emoji || '📦'}
+                            </div>
+                            <div class="flex-grow-1">
+                                <div class="d-flex justify-content-between">
+                                    <h5 class="mb-1">${escapeHtml(item.listingName)}</h5>
+                                    <button class="btn btn-sm text-danger cart-remove-item" data-id="${item.id}">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                                <p class="text-muted mb-1">From: ${escapeHtml(item.storeName)}</p>
+                                <div class="d-flex justify-content-between align-items-center mt-2">
+                                    <div class="d-flex align-items-center">
+                                        <button class="btn btn-sm btn-outline-secondary cart-decrease-quantity" data-id="${item.id}">-</button>
+                                        <span class="mx-2">${item.quantity}</span>
+                                        <button class="btn btn-sm btn-outline-secondary cart-increase-quantity" data-id="${item.id}">+</button>
+                                    </div>
+                                    <div class="text-end">
+                                        <span class="fw-bold">₹${item.price * item.quantity}</span>
+                                        ${item.originalPrice ? `<span class="text-muted text-decoration-line-through ms-2">₹${item.originalPrice * item.quantity}</span>` : ''}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    
+                    cartItemsList.appendChild(cartItem);
+                });
+                
+                // Add event listeners
+                document.getElementById('clearCartBtn').addEventListener('click', () => {
+                    if (confirm('Are you sure you want to clear your cart?')) {
+                        cart = [];
+                        saveCart();
+                        updateCartCount();
+                        updateCartTotal();
+                        renderCartDrawer();
+                        renderCartPage();
+                    }
+                });
+                
+                document.getElementById('proceedToCheckoutBtn').addEventListener('click', () => {
+                    navigateTo('checkout-page');
+                    renderCheckoutItems();
+                });
+                
+                document.querySelectorAll('.cart-remove-item').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const itemId = e.currentTarget.dataset.id;
+                        removeFromCart(itemId);
+                    });
+                });
+                
+                document.querySelectorAll('.cart-decrease-quantity').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const itemId = e.currentTarget.dataset.id;
+                        const item = cart.find(item => item.id === itemId);
+                        if (item) {
+                            updateQuantity(itemId, item.quantity - 1);
+                        }
+                    });
+                });
+                
+                document.querySelectorAll('.cart-increase-quantity').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const itemId = e.currentTarget.dataset.id;
+                        const item = cart.find(item => item.id === itemId);
+                        if (item) {
+                            updateQuantity(itemId, item.quantity + 1);
+                        }
+                    });
+                });
+            };
+            
+            // Render checkout items
+            window.renderCheckoutItems = function() {
+                const checkoutItems = document.getElementById('checkout-items');
+                if (!checkoutItems) return;
+                
+                // Clear existing content
+                checkoutItems.innerHTML = '';
+                
+                if (cart.length === 0) {
+                    checkoutItems.innerHTML = '<p class="text-muted">No items in cart</p>';
+                    return;
+                }
+                
+                // Render each checkout item
+                cart.forEach(item => {
+                    const itemElement = document.createElement('div');
+                    itemElement.className = 'checkout-summary-item';
+                    
+                    itemElement.innerHTML = `
+                        <span>${escapeHtml(item.listingName)} × ${item.quantity}</span>
+                        <span>₹${item.price * item.quantity}</span>
+                    `;
+                    
+                    checkoutItems.appendChild(itemElement);
+                });
+            };
+            
+            // Render order confirmation
+            window.renderOrderConfirmation = function() {
+                // Generate order number
+                const orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+                
+                // Get current date
+                const orderDate = new Date().toLocaleDateString('en-US', {
+                    year: 'numeric',
+                    month: 'long',
+                    day: 'numeric'
+                });
+                
+                // Get payment method
+                const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+                let paymentText = 'Cash on Pickup';
+                if (paymentMethod === 'card') paymentText = 'Credit/Debit Card';
+                if (paymentMethod === 'upi') paymentText = 'UPI Payment';
+                
+                // Get total amount
+                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+                
+                // Update order  item) => sum + (item.price * item.quantity), 0);
+                
+                // Update order details
+                document.getElementById('order-number').textContent = orderNumber;
+                document.getElementById('order-date').textContent = orderDate;
+                document.getElementById('order-payment').textContent = paymentText;
+                document.getElementById('order-total').textContent = `₹${total}`;
+                
+                // Render order items
+                const orderItems = document.getElementById('order-items');
+                orderItems.innerHTML = '';
+                
+                cart.forEach(item => {
+                    const orderItem = document.createElement('div');
+                    orderItem.className = 'order-item mb-2 pb-2 border-bottom';
+                    
+                    orderItem.innerHTML = `
+                        <div class="order-item-details">
+                            <div class="d-flex justify-content-between">
+                                <span class="order-item-title">${escapeHtml(item.listingName)} × ${item.quantity}</span>
+                                <span class="order-item-price">₹${item.price * item.quantity}</span>
+                            </div>
+                            <span class="order-item-store">${escapeHtml(item.storeName)}</span>
+                        </div>
+                    `;
+                    
+                    orderItems.appendChild(orderItem);
+                });
+                
+                // Clear cart
+                cart = [];
+                saveCart();
+                updateCartCount();
+            };
+            
+            // Open cart drawer
+            window.openCartDrawer = function() {
+                const cartDrawer = document.getElementById('cartDrawer');
+                const cartOverlay = document.getElementById('cartOverlay');
+                
+                cartDrawer.classList.add('open');
+                cartOverlay.classList.add('open');
+                isCartOpen = true;
+            };
+            
+            // Close cart drawer
+            window.closeCartDrawer = function() {
+                const cartDrawer = document.getElementById('cartDrawer');
+                const cartOverlay = document.getElementById('cartOverlay');
+                
+                cartDrawer.classList.remove('open');
+                cartOverlay.classList.remove('open');
+                isCartOpen = false;
+            };
+            
+            // Show toast notification
+            window.showToast = function(message) {
+                const toast = document.getElementById('toastNotification');
+                const toastMessage = document.getElementById('toastMessage');
+                
+                toastMessage.textContent = message;
+                toast.classList.add('show');
+                
+                // Hide toast after 3 seconds
+                setTimeout(() => {
+                    toast.classList.remove('show');
+                }, 3000);
+            };
+            
+            // Navigate to page
+            window.navigateTo = function(pageId) {
+                // Hide all pages
+                document.querySelectorAll('.page').forEach(page => {
+                    page.classList.remove('active');
+                });
+                
+                // Show selected page
+                document.getElementById(pageId).classList.add('active');
+                
+                // Close cart drawer if open
+                if (isCartOpen) {
+                    closeCartDrawer();
+                }
+                
+                // Update current page
+                currentPage = pageId;
+                
+                // Scroll to top
+                window.scrollTo(0, 0);
+                
+                // Render page-specific content
+                if (pageId === 'cart-page') {
+                    renderCartPage();
+                } else if (pageId === 'checkout-page') {
+                    renderCheckoutItems();
+                }
+            };
+            
+            // Helper function to escape HTML
+            window.escapeHtml = function(unsafe) {
+                if (typeof unsafe !== 'string') return '';
+                return unsafe
+                    .replace(/&/g, "&amp;")
+                    .replace(/</g, "&lt;")
+                    .replace(/>/g, "&gt;")
+                    .replace(/"/g, "&quot;")
+                    .replace(/'/g, "&#039;");
+            };
+            
+            // Event Listeners
+            
+            // Cart Button
+            const cartButton = document.getElementById('cartButton');
+            if (cartButton) {
+                cartButton.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    openCartDrawer();
+                });
+            }
+            
+            // Close Cart Button
+            const closeCartBtn = document.getElementById('closeCartBtn');
+            if (closeCartBtn) {
+                closeCartBtn.addEventListener('click', () => {
+                    closeCartDrawer();
+                });
+            }
+            
+            // Cart Overlay
+            const cartOverlay = document.getElementById('cartOverlay');
+            if (cartOverlay) {
+                cartOverlay.addEventListener('click', () => {
+                    closeCartDrawer();
+                });
+            }
+            
+            // Continue Shopping Button
+            const continueShoppingBtn = document.getElementById('continueShoppingBtn');
+            if (continueShoppingBtn) {
+                continueShoppingBtn.addEventListener('click', () => {
+                    closeCartDrawer();
+                });
+            }
+            
+            // View Cart Button
+            const viewCartBtn = document.getElementById('viewCartBtn');
+            if (viewCartBtn) {
+                viewCartBtn.addEventListener('click', () => {
+                    closeCartDrawer();
+                    navigateTo('cart-page');
+                });
+            }
+            
+            // Checkout Form
+            const checkoutForm = document.getElementById('checkout-form');
+            if (checkoutForm) {
+                checkoutForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    
+                    // Validate form
+                    if (!checkoutForm.checkValidity()) {
+                        checkoutForm.reportValidity();
+                        return;
+                    }
+                    
+                    // Show loading state
+                    const submitButton = checkoutForm.querySelector('button[type="submit"]');
+                    const originalText = submitButton.innerHTML;
+                    submitButton.innerHTML = '<i class="fas fa-spinner fa-spin me-2"></i> Processing...';
+                    submitButton.disabled = true;
+                    
+                    // Simulate processing
+                    setTimeout(() => {
+                        // Render order confirmation
+                        renderOrderConfirmation();
+                        
+                        // Navigate to order confirmation page
+                        navigateTo('order-confirmation-page');
+                        
+                        // Reset form and button
+                        checkoutForm.reset();
+                        submitButton.innerHTML = originalText;
+                        submitButton.disabled = false;
+                        
+                        // Show success toast
+                        showToast('Order placed successfully!');
+                    }, 1500);
+                });
+            }
+            
+            // Initialize cart
+            loadCart();
+            renderCartDrawer();
+        });
+    </script>
     <!-- Firebase SDK - ENSURE ORDER IS CORRECT AND FILES ARE ACCESSIBLE -->
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script> <!-- CHECK THIS LINE -->
@@ -330,7 +1522,304 @@
     <!-- Auth Logic -->
     <script src="js/auth.js"></script>
     <!-- Seeker Page Specific Logic -->
-    <script src="js/seeker.js"></script>
+    <script>
+        // js/seeker.js - Includes loading nearby stores
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log("Seeker script loaded.");
+
+            // Ensure Firebase services are available
+            if (typeof auth === 'undefined' || typeof db === 'undefined') {
+                console.error("Firebase auth or db not initialized for seeker.js");
+                hideListingSectionsOnError("Error connecting to services. Please refresh.");
+                return;
+            }
+
+            // --- DOM References ---
+            const vegListingsContainer = document.getElementById('vegListingsContainer');
+            const noVegListingsMsg = document.getElementById('noVegListings');
+            const nonVegListingsContainer = document.getElementById('nonVegListingsContainer');
+            const noNonVegListingsMsg = document.getElementById('noNonVegListings');
+            const storesContainer = document.getElementById('storesContainer'); // Stores section
+            const noStoresMsg = document.getElementById('noStores');           // Placeholder for stores
+
+            // Filter Bar Elements
+            const searchInput = document.getElementById('searchInput');
+            const locationInput = document.getElementById('locationInput'); // Placeholder for now
+            const radiusSelect = document.getElementById('radiusSelect');   // Placeholder for now
+            const filterBtn = document.getElementById('filterBtn');
+            // Filter Modal related elements removed as filtering was reverted
+
+            // --- Helper Functions ---
+            function escapeHtml(unsafe) {
+                if (typeof unsafe !== 'string') return '';
+                return unsafe.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;").replace(/'/g, "&#039;");
+            }
+
+            function hideListingSectionsOnError(message = "Could not load data.") {
+                if (vegListingsContainer) vegListingsContainer.innerHTML = `<p class="text-danger text-center p-3">${message}</p>`;
+                if (nonVegListingsContainer) nonVegListingsContainer.innerHTML = `<p class="text-danger text-center p-3">${message}</p>`;
+                if (storesContainer) storesContainer.innerHTML = `<p class="text-danger text-center p-3">${message}</p>`; // Clear stores too on error
+                // Ensure placeholder messages are hidden when error occurs
+                if (noVegListingsMsg) noVegListingsMsg.style.display = 'none';
+                if (noNonVegListingsMsg) noNonVegListingsMsg.style.display = 'none';
+                if (noStoresMsg) noStoresMsg.style.display = 'none';
+            }
+
+            // --- Function to Create Listing Card HTML (for seeker page) ---
+            function createSeekerListingCard(listingData, listingId) {
+                const card = document.createElement('div');
+                card.className = 'listing-card';
+                card.setAttribute('data-id', listingId);
+
+                const priceString = listingData.price === 0 ? 'FREE (Donation)' : `₹${listingData.price}`;
+                const originalPriceString = listingData.originalPrice ? `<span class="text-sm line-through text-muted">₹${listingData.originalPrice}</span>` : '';
+                const placeholderColor = '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6, '0');
+                let emoji = '📦';
+                if (listingData.foodType === 'Bakery') emoji = '🥐';
+                else if (listingData.foodType === 'Fresh') emoji = '🍎';
+                else if (listingData.foodType === 'Leftovers') emoji = '🍲';
+                else if (listingData.foodType === 'Packaged') emoji = '🥫';
+
+                card.innerHTML = `
+                    <div class="listing-card-img" style="background-color: ${placeholderColor}; display: flex; align-items: center; justify-content: center; font-size: 2rem; color: white;">
+                         ${emoji}
+                    </div>
+                    <div class="listing-card-body">
+                        <h5>${escapeHtml(listingData.listingName)}</h5>
+                        <p class="store-name">From: ${escapeHtml(listingData.storeName)}</p>
+                        <p class="details">Qty: ${escapeHtml(listingData.quantity)}</p>
+                        ${listingData.expiryDate ? `<p class="details"><small>Best Before: ${listingData.expiryDate}</small></p>` : ''}
+                        ${listingData.description ? `<p class="details description-clamp">${escapeHtml(listingData.description)}</p>`: ''}
+                    </div>
+                    <div class="listing-card-footer">
+                        <span class="price">${priceString} ${originalPriceString}</span>
+                        <button class="btn-request btn btn-sm" data-id="${listingId}">
+                            <i class="fas fa-shopping-cart me-1"></i> Add to Cart
+                        </button>
+                    </div>
+                `;
+                const descEl = card.querySelector('.description-clamp');
+                if(descEl) {
+                    descEl.style.display = '-webkit-box'; descEl.style.webkitLineClamp = '2';
+                    descEl.style.webkitBoxOrient = 'vertical'; descEl.style.overflow = 'hidden';
+                    descEl.style.textOverflow = 'ellipsis'; descEl.style.marginBottom = '0.5rem';
+                }
+
+                card.querySelector('.btn-request').addEventListener('click', () => {
+                    console.log(`Add to cart button clicked for listing: ${listingId}`, listingData);
+                    
+                    // Create cart item from listing data
+                    const cartItem = {
+                        id: listingId,
+                        listingName: listingData.listingName,
+                        storeName: listingData.storeName,
+                        price: listingData.price || 0,
+                        originalPrice: listingData.originalPrice,
+                        color: placeholderColor,
+                        emoji: emoji,
+                        quantity: 1
+                    };
+                    
+                    // Add to cart using the global function
+                    window.addToCart(cartItem);
+                });
+                return card;
+            } // End createSeekerListingCard
+
+            // --- Function to Filter Cards Client-Side (for Search) ---
+            function filterCardsBySearch(searchTerm) {
+                const lowerCaseSearchTerm = searchTerm.toLowerCase().trim();
+                const allListingCards = document.querySelectorAll('#vegListingsContainer .listing-card, #nonVegListingsContainer .listing-card');
+                const allStoreCards = document.querySelectorAll('#storesContainer .store-listing-card'); // Match class used below
+
+                let vegVisible = false; let nonVegVisible = false; let storesVisible = false;
+
+                allListingCards.forEach(card => {
+                    const cardText = card.textContent.toLowerCase();
+                    const isMatch = cardText.includes(lowerCaseSearchTerm);
+                    card.style.display = isMatch ? 'flex' : 'none';
+                    if (isMatch) {
+                        const parentContainer = card.closest('.horizontal-scroll-container');
+                        if (parentContainer) {
+                            if (parentContainer.id === 'vegListingsContainer') vegVisible = true;
+                            if (parentContainer.id === 'nonVegListingsContainer') nonVegVisible = true;
+                        }
+                    }
+                });
+                 // Filter Store Cards
+                 allStoreCards.forEach(card => {
+                     const cardText = card.textContent.toLowerCase();
+                     const isMatch = cardText.includes(lowerCaseSearchTerm);
+                     card.style.display = isMatch ? 'flex' : 'none'; // Make sure display: flex matches card style
+                     if(isMatch) storesVisible = true;
+                 });
+
+                if (noVegListingsMsg) noVegListingsMsg.style.display = vegVisible ? 'none' : 'block';
+                if (noNonVegListingsMsg) noNonVegListingsMsg.style.display = nonVegVisible ? 'none' : 'block';
+                if (noStoresMsg) noStoresMsg.style.display = storesVisible ? 'none' : 'block';
+                // Update text if still visible
+                if(noVegListingsMsg && !vegVisible) noVegListingsMsg.textContent = "No matching vegetarian listings found.";
+                if(noNonVegListingsMsg && !nonVegVisible) noNonVegListingsMsg.textContent = "No matching non-vegetarian listings found.";
+                if(noStoresMsg && !storesVisible) noStoresMsg.textContent = "No matching stores found.";
+            } // End filterCardsBySearch
+
+            // --- Function to Load Available Food Listings (Simplified - no filters parameter) ---
+            async function loadAvailableFoodListings() {
+                if (!vegListingsContainer || !nonVegListingsContainer || !noVegListingsMsg || !noNonVegListingsMsg) { return; }
+                vegListingsContainer.innerHTML = ''; nonVegListingsContainer.innerHTML = '';
+                noVegListingsMsg.style.display = 'block'; noNonVegListingsMsg.style.display = 'block';
+                noVegListingsMsg.textContent = "Searching for vegetarian listings..."; // Reset text
+                noNonVegListingsMsg.textContent = "Searching for non-vegetarian listings..."; // Reset text
+                let vegFound = false; let nonVegFound = false;
+
+                console.log("Loading available FOOD listings (status: Available)...");
+
+                try {
+                    const listingsRef = db.collection('listings');
+                    const query = listingsRef.where('status', '==', 'Available').orderBy('createdAt', 'desc');
+                    const snapshot = await query.get();
+
+                    if (snapshot.empty) {
+                         console.log('No available food listings found.');
+                    } else {
+                         console.log(`Found ${snapshot.docs.length} available food listings.`);
+                         snapshot.forEach(doc => {
+                             const listingData = doc.data();
+                             const listingId = doc.id;
+                             const cardElement = createSeekerListingCard(listingData, listingId);
+                             if (listingData.dietaryPref === 'Vegetarian' || listingData.dietaryPref === 'Vegan') {
+                                 vegListingsContainer.appendChild(cardElement); vegFound = true;
+                             } else {
+                                 nonVegListingsContainer.appendChild(cardElement); nonVegFound = true;
+                             }
+                         });
+                    }
+                } catch (error) {
+                    console.error("Error loading available food listings: ", error);
+                    hideListingSectionsOnError("Error loading food listings. Please try refreshing.");
+                     if (error.code === 'failed-precondition') {
+                          console.warn("Firestore query requires an index (status == Available, orderBy createdAt). Check error details for link.");
+                     }
+                } finally {
+                    if (noVegListingsMsg) noVegListingsMsg.style.display = vegFound ? 'none' : 'block';
+                    if (noNonVegListingsMsg) noNonVegListingsMsg.style.display = nonVegFound ? 'none' : 'block';
+                    if(noVegListingsMsg && !vegFound) noVegListingsMsg.textContent = "No vegetarian listings found currently.";
+                    if(noNonVegListingsMsg && !nonVegFound) noNonVegListingsMsg.textContent = "No non-vegetarian listings found currently.";
+                }
+            } // End loadAvailableFoodListings
+
+            // --- Function to Load Stores with Available Listings ---
+            async function loadNearbyStores() {
+                 if (!storesContainer || !noStoresMsg) {
+                     console.error("Stores container or placeholder not found.");
+                     return;
+                 }
+                 storesContainer.innerHTML = ''; // Clear previous
+                 noStoresMsg.style.display = 'block'; // Show loading/default message
+                 noStoresMsg.textContent = "Loading nearby stores..."; // Update text
+                 let storesFound = false;
+                 const uniqueStores = new Map(); // Use a Map to track unique stores { storeId: storeName }
+
+                 console.log("Loading stores with available listings...");
+
+                 try {
+                     const listingsRef = db.collection('listings');
+                     const query = listingsRef.where('status', '==', 'Available'); // Only need available listings
+                     const snapshot = await query.get();
+
+                     if (!snapshot.empty) {
+                         snapshot.forEach(doc => {
+                             const data = doc.data();
+                             if (data.storeId && data.storeName && !uniqueStores.has(data.storeId)) {
+                                 uniqueStores.set(data.storeId, data.storeName);
+                             }
+                         });
+                     }
+
+                     if (uniqueStores.size === 0) {
+                         console.log("No stores found with available listings.");
+                         noStoresMsg.textContent = "No stores with available items found nearby.";
+                     } else {
+                         storesFound = true;
+                         console.log(`Found ${uniqueStores.size} unique stores with listings.`);
+                         uniqueStores.forEach((storeName, storeId) => {
+                             displayStoreCard(storeName, storeId); // Call function to create store card
+                         });
+                     }
+
+                 } catch (error) {
+                    console.error("Error loading stores based on listings:", error);
+                    storesContainer.innerHTML = '<p class="text-danger text-center p-3">Error loading nearby stores.</p>';
+                    // Check for index errors if the query becomes more complex (e.g., adding location filter later)
+                     if (error.code === 'failed-precondition') {
+                          console.warn("Firestore query for active stores might need an index.");
+                     }
+                 } finally {
+                     noStoresMsg.style.display = storesFound ? 'none' : 'block';
+                 }
+            } // End loadNearbyStores
+
+            // --- Function to Create and Display a Single Store Card (on seeker page) ---
+            function displayStoreCard(storeName, storeId) {
+                 if (!storesContainer) return;
+
+                 const card = document.createElement('div');
+                 // Give it a distinct class from food listing cards if styles differ significantly
+                 card.className = 'listing-card store-listing-card'; // Example class
+                 card.setAttribute('data-id', storeId);
+                 card.style.cursor = 'pointer'; // Indicate it's clickable
+                 card.style.textAlign = 'center'; // Center content
+
+                 card.innerHTML = `
+                     <div class="listing-card-body" style="justify-content: center; padding: 2rem 1rem;"> <!-- Adjust padding/alignment -->
+                         <i class="fas fa-store fa-2x" style="color: var(--forest-green); margin-bottom: 0.8rem;"></i> <!-- Store icon -->
+                         <h5 style="margin-bottom: 0.5rem;">${escapeHtml(storeName)}</h5>
+                         <p class="details"><small>Click to see listings</small></p>
+                     </div>
+                 `;
+
+                 // Add click listener to navigate
+                 card.addEventListener('click', () => {
+                     window.location.href = `store-details.html?storeId=${storeId}`;
+                 });
+
+                 storesContainer.appendChild(card);
+            } // End displayStoreCard
+
+            // --- Event Listeners ---
+
+            // 1. Search Input Listener
+            if (searchInput) {
+                searchInput.addEventListener('input', (e) => {
+                    filterCardsBySearch(e.target.value);
+                });
+            }
+
+            // 2. Filter Button Listener (Placeholder functionality)
+             if (filterBtn) {
+                 filterBtn.addEventListener('click', () => {
+                     console.log("Filter button clicked (functionality deferred).");
+                     alert("Advanced filtering options will be added later!");
+                     // If you kept the modal HTML, you could open it:
+                     // const filterModal = bootstrap.Modal.getInstance(document.getElementById('filterModal'));
+                     // if (filterModal) filterModal.show();
+                 });
+             }
+
+            // --- Initial Load ---
+            loadAvailableFoodListings();
+            loadNearbyStores(); // <-- CALL THE NEW FUNCTION HERE
+
+            // --- Authentication Listener ---
+            auth.onAuthStateChanged(user => {
+                const isSeekerPage = window.location.pathname.includes('seeker.html');
+                if (!isSeekerPage) return;
+                if (user) { console.log("Seeker page: User logged in", user.uid); }
+                else { console.log("Seeker page: User logged out."); }
+            });
+
+        }); // End DOMContentLoaded
+    </script>
 
 </body>
 </html>
