@@ -728,6 +728,17 @@
                                         <label class="form-check-label" for="paymentUPI">
                                             <i class="fas fa-mobile-alt me-2"></i> UPI Payment
                                         </label>
+                                        <div id="upiApps" class="mt-2 ms-4">
+                                            <button type="button" class="btn btn-outline-primary btn-sm me-2" onclick="redirectToPayment('PhonePe')">PhonePe</button>
+                                            <button type="button" class="btn btn-outline-success btn-sm me-2" onclick="redirectToPayment('GooglePay')">Google Pay</button>
+                                            <button type="button" class="btn btn-outline-info btn-sm" onclick="redirectToPayment('PayPal')">PayPal</button>
+                                        </div>
+                                        <script>
+                                            function redirectToPayment(appName) {
+                                                const paymentUrl = `payment.html?app=${encodeURIComponent(appName)}`;
+                                                window.location.href = paymentUrl;
+                                            }
+                                        </script>
                                     </div>
                                 </div>
                             </div>
@@ -1298,61 +1309,96 @@
                 });
             };
             
-            // Render order confirmation
-            window.renderOrderConfirmation = function() {
-                // Generate order number
-                const orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
-                
-                // Get current date
-                const orderDate = new Date().toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric'
-                });
-                
-                // Get payment method
-                const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
-                let paymentText = 'Cash on Pickup';
-                if (paymentMethod === 'card') paymentText = 'Credit/Debit Card';
-                if (paymentMethod === 'upi') paymentText = 'UPI Payment';
-                
-                // Get total amount
-                const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-                
-                // Update order  item) => sum + (item.price * item.quantity), 0);
-                
-                // Update order details
-                document.getElementById('order-number').textContent = orderNumber;
-                document.getElementById('order-date').textContent = orderDate;
-                document.getElementById('order-payment').textContent = paymentText;
-                document.getElementById('order-total').textContent = `₹${total}`;
-                
-                // Render order items
-                const orderItems = document.getElementById('order-items');
-                orderItems.innerHTML = '';
-                
-                cart.forEach(item => {
-                    const orderItem = document.createElement('div');
-                    orderItem.className = 'order-item mb-2 pb-2 border-bottom';
-                    
-                    orderItem.innerHTML = `
-                        <div class="order-item-details">
-                            <div class="d-flex justify-content-between">
-                                <span class="order-item-title">${escapeHtml(item.listingName)} × ${item.quantity}</span>
-                                <span class="order-item-price">₹${item.price * item.quantity}</span>
-                            </div>
-                            <span class="order-item-store">${escapeHtml(item.storeName)}</span>
-                        </div>
-                    `;
-                    
-                    orderItems.appendChild(orderItem);
-                });
-                
-                // Clear cart
-                cart = [];
-                saveCart();
-                updateCartCount();
-            };
+            //// Modify the renderOrderConfirmation function in seeker.html
+window.renderOrderConfirmation = function() {
+    // Generate order number
+    const orderNumber = 'ORD-' + Math.floor(100000 + Math.random() * 900000);
+    
+    // Get current date
+    const orderDate = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+    });
+    
+    // Get payment method
+    const paymentMethod = document.querySelector('input[name="paymentMethod"]:checked').value;
+    let paymentText = 'Cash on Pickup';
+    if (paymentMethod === 'card') paymentText = 'Credit/Debit Card';
+    if (paymentMethod === 'upi') paymentText = 'UPI Payment';
+    
+    // Get total amount
+    const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
+    
+    // Update order details
+    document.getElementById('order-number').textContent = orderNumber;
+    document.getElementById('order-date').textContent = orderDate;
+    document.getElementById('order-payment').textContent = paymentText;
+    document.getElementById('order-total').textContent = `₹${total}`;
+    
+    // Render order items
+    const orderItems = document.getElementById('order-items');
+    orderItems.innerHTML = '';
+    
+    cart.forEach(item => {
+        const orderItem = document.createElement('div');
+        orderItem.className = 'order-item mb-2 pb-2 border-bottom';
+        
+        orderItem.innerHTML = `
+            <div class="order-item-details">
+                <div class="d-flex justify-content-between">
+                    <span class="order-item-title">${escapeHtml(item.listingName)} × ${item.quantity}</span>
+                    <span class="order-item-price">₹${item.price * item.quantity}</span>
+                </div>
+                <span class="order-item-store">${escapeHtml(item.storeName)}</span>
+            </div>
+        `;
+        
+        orderItems.appendChild(orderItem);
+    });
+    
+    // STORE ORDER IN DATABASE (localStorage for now)
+    const orderData = {
+        id: orderNumber,
+        date: orderDate,
+        paymentMethod: paymentText,
+        total: total,
+        items: cart.map(item => ({
+            id: item.id,
+            name: item.listingName,
+            store: item.storeName,
+            price: item.price,
+            quantity: item.quantity,
+            color: item.color,
+            emoji: item.emoji
+        })),
+        status: 'Confirmed',
+        customerInfo: {
+            name: document.getElementById('fullName').value,
+            email: document.getElementById('email').value,
+            phone: document.getElementById('phone').value,
+            address: document.getElementById('address').value,
+            city: document.getElementById('city').value,
+            state: document.getElementById('state').value,
+            pincode: document.getElementById('pincode').value
+        },
+        specialInstructions: document.getElementById('instructions').value || ''
+    };
+    
+    // Get existing orders or initialize empty array
+    let orders = JSON.parse(localStorage.getItem('greenfork-orders') || '[]');
+    
+    // Add new order
+    orders.push(orderData);
+    
+    // Save back to localStorage
+    localStorage.setItem('greenfork-orders', JSON.stringify(orders));
+    
+    // Clear cart
+    cart = [];
+    saveCart();
+    updateCartCount();
+};
             
             // Open cart drawer
             window.openCartDrawer = function() {
