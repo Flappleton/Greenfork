@@ -1,0 +1,25 @@
+{
+  "name": "greenfork",
+  "version": "1.0.0",
+  "description": "![GreenFork Logo](logo.png)",
+  "main": "index.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Flappleton/Greenfork.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Flappleton/Greenfork/issues"
+  },
+  "homepage": "https://github.com/Flappleton/Greenfork#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}

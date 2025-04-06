@@ -1,6 +1,7 @@
 // js/seeker.js
 // This file will contain logic for loading and filtering listings on the seeker page.
 
+
 document.addEventListener('DOMContentLoaded', () => {
     console.log("Seeker script loaded.");
 
