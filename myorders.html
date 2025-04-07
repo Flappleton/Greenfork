@@ -7,6 +7,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <!-- Font Awesome (Optional for icons) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Animate.css for animations -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     <style>
         /* Reusing styles from seeker.html */
         :root {
@@ -193,6 +195,170 @@
             font-weight: bold;
         }
 
+        /* New styles for enhanced reorder functionality */
+        .reorder-btn {
+            background-color: var(--forest-green);
+            color: white;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .reorder-btn:hover {
+            background-color: var(--deep-green);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(42, 157, 143, 0.3);
+        }
+        
+        .reorder-btn:active {
+            transform: translateY(0);
+        }
+        
+        .reorder-btn::after {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 5px;
+            height: 5px;
+            background: rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            border-radius: 100%;
+            transform: scale(1, 1) translate(-50%);
+            transform-origin: 50% 50%;
+        }
+        
+        .reorder-btn:focus:not(:active)::after {
+            animation: ripple 1s ease-out;
+        }
+        
+        @keyframes ripple {
+            0% {
+                transform: scale(0, 0);
+                opacity: 0.5;
+            }
+            100% {
+                transform: scale(20, 20);
+                opacity: 0;
+            }
+        }
+        
+        .cart-animation {
+            position: fixed;
+            width: 30px;
+            height: 30px;
+            background-color: var(--forest-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 14px;
+            z-index: 9999;
+            pointer-events: none;
+        }
+        
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+        }
+        
+        .custom-toast {
+            background-color: white;
+            color: var(--deep-green);
+            border-left: 4px solid var(--forest-green);
+            border-radius: 4px;
+            padding: 15px 20px;
+            margin-bottom: 10px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            max-width: 350px;
+            animation: slideInRight 0.5s ease forwards;
+        }
+        
+        .custom-toast.hide {
+            animation: slideOutRight 0.5s ease forwards;
+        }
+        
+        .toast-icon {
+            margin-right: 15px;
+            font-size: 20px;
+            color: var(--forest-green);
+        }
+        
+        .toast-content {
+            flex: 1;
+        }
+        
+        .toast-title {
+            font-weight: 600;
+            margin-bottom: 5px;
+        }
+        
+        .toast-message {
+            font-size: 14px;
+            color: #666;
+        }
+        
+        .toast-close {
+            color: #999;
+            background: none;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 0 5px;
+        }
+        
+        @keyframes slideInRight {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+        
+        @keyframes slideOutRight {
+            from {
+                transform: translateX(0);
+                opacity: 1;
+            }
+            to {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+        }
+        
+        .pulse-animation {
+            animation: pulse 1.5s infinite;
+        }
+        
+        @keyframes pulse {
+            0% {
+                transform: scale(1);
+            }
+            50% {
+                transform: scale(1.05);
+            }
+            100% {
+                transform: scale(1);
+            }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            pointer-events: none;
+            z-index: 9999;
+        }
+
         @media (max-width: 768px) {
             .orders-section { padding: 3rem 1rem; margin: 1.5rem auto; }
             .order-actions { flex-direction: column; }
@@ -229,6 +395,9 @@
         </div>
     </nav>
 
+    <!-- Toast Container for Notifications -->
+    <div class="toast-container" id="toastContainer"></div>
+
     <!-- My Orders Section -->
     <section class="orders-section">
         <div class="container">
@@ -263,6 +432,49 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn reorder-btn" id="modalReorderBtn" data-order-id="">
+                        <i class="fas fa-shopping-cart me-2"></i> Reorder All Items
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reorder Confirmation Modal -->
+    <div class="modal fade" id="reorderConfirmModal" tabindex="-1" aria-labelledby="reorderConfirmModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="reorderConfirmModalLabel">Reorder Items</h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-center mb-4">
+                        <i class="fas fa-shopping-cart fa-3x text-success mb-3"></i>
+                        <h4>Ready to reorder?</h4>
+                        <p class="text-muted">This will add all items from your previous order to your cart.</p>
+                    </div>
+                    <div id="reorderItemsList" class="mb-4">
+                        <!-- Items will be listed here -->
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="useExistingAddress" checked>
+                        <label class="form-check-label" for="useExistingAddress">
+                            Use same delivery address
+                        </label>
+                    </div>
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="useExistingPayment" checked>
+                        <label class="form-check-label" for="useExistingPayment">
+                            Use same payment method
+                        </label>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn reorder-btn" id="confirmReorderBtn" data-order-id="">
+                        <i class="fas fa-check me-2"></i> Confirm Reorder
+                    </button>
                 </div>
             </div>
         </div>
@@ -296,6 +508,8 @@
         document.addEventListener('DOMContentLoaded', function() {
             // Initialize variables
             let orderDetailsModal;
+            let reorderConfirmModal;
+            let currentOrder = null;
             
             // Helper function to escape HTML
             function escapeHtml(unsafe) {
@@ -337,6 +551,261 @@
                         console.error('Failed to parse cart from localStorage:', error);
                     }
                 }
+            }
+            
+            // Show toast notification
+            function showToast(title, message, icon = 'check-circle', duration = 5000) {
+                const toastContainer = document.getElementById('toastContainer');
+                
+                // Create toast element
+                const toast = document.createElement('div');
+                toast.className = 'custom-toast';
+                toast.innerHTML = `
+                    <div class="toast-icon">
+                        <i class="fas fa-${icon}"></i>
+                    </div>
+                    <div class="toast-content">
+                        <div class="toast-title">${title}</div>
+                        <div class="toast-message">${message}</div>
+                    </div>
+                    <button class="toast-close">&times;</button>
+                `;
+                
+                // Add to container
+                toastContainer.appendChild(toast);
+                
+                // Add close event
+                const closeBtn = toast.querySelector('.toast-close');
+                closeBtn.addEventListener('click', () => {
+                    toast.classList.add('hide');
+                    setTimeout(() => {
+                        toast.remove();
+                    }, 500);
+                });
+                
+                // Auto remove after duration
+                setTimeout(() => {
+                    if (toast.parentNode) {
+                        toast.classList.add('hide');
+                        setTimeout(() => {
+                            if (toast.parentNode) {
+                                toast.remove();
+                            }
+                        }, 500);
+                    }
+                }, duration);
+            }
+            
+            // Create cart animation
+            function createCartAnimation(startX, startY, endX, endY) {
+                // Create element
+                const cartAnim = document.createElement('div');
+                cartAnim.className = 'cart-animation';
+                cartAnim.innerHTML = '<i class="fas fa-shopping-cart"></i>';
+                cartAnim.style.left = `${startX}px`;
+                cartAnim.style.top = `${startY}px`;
+                document.body.appendChild(cartAnim);
+                
+                // Animate to cart icon
+                setTimeout(() => {
+                    cartAnim.style.transition = 'all 0.8s cubic-bezier(0.18, 0.89, 0.32, 1.28)';
+                    cartAnim.style.left = `${endX}px`;
+                    cartAnim.style.top = `${endY}px`;
+                    cartAnim.style.opacity = '0.8';
+                    cartAnim.style.transform = 'scale(0.5)';
+                    
+                    // Remove after animation
+                    setTimeout(() => {
+                        cartAnim.remove();
+                        
+                        // Pulse cart icon
+                        const cartIcon = document.querySelector('.cart-icon');
+                        if (cartIcon) {
+                            cartIcon.classList.add('pulse-animation');
+                            setTimeout(() => {
+                                cartIcon.classList.remove('pulse-animation');
+                            }, 1500);
+                        }
+                    }, 800);
+                }, 10);
+            }
+            
+            // Create confetti effect
+            function createConfetti() {
+                const colors = ['#e76f51', '#2a9d8f', '#8ab17d', '#f4a261', '#264653'];
+                const confettiCount = 100;
+                
+                for (let i = 0; i < confettiCount; i++) {
+                    const confetti = document.createElement('div');
+                    confetti.className = 'confetti';
+                    
+                    // Random properties
+                    const color = colors[Math.floor(Math.random() * colors.length)];
+                    const left = Math.random() * window.innerWidth;
+                    const size = Math.random() * 10 + 5;
+                    
+                    // Set styles
+                    confetti.style.backgroundColor = color;
+                    confetti.style.left = `${left}px`;
+                    confetti.style.top = '-10px';
+                    confetti.style.width = `${size}px`;
+                    confetti.style.height = `${size}px`;
+                    confetti.style.opacity = Math.random() + 0.5;
+                    confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                    
+                    // Add to body
+                    document.body.appendChild(confetti);
+                    
+                    // Animate
+                    const animationDuration = Math.random() * 3 + 2;
+                    const finalLeft = left + (Math.random() * 200 - 100);
+                    
+                    confetti.style.transition = `all ${animationDuration}s ease-out`;
+                    
+                    setTimeout(() => {
+                        confetti.style.transform = `rotate(${Math.random() * 360}deg)`;
+                        confetti.style.top = `${window.innerHeight}px`;
+                        confetti.style.left = `${finalLeft}px`;
+                        
+                        // Remove after animation
+                        setTimeout(() => {
+                            confetti.remove();
+                        }, animationDuration * 1000);
+                    }, 10);
+                }
+            }
+            
+            // Add items to cart
+            function addItemsToCart(items) {
+                // Get current cart
+                let cart = JSON.parse(localStorage.getItem('greenfork-cart') || '[]');
+                
+                // Add each item
+                items.forEach(item => {
+                    // Convert order item to cart item format
+                    const cartItem = {
+                        id: item.id,
+                        listingId: item.id,
+                        listingName: item.name,
+                        storeName: item.store,
+                        price: item.price,
+                        quantity: item.quantity,
+                        color: item.color || '#8ab17d',
+                        emoji: item.emoji || '🥗'
+                    };
+                    
+                    // Check if item already exists
+                    const existingItemIndex = cart.findIndex(i => i.id === cartItem.id);
+                    
+                    if (existingItemIndex >= 0) {
+                        // Update quantity
+                        cart[existingItemIndex].quantity += cartItem.quantity;
+                    } else {
+                        // Add new item
+                        cart.push(cartItem);
+                    }
+                });
+                
+                // Save cart
+                localStorage.setItem('greenfork-cart', JSON.stringify(cart));
+                
+                // Update cart count
+                loadCartCount();
+            }
+            
+            // Handle reorder button click
+            function handleReorder(orderId) {
+                const orders = JSON.parse(localStorage.getItem('greenfork-orders') || '[]');
+                const order = orders.find(o => o.id === orderId);
+                
+                if (!order) {
+                    console.error('Order not found:', orderId);
+                    return;
+                }
+                
+                // Set current order
+                currentOrder = order;
+                
+                // Update reorder confirmation modal
+                const reorderItemsList = document.getElementById('reorderItemsList');
+                if (reorderItemsList) {
+                    reorderItemsList.innerHTML = '';
+                    
+                    // Add each item
+                    order.items.forEach(item => {
+                        const itemElement = document.createElement('div');
+                        itemElement.className = 'order-item';
+                        itemElement.innerHTML = `
+                            <div class="order-item-image" style="background-color: ${item.color || '#ccc'}; color: white;">
+                                ${item.emoji || '📦'}
+                            </div>
+                            <div class="order-item-details">
+                                <div class="d-flex justify-content-between">
+                                    <h6 class="order-item-title">${escapeHtml(item.name)} × ${item.quantity}</h6>
+                                    <span class="order-item-price">₹${item.price * item.quantity}</span>
+                                </div>
+                                <p class="order-item-store">${escapeHtml(item.store)}</p>
+                            </div>
+                        `;
+                        
+                        reorderItemsList.appendChild(itemElement);
+                    });
+                }
+                
+                // Set order ID on confirm button
+                const confirmReorderBtn = document.getElementById('confirmReorderBtn');
+                if (confirmReorderBtn) {
+                    confirmReorderBtn.dataset.orderId = orderId;
+                }
+                
+                // Show modal
+                reorderConfirmModal.show();
+            }
+            
+            // Handle confirm reorder button click
+            function handleConfirmReorder() {
+                if (!currentOrder) return;
+                
+                // Get button element for animation
+                const button = document.getElementById('confirmReorderBtn');
+                const buttonRect = button.getBoundingClientRect();
+                
+                // Get cart icon position for animation
+                const cartIcon = document.querySelector('.cart-icon');
+                const cartRect = cartIcon.getBoundingClientRect();
+                
+                // Add items to cart
+                addItemsToCart(currentOrder.items);
+                
+                // Hide modal
+                reorderConfirmModal.hide();
+                
+                // Show animation
+                createCartAnimation(
+                    buttonRect.left + buttonRect.width / 2,
+                    buttonRect.top + buttonRect.height / 2,
+                    cartRect.left + cartRect.width / 2,
+                    cartRect.top + cartRect.height / 2
+                );
+                
+                // Show confetti
+                createConfetti();
+                
+                // Show success toast
+                showToast(
+                    'Items Added to Cart!',
+                    `${currentOrder.items.length} item${currentOrder.items.length !== 1 ? 's' : ''} from order ${currentOrder.id} added to your cart.`,
+                    'shopping-cart',
+                    6000
+                );
+                
+                // Reset current order
+                currentOrder = null;
+                
+                // Redirect to cart after a delay
+                setTimeout(() => {
+                    window.location.href = 'seeker.html';
+                }, 2000);
             }
             
             // Load orders from localStorage
@@ -388,7 +857,7 @@
                                     <small class="text-muted">${escapeHtml(order.date)}</small>
                                 </div>
                                 <div class="col-md-4 text-md-center my-2 my-md-0">
-                                    <span class="order-status ${statusClass}">${escapeHtml(order.status)}</span>
+                                    <span class="order-status ${statusClass}">${escapeHtml(order.status || 'Confirmed')}</span>
                                 </div>
                                 <div class="col-md-4 text-md-end">
                                     <h5 class="mb-0">₹${order.total}</h5>
@@ -420,10 +889,10 @@
                             </div>
                             <div class="order-actions">
                                 <button class="btn btn-sm btn-outline-secondary view-details-btn" data-order-id="${order.id}">
-                                    View Details
+                                    <i class="fas fa-eye me-1"></i> View Details
                                 </button>
-                                <button class="btn btn-sm" style="background-color: var(--forest-green); color: white;">
-                                    Reorder
+                                <button class="btn btn-sm reorder-btn" data-order-id="${order.id}">
+                                    <i class="fas fa-shopping-cart me-1"></i> Reorder
                                 </button>
                             </div>
                         </div>
@@ -438,6 +907,33 @@
                     button.addEventListener('click', (e) => {
                         const orderId = e.currentTarget.dataset.orderId;
                         showOrderDetails(orderId);
+                    });
+                });
+                
+                // Add event listeners to reorder buttons
+                document.querySelectorAll('.reorder-btn').forEach(button => {
+                    button.addEventListener('click', (e) => {
+                        const orderId = e.currentTarget.dataset.orderId;
+                        
+                        // Get button position for animation
+                        const buttonRect = e.currentTarget.getBoundingClientRect();
+                        
+                        // Get cart icon position
+                        const cartIcon = document.querySelector('.cart-icon');
+                        const cartRect = cartIcon.getBoundingClientRect();
+                        
+                        // Show animation before opening modal
+                        createCartAnimation(
+                            buttonRect.left + buttonRect.width / 2,
+                            buttonRect.top + buttonRect.height / 2,
+                            buttonRect.left + buttonRect.width / 2,
+                            buttonRect.top - 50
+                        );
+                        
+                        // Handle reorder after animation
+                        setTimeout(() => {
+                            handleReorder(orderId);
+                        }, 300);
                     });
                 });
             }
@@ -455,6 +951,12 @@
                 const modalBody = document.getElementById('orderDetailsModalBody');
                 if (!modalBody) return;
                 
+                // Set order ID on reorder button
+                const modalReorderBtn = document.getElementById('modalReorderBtn');
+                if (modalReorderBtn) {
+                    modalReorderBtn.dataset.orderId = orderId;
+                }
+                
                 // Determine status class
                 let statusClass = 'status-confirmed';
                 if (order.status === 'Processing') statusClass = 'status-processing';
@@ -466,7 +968,7 @@
                     <div class="mb-4">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h4 class="mb-0">Order Summary</h4>
-                            <span class="order-status ${statusClass}">${escapeHtml(order.status)}</span>
+                            <span class="order-status ${statusClass}">${escapeHtml(order.status || 'Confirmed')}</span>
                         </div>
                         
                         <div class="order-detail-row">
@@ -554,11 +1056,16 @@
                 orderDetailsModal.show();
             }
             
-            // Initialize Bootstrap modal
-            function initModal() {
-                const modalElement = document.getElementById('orderDetailsModal');
-                if (modalElement) {
-                    orderDetailsModal = new bootstrap.Modal(modalElement);
+            // Initialize Bootstrap modals
+            function initModals() {
+                const orderDetailsModalElement = document.getElementById('orderDetailsModal');
+                if (orderDetailsModalElement) {
+                    orderDetailsModal = new bootstrap.Modal(orderDetailsModalElement);
+                }
+                
+                const reorderConfirmModalElement = document.getElementById('reorderConfirmModal');
+                if (reorderConfirmModalElement) {
+                    reorderConfirmModal = new bootstrap.Modal(reorderConfirmModalElement);
                 }
             }
             
@@ -566,7 +1073,7 @@
             function init() {
                 loadCartCount();
                 loadOrders();
-                initModal();
+                initModals();
                 
                 // Cart button event listener
                 const cartButton = document.getElementById('cartButton');
@@ -575,6 +1082,37 @@
                         e.preventDefault();
                         window.location.href = 'seeker.html';
                     });
+                }
+                
+                // Modal reorder button event listener
+                const modalReorderBtn = document.getElementById('modalReorderBtn');
+                if (modalReorderBtn) {
+                    modalReorderBtn.addEventListener('click', (e) => {
+                        const orderId = e.currentTarget.dataset.orderId;
+                        orderDetailsModal.hide();
+                        
+                        // Get button position for animation
+                        const buttonRect = e.currentTarget.getBoundingClientRect();
+                        
+                        // Show animation before opening modal
+                        createCartAnimation(
+                            buttonRect.left + buttonRect.width / 2,
+                            buttonRect.top + buttonRect.height / 2,
+                            buttonRect.left + buttonRect.width / 2,
+                            buttonRect.top - 50
+                        );
+                        
+                        // Handle reorder after animation
+                        setTimeout(() => {
+                            handleReorder(orderId);
+                        }, 300);
+                    });
+                }
+                
+                // Confirm reorder button event listener
+                const confirmReorderBtn = document.getElementById('confirmReorderBtn');
+                if (confirmReorderBtn) {
+                    confirmReorderBtn.addEventListener('click', handleConfirmReorder);
                 }
             }
             
